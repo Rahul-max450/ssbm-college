@@ -2706,13 +2706,29 @@
     }
 
     /* =========================================================================
-       12. PRINCIPAL PHOTO UPLOAD (Local Base64 Storage)
+    /* =========================================================================
+       12. PRINCIPAL PHOTO UPLOAD (Local Base64 Storage + Automatic Default)
        ========================================================================= */
     function loadPrincipalPhoto() {
+      const imgElem = document.getElementById("principalImage");
+      if (!imgElem) return;
+
       const saved = localStorage.getItem("ssbm_principal_photo_store");
       if (saved) {
-        document.getElementById("principalImage").src = saved;
+        imgElem.src = saved;
+      } else {
+        // Default to your uploaded GitHub file
+        imgElem.src = "principal.jpeg";
       }
+
+      // Built-in fallback in case filename matches another extension
+      imgElem.onerror = function() {
+        if (this.src.indexOf('principal.jpeg') !== -1) {
+          this.src = 'principal.jpg.jpeg';
+        } else if (this.src.indexOf('principal.jpg.jpeg') !== -1) {
+          this.src = 'principal.jpg';
+        }
+      };
     }
 
     function uploadPrincipalImage(event) {
