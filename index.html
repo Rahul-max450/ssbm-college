@@ -1,0 +1,2806 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shri S.B. Mamadapur Arts, Commerce & Science College, Badami | Digital Campus Hub</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            royal: {
+              50: '#f0f5ff',
+              100: '#e0ecff',
+              600: '#1d4ed8',
+              700: '#1e40af',
+              800: '#1e3a8a',
+              900: '#172554',
+              950: '#0b132b',
+            },
+            amber: {
+              450: '#f59e0b',
+              550: '#d97706',
+            },
+            turf: {
+              600: '#16a34a',
+              700: '#15803d',
+              800: '#166534',
+            }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif'],
+            kannada: ['Noto Sans Kannada', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Typography & Lucide Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    ::-webkit-scrollbar { width: 7px; height: 7px; }
+    ::-webkit-scrollbar-track { background: #f1f5f9; }
+    ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #1e3a8a; }
+
+    .kannada-mode {
+      font-family: 'Noto Sans Kannada', sans-serif !important;
+    }
+
+    .luxury-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.04), 0 2px 6px -1px rgba(15, 23, 42, 0.02);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .luxury-card:hover {
+      border-color: #cbd5e1;
+      box-shadow: 0 12px 24px -4px rgba(30, 58, 138, 0.08), 0 4px 8px -2px rgba(30, 58, 138, 0.03);
+      transform: translateY(-2px);
+    }
+
+    @media print {
+      body { background: white !important; color: black !important; }
+      header, footer, #mobileMenu, .no-print, button { display: none !important; }
+      .luxury-card { border: 1px solid #ddd !important; box-shadow: none !important; }
+      #timetable { display: block !important; }
+    }
+  </style>
+</head>
+<body class="bg-[#f8fafc] text-slate-800 antialiased font-sans selection:bg-royal-600 selection:text-white min-h-screen flex flex-col">
+
+  <!-- Top Marquee & Utility Bar -->
+  <div class="bg-royal-950 text-white text-xs py-2 px-4 border-b border-royal-900 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      
+      <!-- Notice Ticker -->
+      <div class="flex items-center gap-3 overflow-hidden text-ellipsis whitespace-nowrap max-w-xl">
+        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wide bg-amber-500 text-slate-950 shadow-sm flex-shrink-0">
+          <i data-lucide="bell" class="w-3 h-3"></i> <span data-i18n="announcementBadge">OFFICIAL NOTICE</span>
+        </span>
+        <span class="text-slate-200 text-xs font-medium truncate" id="topNoticeMarquee" data-i18n="topNoticeText">
+          2nd Internal Assessment Scheduled for Oct 07, 08 &amp; 09, 2026 across BA, B.Com, &amp; B.Sc.
+        </span>
+      </div>
+
+      <!-- Controls: Academic Year Switcher + Bilingual Toggle -->
+      <div class="flex items-center gap-2 sm:gap-3 ml-auto flex-shrink-0">
+        <!-- Academic Year Time-Capsule -->
+        <div class="flex items-center gap-1.5 bg-royal-900/90 px-2.5 py-1 rounded-lg border border-royal-700/70 text-xs shadow-inner">
+          <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-400"></i>
+          <span class="text-[11px] text-slate-300 font-medium hidden sm:inline" data-i18n="yearLabel">Session:</span>
+          <select id="academicYearSelect" onchange="switchAcademicYear(this.value)" class="bg-royal-950 text-amber-300 font-bold font-mono text-xs rounded border-0 focus:ring-1 focus:ring-amber-400 py-0.5 px-1 cursor-pointer">
+            <option value="2026-2027" selected>2026–2027 (Current)</option>
+            <option value="2025-2026">2025–2026 (Archive)</option>
+            <option value="2024-2025">2024–2025 (Archive)</option>
+          </select>
+        </div>
+
+        <!-- Language Switcher -->
+        <div class="flex items-center bg-royal-900/90 p-0.5 rounded-lg border border-royal-700/70 shadow-inner">
+          <button id="btnLangEn" onclick="setLanguage('en')" class="px-2.5 py-1 rounded text-xs font-bold transition bg-white text-royal-950 shadow-sm">
+            English
+          </button>
+          <button id="btnLangKn" onclick="setLanguage('kn')" class="px-2.5 py-1 rounded text-xs font-medium text-slate-300 hover:text-white transition">
+            ಕನ್ನಡ
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Main College Header with clean vertical clearance -->
+  <header class="bg-white border-b border-slate-200 sticky top-9 z-40 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-4">
+      
+      <!-- College Crest and Institution Title -->
+      <a href="#" class="flex items-center gap-3.5 group flex-shrink-0">
+        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-royal-800 to-royal-950 p-1 shadow-md shadow-royal-900/10 flex items-center justify-center text-white flex-shrink-0">
+          <div class="w-full h-full rounded-xl border border-white/20 flex flex-col items-center justify-center bg-royal-900">
+            <span class="font-extrabold text-xs tracking-wider text-amber-400">SSBM</span>
+            <span class="text-[8px] font-mono tracking-widest text-slate-300">BADAMI</span>
+          </div>
+        </div>
+        <div class="flex flex-col">
+          <div class="flex items-center gap-2 flex-wrap">
+            <h1 class="font-black text-slate-900 text-base sm:text-lg lg:text-xl tracking-tight leading-snug group-hover:text-royal-700 transition" data-i18n="collegeTitle">
+              SHRI S. B. MAMADAPUR
+            </h1>
+            <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-300 whitespace-nowrap">
+              NAAC / UGC 2(f) &amp; 12(B)
+            </span>
+          </div>
+          <p class="text-xs sm:text-sm font-semibold text-royal-800 mt-0.5 leading-tight" data-i18n="collegeSubtitle">
+            Arts, Commerce &amp; Science Degree College, Badami
+          </p>
+          <p class="text-[11px] text-slate-500 font-medium hidden md:block mt-0.5" data-i18n="samsthaTag">
+            Shri Veerapulakeshi Vidya Vardhak Samstha (Est. 1956) &bull; Bagalkot Dist.
+          </p>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="hidden 2xl:flex items-center gap-4 text-xs font-bold text-slate-700">
+        <a href="#about" class="hover:text-royal-700 transition py-1" data-i18n="navAbout">About</a>
+        <a href="#principal" class="hover:text-royal-700 transition py-1" data-i18n="navPrincipal">Principal</a>
+        <a href="#staff" class="hover:text-royal-700 transition py-1" data-i18n="navStaff">Teaching Staff</a>
+        <a href="#council" class="hover:text-royal-700 transition py-1" data-i18n="navCouncil">Student Council</a>
+        <a href="#timetable" class="hover:text-royal-700 transition py-1 text-royal-700 font-extrabold" data-i18n="navTimetable">Internal Exams</a>
+        <a href="#materials" class="hover:text-royal-700 transition py-1" data-i18n="navStudyHub">SEP Hub</a>
+        <a href="#deadlines" class="hover:text-royal-700 transition py-1" data-i18n="navDeadlines">Submissions</a>
+        <a href="#strength" class="hover:text-royal-700 transition py-1" data-i18n="navStrength">Students</a>
+        <a href="#sports" class="hover:text-royal-700 transition py-1 text-turf-700" data-i18n="navSports">Sports Hub</a>
+        <a href="#talenthunt" class="hover:text-royal-700 transition py-1" data-i18n="navTalent">Talent Hunt</a>
+        <a href="#developers" class="hover:text-royal-700 transition py-1 text-slate-900 font-black" data-i18n="navDev">Developer</a>
+      </nav>
+
+      <!-- Action Group -->
+      <div class="flex items-center gap-2 flex-shrink-0">
+        <button id="mobileMenuToggle" class="2xl:hidden p-2 rounded-xl border border-slate-200 text-slate-700 hover:bg-slate-100" aria-label="Toggle mobile menu">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobileMenu" class="hidden 2xl:hidden bg-white border-b border-slate-200 px-6 py-4 space-y-2 text-sm font-semibold shadow-lg">
+      <a href="#about" class="block py-1 text-slate-700 hover:text-royal-700" data-i18n="navAbout">About College</a>
+      <a href="#principal" class="block py-1 text-slate-700 hover:text-royal-700" data-i18n="navPrincipal">Principal's Desk</a>
+      <a href="#staff" class="block py-1 text-slate-700 hover:text-royal-700" data-i18n="navStaff">Teaching Staff Directory</a>
+      <a href="#council" class="block py-1 text-slate-700 hover:text-royal-700" data-i18n="navCouncil">Student Council (GS &amp; CRs)</a>
+      <a href="#timetable" class="block py-1 text-royal-700 font-bold" data-i18n="navTimetable">Internal Assessment Exams</a>
+      <a href="#materials" class="block py-1 text-slate-700 hover:text-royal-700" data-i18n="navStudyHub">SEP Study Repository</a>
+      <a href="#deadlines" class="block py-1 text-slate-700 hover:text-royal-700" data-i18n="navDeadlines">Assignment &amp; Journal Deadlines</a>
+      <a href="#strength" class="block py-1 text-slate-700 hover:text-royal-700" data-i18n="navStrength">Student Strength Registry</a>
+      <a href="#sports" class="block py-1 text-turf-700 font-bold" data-i18n="navSports">Sports Hub &bull; Athletic Pavilion</a>
+      <a href="#talenthunt" class="block py-1 text-slate-700 hover:text-royal-700" data-i18n="navTalent">Talent Hunt 2026 Archive</a>
+      <a href="#developers" class="block py-1 text-royal-800 font-bold" data-i18n="navDev">Developer &bull; Rahulkumar K</a>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="relative bg-gradient-to-b from-royal-50/70 via-white to-slate-50 py-16 sm:py-20 px-4 sm:px-6 border-b border-slate-200">
+    <div class="max-w-5xl mx-auto text-center relative z-10">
+      
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-royal-100 text-royal-900 border border-royal-200/80 mb-6 shadow-sm">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span class="text-xs font-bold tracking-wide" id="heroPill">
+          Academic Session 2026–2027 &bull; Bagalkot University SEP Curriculum
+        </span>
+      </div>
+
+      <h2 class="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.18] max-w-4xl mx-auto">
+        <span data-i18n="heroTitlePart1">Fostering Academic Dignity in the</span><br />
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-royal-700 via-royal-800 to-amber-600" data-i18n="heroTitlePart2">
+          Historic Land of Badami Chalukyas
+        </span>
+      </h2>
+
+      <p class="mt-4 text-sm sm:text-base lg:text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed" data-i18n="heroSubtitle">
+        The official digital campus portal for Shri S.B. Mamadapur Arts, Commerce &amp; Science Degree College, Badami. Access verified timetables, university updates, SEP learning materials, athletic achievements, and institutional records.
+      </p>
+
+      <div class="mt-8 flex flex-wrap justify-center items-center gap-3.5">
+        <a href="#timetable" class="px-5 py-3 rounded-xl bg-royal-700 hover:bg-royal-800 text-white font-bold text-xs sm:text-sm shadow-lg shadow-royal-700/20 transition flex items-center gap-2">
+          <i data-lucide="calendar-check" class="w-4 h-4 text-amber-300"></i>
+          <span data-i18n="heroActionTimetable">Internal Exam Timetable</span>
+        </a>
+        <a href="#materials" class="px-5 py-3 rounded-xl bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 font-bold text-xs sm:text-sm shadow-sm transition flex items-center gap-2">
+          <i data-lucide="book-marked" class="w-4 h-4 text-royal-700"></i>
+          <span data-i18n="heroActionNotes">SEP Study Repository</span>
+        </a>
+        <a href="#deadlines" class="px-5 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs sm:text-sm shadow-md transition flex items-center gap-2">
+          <i data-lucide="clock" class="w-4 h-4 text-emerald-400"></i>
+          <span data-i18n="heroActionDeadlines">Submission Deadlines</span>
+        </a>
+        <a href="#sports" class="px-5 py-3 rounded-xl bg-turf-700 hover:bg-turf-800 text-white font-bold text-xs sm:text-sm shadow-md transition flex items-center gap-2">
+          <i data-lucide="trophy" class="w-4 h-4 text-amber-300"></i>
+          <span data-i18n="heroActionSports">SSBM Sports Pavilion</span>
+        </a>
+      </div>
+
+      <!-- Quick Metrics Counter Ribbon -->
+      <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+        <div class="luxury-card p-4 rounded-2xl text-center">
+          <div class="text-2xl sm:text-3xl font-black text-royal-800 font-mono">1982</div>
+          <div class="text-[11px] font-bold uppercase tracking-wider text-slate-500 mt-1" data-i18n="metricEstablished">Degree Established</div>
+          <div class="text-[10px] text-slate-400 mt-0.5" data-i18n="metricSamstha">Samstha Est. 1956</div>
+        </div>
+
+        <div class="luxury-card p-4 rounded-2xl text-center">
+          <div class="text-2xl sm:text-3xl font-black text-royal-800 font-mono" id="statScholarsCounter">1,140</div>
+          <div class="text-[11px] font-bold uppercase tracking-wider text-slate-500 mt-1" data-i18n="metricScholars">Enrolled Scholars</div>
+          <div class="text-[10px] text-slate-400 mt-0.5" data-i18n="metricFaculties">BA, B.Com, B.Sc</div>
+        </div>
+
+        <div class="luxury-card p-4 rounded-2xl text-center">
+          <div class="text-2xl sm:text-3xl font-black text-royal-800 font-mono">BGKU</div>
+          <div class="text-[11px] font-bold uppercase tracking-wider text-slate-500 mt-1" data-i18n="metricAffiliation">Bagalkot University</div>
+          <div class="text-[10px] text-slate-400 mt-0.5" data-i18n="metricGovt">UGC 2(f) &amp; 12(B)</div>
+        </div>
+
+        <div class="luxury-card p-4 rounded-2xl text-center">
+          <div class="text-2xl sm:text-3xl font-black text-amber-600 font-mono">100%</div>
+          <div class="text-[11px] font-bold uppercase tracking-wider text-slate-500 mt-1" data-i18n="metricDedicated">Academic Mentorship</div>
+          <div class="text-[10px] text-slate-400 mt-0.5" data-i18n="metricFaculty">Science, Comm. &amp; Arts</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 1: ABOUT COLLEGE -->
+  <section id="about" class="py-16 px-4 sm:px-6 max-w-7xl mx-auto border-b border-slate-200">
+    <div class="mb-10 text-center max-w-3xl mx-auto">
+      <span class="text-xs font-bold uppercase tracking-widest text-royal-700 bg-royal-100 px-3.5 py-1 rounded-full border border-royal-200" data-i18n="aboutBadge">
+        INSTITUTIONAL HERITAGE &bull; ಸಂಸ್ಥೆಯ ಪರಿಚಯ
+      </span>
+      <h3 class="text-2xl sm:text-4xl font-black text-slate-900 mt-3" data-i18n="aboutTitle">
+        About Shri S.B. Mamadapur Degree College
+      </h3>
+      <p class="text-xs sm:text-sm text-slate-600 mt-2" data-i18n="aboutSubtitle">
+        Pioneering higher education for over four decades under Shri Veerapulakeshi Vidya Vardhak Samstha.
+      </p>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-6">
+      <div class="luxury-card p-6 sm:p-7 rounded-2xl lg:col-span-2">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 rounded-xl bg-royal-100 text-royal-800 flex items-center justify-center font-bold">
+            <i data-lucide="landmark" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h4 class="text-lg font-bold text-slate-900" data-i18n="aboutHistoryTitle">Historical Foundations &amp; Samstha Roots</h4>
+            <p class="text-xs text-slate-500" data-i18n="aboutHistorySubtitle">Established in 1982 in the heritage city of Badami</p>
+          </div>
+        </div>
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed" data-i18n="aboutHistoryP1">
+          <strong>Shri S.B. Mamadapur Arts, Commerce &amp; Science College</strong> was established in 1982 to bring undergraduate higher education to the rural and semi-urban youth of Badami, Guledagudda, Kerur, and surrounding rural taluks of Bagalkot district. The college is run by the prestigious <strong>Shri Veerapulakeshi Vidya Vardhak Samstha (SVPVVS)</strong>, founded in 1956 to memorialize the valor and cultural patronship of the immortal Badami Chalukya monarch, Pulakeshi II.
+        </p>
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mt-3" data-i18n="aboutHistoryP2">
+          Starting with Arts and Commerce faculties, the Science division was inaugurated in 1987–88, equipping students with state-of-the-art physics, chemistry, botany, zoology, and mathematics labs. Affiliated with <strong>Bagalkot University (Jamkhandi)</strong>, the college adheres strictly to the State Education Policy (SEP).
+        </p>
+
+        <div class="mt-6 pt-4 border-t border-slate-100 flex flex-wrap items-center gap-3 text-xs">
+          <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 font-semibold flex items-center gap-1.5">
+            <i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-600"></i> UGC 2(f) &amp; 12(B) Recognized
+          </span>
+          <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 font-semibold flex items-center gap-1.5">
+            <i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-600"></i> Bagalkot University Affiliated
+          </span>
+          <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 font-semibold flex items-center gap-1.5">
+            <i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-600"></i> AISHE Registered
+          </span>
+        </div>
+      </div>
+
+      <div class="luxury-card p-6 sm:p-7 rounded-2xl flex flex-col justify-between bg-gradient-to-br from-royal-900 to-royal-950 text-white">
+        <div>
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold">
+              <i data-lucide="target" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h4 class="text-lg font-bold text-white" data-i18n="aboutVisionTitle">Vision &amp; Mission</h4>
+              <p class="text-xs text-slate-400" data-i18n="aboutVisionSubtitle">Institutional charter</p>
+            </div>
+          </div>
+          
+          <div class="space-y-3.5 text-xs text-slate-300 leading-relaxed">
+            <div class="p-3 rounded-xl bg-white/5 border border-white/10">
+              <strong class="text-amber-400 block mb-1" data-i18n="visionLabel">OUR VISION</strong>
+              <span data-i18n="visionText">"To impart holistic, value-based higher education to the rural and backward community youth, transforming them into globally competent and socially committed citizens."</span>
+            </div>
+            <div class="p-3 rounded-xl bg-white/5 border border-white/10">
+              <strong class="text-amber-400 block mb-1" data-i18n="missionLabel">OUR MISSION</strong>
+              <span data-i18n="missionText">"To foster academic excellence in Science, Commerce, and Arts through skilled faculty, modern infrastructure, scientific temperament, and ethical responsibility."</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 pt-4 border-t border-white/10 text-[11px] text-slate-400 flex items-center justify-between">
+          <span data-i18n="samsthaMotto">SVPVVS Samstha &bull; Badami</span>
+          <span class="text-amber-400 font-bold">&bull; Est. 1956</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: PRINCIPAL'S DESK -->
+  <section id="principal" class="py-16 px-4 sm:px-6 max-w-7xl mx-auto border-b border-slate-200">
+    <div class="luxury-card rounded-3xl p-6 sm:p-10 border-slate-200 bg-white">
+      <div class="grid lg:grid-cols-12 gap-8 items-center">
+        
+        <!-- Principal Portrait Column -->
+        <div class="lg:col-span-4 flex flex-col items-center text-center">
+          <div class="relative group">
+            <div class="w-52 h-64 sm:w-60 sm:h-72 rounded-2xl overflow-hidden bg-slate-100 border-4 border-white shadow-xl shadow-royal-950/10 flex items-center justify-center relative">
+              <img 
+                id="principalImage" 
+                src="principal.jpg" 
+                alt="Principal Dr. Amaresh Topalakatti" 
+                onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80';"
+                class="w-full h-full object-cover object-top"
+              />
+              <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-royal-950 via-royal-950/70 to-transparent p-3 pt-6 text-center">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-amber-300 font-mono">
+                  Principal &bull; SSBM Badami
+                </span>
+              </div>
+            </div>
+
+            <!-- Per-action passkey protected button for Principal photo -->
+            <button onclick="promptPasskeyForAction('principalPhoto', 'Update Principal Photo')" title="Update photo (Staff Only)" class="absolute -bottom-2 -right-2 p-2.5 rounded-xl bg-royal-700 hover:bg-royal-800 text-white cursor-pointer shadow-md transition hover:scale-105 flex items-center justify-center">
+              <i data-lucide="camera" class="w-4 h-4"></i>
+            </button>
+            <input type="file" id="principalFileInput" accept="image/*" class="hidden" onchange="uploadPrincipalImage(event)" />
+          </div>
+
+          <div class="mt-4">
+            <span class="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-royal-100 text-royal-900 border border-royal-200 inline-block" data-i18n="principalBadge">
+              Principal &amp; Head of Institution
+            </span>
+            <h3 class="text-2xl font-black text-slate-900 mt-1.5" data-i18n="principalName">
+              Dr. Amaresh Topalakatti
+            </h3>
+            <p class="text-xs text-royal-700 font-bold mt-0.5" data-i18n="principalQual">
+              M.Sc., Ph.D. &bull; InSc Best Researcher Awardee
+            </p>
+            <p class="text-xs text-slate-500 font-medium" data-i18n="principalDept">
+              Principal &amp; Head, Department of Botany
+            </p>
+          </div>
+        </div>
+
+        <!-- Vision and Address -->
+        <div class="lg:col-span-8 space-y-4 text-xs sm:text-sm text-slate-600 leading-relaxed border-t lg:border-t-0 lg:border-l border-slate-200 pt-6 lg:pt-0 lg:pl-8">
+          <div class="flex items-center gap-2 text-royal-700 font-bold text-xs uppercase tracking-wider">
+            <i data-lucide="quote" class="w-4 h-4"></i> <span data-i18n="principalMessageHeader">Message from the Principal's Desk</span>
+          </div>
+
+          <p class="italic text-slate-900 text-sm sm:text-base font-medium leading-relaxed" data-i18n="principalQuote">
+            "Welcome to Shri S.B. Mamadapur Arts, Commerce &amp; Science College, Badami. Since 1982, our institution has stood as an academic sanctuary, carrying forward the great civilizational legacy of the Badami Chalukyas."
+          </p>
+
+          <p data-i18n="principalBody1">
+            Under our affiliation with <strong>Bagalkot University (Jamkhandi)</strong>, we impart high-rigor undergraduate education across B.Sc, B.Com, and B.A. programs. Our focus is cultivating disciplined inquiry, research aptitude through laboratory sessions, and character-building through sports and cultural events.
+          </p>
+
+          <p data-i18n="principalBody2">
+            I commend our BSc 1st semester scholars under Roxstarlabs for engineering this campus portal. Maintaining our <strong>Internal Examination schedules</strong>, Bagalkot University SEP resources, athletic tournament records, and student statistics in an accessible, bilingual hub keeps every student ahead.
+          </p>
+
+          <div class="pt-4 border-t border-slate-200 flex flex-wrap gap-4 text-xs font-mono text-slate-600">
+            <span class="flex items-center gap-1.5"><i data-lucide="phone" class="w-3.5 h-3.5 text-royal-700"></i> Office: 08357-220116</span>
+            <span class="flex items-center gap-1.5"><i data-lucide="mail" class="w-3.5 h-3.5 text-royal-700"></i> ssbmcollegebadami@gmail.com</span>
+            <span class="flex items-center gap-1.5"><i data-lucide="map-pin" class="w-3.5 h-3.5 text-royal-700"></i> Badami - 587201</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: TEACHING STAFF DIRECTORY -->
+  <section id="staff" class="py-16 px-4 sm:px-6 max-w-7xl mx-auto border-b border-slate-200">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+      <div>
+        <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-royal-800 bg-royal-100 px-3 py-1 rounded-md border border-royal-200 mb-2">
+          <i data-lucide="users" class="w-4 h-4 text-royal-700"></i>
+          <span data-i18n="staffBadge">FACULTY OF ARTS, COMMERCE &amp; SCIENCE</span>
+        </div>
+        <h3 class="text-2xl sm:text-4xl font-black text-slate-900" data-i18n="staffTitle">
+          Teaching Staff <span class="text-royal-700">Directory</span>
+        </h3>
+        <p class="text-xs sm:text-sm text-slate-600 mt-1 max-w-2xl" data-i18n="staffSubtitle">
+          Distinguished professors, heads of departments, and lecturers dedicated to academic excellence across undergraduate streams.
+        </p>
+      </div>
+
+      <!-- Action Button (Isolated Passkey Protected) -->
+      <button onclick="promptPasskeyForAction('staffManage', 'Add / Manage Teaching Staff')" class="px-4 py-2.5 rounded-xl bg-royal-700 hover:bg-royal-800 text-white font-bold text-xs shadow-md transition flex items-center gap-2">
+        <i data-lucide="user-plus" class="w-4 h-4 text-amber-300"></i>
+        <span data-i18n="addStaffBtn">Add / Manage Staff</span>
+      </button>
+    </div>
+
+    <!-- Department Filter Tabs -->
+    <div class="flex flex-wrap gap-2 mb-6 pb-2 border-b border-slate-200" id="staffFilterTabs">
+      <button onclick="filterStaffDept('ALL')" id="staff-tab-ALL" class="staff-tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-royal-700 text-white shadow-sm transition">All Departments</button>
+      <button onclick="filterStaffDept('BSC')" id="staff-tab-BSC" class="staff-tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 transition">Science Faculty (B.Sc)</button>
+      <button onclick="filterStaffDept('BCOM')" id="staff-tab-BCOM" class="staff-tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 transition">Commerce Faculty (B.Com)</button>
+      <button onclick="filterStaffDept('BA')" id="staff-tab-BA" class="staff-tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 transition">Arts Faculty (B.A)</button>
+    </div>
+
+    <!-- Staff Cards Grid -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="staffContainer">
+      <!-- Injected by JavaScript -->
+    </div>
+  </section>
+
+  <!-- SECTION 4: STUDENT COUNCIL & CLASS REPRESENTATIVES (GS & CRs) -->
+  <section id="council" class="py-16 px-4 sm:px-6 max-w-7xl mx-auto border-b border-slate-200">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+      <div>
+        <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-royal-800 bg-royal-100 px-3 py-1 rounded-md border border-royal-200 mb-2">
+          <i data-lucide="shield" class="w-4 h-4 text-royal-700"></i>
+          <span data-i18n="councilBadge">STUDENT COUNCIL LEADERSHIP</span>
+        </div>
+        <h3 class="text-2xl sm:text-4xl font-black text-slate-900" data-i18n="councilTitle">
+          General Secretary &amp; Class Representatives <span class="text-royal-700">(GS &amp; CRs)</span>
+        </h3>
+        <p class="text-xs sm:text-sm text-slate-600 mt-1 max-w-2xl" data-i18n="councilSubtitle">
+          Student leadership representing BA, B.Com, and B.Sc streams. Photo management, full names, roles, and department assignments.
+        </p>
+      </div>
+
+      <!-- Isolated Passkey Protected Button for Student Council -->
+      <button onclick="promptPasskeyForAction('councilManage', 'Add Student Leader / CR')" class="px-4 py-2.5 rounded-xl bg-royal-700 hover:bg-royal-800 text-white text-xs font-bold shadow-md transition flex items-center gap-2">
+        <i data-lucide="user-plus" class="w-4 h-4 text-amber-300"></i>
+        <span data-i18n="updateCouncilBtn">Add Student Leader / CR</span>
+      </button>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6" id="councilContainer">
+      <!-- Injected by JavaScript -->
+    </div>
+  </section>
+
+  <!-- SECTION 5: INTERNAL ASSESSMENT (IA) EXAMINATION SECTION -->
+  <section id="timetable" class="py-16 px-4 sm:px-6 max-w-7xl mx-auto border-b border-slate-200">
+    
+    <!-- Active IA Container (Shown when IA is active) -->
+    <div id="iaActiveBlock">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-8 gap-4">
+        <div>
+          <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-royal-800 bg-royal-100 px-3 py-1 rounded-md border border-royal-200 mb-2">
+            <i data-lucide="file-check-2" class="w-4 h-4 text-royal-700"></i>
+            <span data-i18n="ttBadge">OFFICIAL CIRCULAR VERIFIED &bull; 2026–27</span>
+          </div>
+          <h3 class="text-2xl sm:text-4xl font-black text-slate-900" data-i18n="ttTitle">
+            1st, 3rd &amp; 5th Semester <span class="text-royal-700">Internal Test</span> Timetable
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-600 mt-1 max-w-2xl" data-i18n="ttSubtitle">
+            Conducted by SSBM Examination Committee. Matches official notification signed by Examination Chairman &amp; Principal Dr. Amaresh Topalakatti.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2.5">
+          <button onclick="window.print()" class="px-3.5 py-2 rounded-xl bg-white hover:bg-slate-100 border border-slate-300 text-xs font-bold text-slate-700 transition flex items-center gap-1.5 shadow-sm">
+            <i data-lucide="printer" class="w-3.5 h-3.5 text-royal-700"></i> <span data-i18n="ttPrintBtn">Print Timetable</span>
+          </button>
+          
+          <!-- Individual passkey-protected actions for IA -->
+          <button onclick="promptPasskeyForAction('iaAddSlot', 'Add IA Exam Slot')" class="px-3.5 py-2 rounded-xl bg-royal-700 hover:bg-royal-800 text-xs font-bold text-white transition flex items-center gap-1.5 shadow-sm">
+            <i data-lucide="plus-circle" class="w-3.5 h-3.5 text-amber-300"></i> <span>Add Slot</span>
+          </button>
+          
+          <button onclick="promptPasskeyForAction('iaDeleteSection', 'Delete / Clear IA Schedule')" class="px-3.5 py-2 rounded-xl bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 text-xs font-bold transition flex items-center gap-1.5 shadow-sm" title="Clear/Hide section once IA exams conclude">
+            <i data-lucide="eye-off" class="w-3.5 h-3.5"></i> <span>Clear / Conclude IA</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Filter Control Bars -->
+      <div class="luxury-card p-4 rounded-2xl mb-6 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
+          <span class="text-xs font-bold text-slate-500 mr-2 flex items-center gap-1">
+            <i data-lucide="filter" class="w-3.5 h-3.5 text-royal-700"></i> <span data-i18n="filterStreamLabel">Stream:</span>
+          </span>
+          <button onclick="filterTimetableStream('ALL')" id="stream-btn-ALL" class="tt-stream-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-royal-700 text-white transition shadow-sm" data-i18n="filterAllStreams">All Streams</button>
+          <button onclick="filterTimetableStream('BSC')" id="stream-btn-BSC" class="tt-stream-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">B.Sc</button>
+          <button onclick="filterTimetableStream('BCOM')" id="stream-btn-BCOM" class="tt-stream-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">B.Com</button>
+          <button onclick="filterTimetableStream('BA')" id="stream-btn-BA" class="tt-stream-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">B.A</button>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
+          <span class="text-xs font-bold text-slate-500 mr-2 flex items-center gap-1">
+            <i data-lucide="layers" class="w-3.5 h-3.5 text-royal-700"></i> <span data-i18n="filterSemLabel">Semester:</span>
+          </span>
+          <button onclick="filterTimetableSem('ALL')" id="sem-btn-ALL" class="tt-sem-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-amber-500 text-slate-950 transition shadow-sm" data-i18n="filterAllSems">All Sems</button>
+          <button onclick="filterTimetableSem('I')" id="sem-btn-I" class="tt-sem-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Sem I</button>
+          <button onclick="filterTimetableSem('III')" id="sem-btn-III" class="tt-sem-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Sem III</button>
+          <button onclick="filterTimetableSem('V')" id="sem-btn-V" class="tt-sem-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">Sem V</button>
+        </div>
+      </div>
+
+      <!-- Timetable Grid -->
+      <div class="overflow-x-auto rounded-2xl luxury-card shadow-sm border border-slate-200">
+        <table class="w-full text-left text-xs border-collapse">
+          <thead>
+            <tr class="bg-royal-950 text-white font-mono uppercase text-[11px] tracking-wider">
+              <th class="py-4 px-4 font-bold" data-i18n="thDate">Date &amp; Day</th>
+              <th class="py-4 px-4 font-bold" data-i18n="thTime">Time Slot</th>
+              <th class="py-4 px-4 font-bold" data-i18n="thStream">Stream</th>
+              <th class="py-4 px-4 font-bold" data-i18n="thSemester">Semester</th>
+              <th class="py-4 px-4 font-bold" data-i18n="thSubject">Paper / Subject Name</th>
+              <th class="py-4 px-4 font-bold" data-i18n="thType">Paper Type</th>
+              <th class="py-4 px-4 font-bold text-center" data-i18n="thAction">Study Notes</th>
+            </tr>
+          </thead>
+          <tbody id="timetableBody" class="divide-y divide-slate-100 text-slate-700">
+            <!-- Dynamically Injected by JavaScript -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Hidden / Inactive IA Block (Shown when IA is concluded) -->
+    <div id="iaHiddenBlock" class="hidden luxury-card rounded-3xl p-8 sm:p-12 text-center border-slate-200 bg-white">
+      <div class="w-16 h-16 rounded-2xl bg-royal-50 text-royal-700 flex items-center justify-center mx-auto mb-4 border border-royal-100">
+        <i data-lucide="check-circle" class="w-8 h-8 text-emerald-600"></i>
+      </div>
+      <h3 class="text-xl sm:text-2xl font-black text-slate-900" data-i18n="iaConcludedTitle">
+        Internal Assessments Concluded for Current Cycle
+      </h3>
+      <p class="text-xs sm:text-sm text-slate-500 max-w-xl mx-auto mt-2 leading-relaxed" data-i18n="iaConcludedSubtitle">
+        All scheduled internal examinations have been completed. The next Internal Assessment schedule will be published here as soon as released by the SSBM Examination Committee.
+      </p>
+      <div class="mt-6 flex justify-center">
+        <button onclick="promptPasskeyForAction('iaRestoreSection', 'Announce / Re-schedule IA')" class="px-5 py-2.5 rounded-xl bg-royal-700 hover:bg-royal-800 text-white font-bold text-xs shadow-md transition flex items-center gap-2">
+          <i data-lucide="calendar-plus" class="w-4 h-4 text-amber-300"></i>
+          <span data-i18n="iaAnnounceNewBtn">Announce / Re-schedule IA</span>
+        </button>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- SECTION 6: UNIVERSITY SEMESTER EXAMS BULLETIN -->
+  <section id="univExamSection" class="py-10 px-4 sm:px-6 max-w-7xl mx-auto hidden">
+    <div class="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-royal-900 via-royal-950 to-slate-950 text-white shadow-xl border border-royal-700/50 relative overflow-hidden">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-6 mb-6">
+        <div>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide bg-amber-500 text-slate-950 mb-2">
+            <i data-lucide="radio" class="w-3 h-3 animate-ping"></i> <span data-i18n="univExamBadge">OFFICIAL UNIVERSITY EXAMINATION BULLETIN</span>
+          </span>
+          <h3 class="text-2xl sm:text-3xl font-black text-white" id="univExamTitleText">Bagalkot University Semester Examination Dates</h3>
+          <p class="text-xs text-slate-300 mt-1" id="univExamSubtitleText">Official timetables and notifications from the Controller of Examinations.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <!-- Passkey protected clear button -->
+          <button onclick="promptPasskeyForAction('clearUnivExam', 'Clear University Exam Bulletin')" class="px-3 py-1.5 rounded-lg bg-red-500/20 hover:bg-red-500/30 text-red-300 border border-red-500/30 text-xs font-bold transition flex items-center gap-1">
+            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> Clear Bulletin
+          </button>
+        </div>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" id="univExamCardsContainer">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 7: SEP STUDY MATERIALS & CURRICULUM REPOSITORY -->
+  <section id="materials" class="py-16 px-4 sm:px-6 max-w-7xl mx-auto border-b border-slate-200">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+      <div>
+        <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-royal-800 bg-royal-100 px-3 py-1 rounded-md border border-royal-200 mb-2">
+          <i data-lucide="book-open-check" class="w-4 h-4 text-royal-700"></i>
+          <span data-i18n="sepBadge">BAGALKOT UNIVERSITY ACADEMIC REPOSITORY</span>
+        </div>
+        <h3 class="text-2xl sm:text-4xl font-black text-slate-900" data-i18n="sepTitle">
+          SEP Curriculum <span class="text-royal-700">Study Materials &amp; Blueprints</span>
+        </h3>
+        <p class="text-xs sm:text-sm text-slate-600 mt-1 max-w-2xl" data-i18n="sepSubtitle">
+          Verified syllabus blueprints, lecture notes, lab manuals, and previous internal question papers for Semester 1, 3, and 5.
+        </p>
+      </div>
+
+      <div class="relative w-full md:w-80">
+        <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5"></i>
+        <input type="text" id="materialSearchInput" onkeyup="searchMaterials()" placeholder="Search Physics, Accounting, History..." class="w-full bg-white border border-slate-300 rounded-xl pl-10 pr-4 py-2.5 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-royal-600 shadow-sm" />
+      </div>
+    </div>
+
+    <!-- Category Tabs -->
+    <div class="flex flex-wrap gap-2 mb-6 pb-2 border-b border-slate-200">
+      <button onclick="filterMaterialsList('ALL')" id="mat-tab-ALL" class="mat-tab px-4 py-2 rounded-xl text-xs font-bold bg-royal-700 text-white transition shadow-sm" data-i18n="matTabAll">All Subjects</button>
+      <button onclick="filterMaterialsList('BSC')" id="mat-tab-BSC" class="mat-tab px-4 py-2 rounded-xl text-xs font-bold bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 transition" data-i18n="matTabBsc">B.Sc Science Hub</button>
+      <button onclick="filterMaterialsList('BCOM')" id="mat-tab-BCOM" class="mat-tab px-4 py-2 rounded-xl text-xs font-bold bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 transition" data-i18n="matTabBcom">B.Com Commerce Hub</button>
+      <button onclick="filterMaterialsList('BA')" id="mat-tab-BA" class="mat-tab px-4 py-2 rounded-xl text-xs font-bold bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 transition" data-i18n="matTabBa">B.A Arts Hub</button>
+      <button onclick="filterMaterialsList('GEN')" id="mat-tab-GEN" class="mat-tab px-4 py-2 rounded-xl text-xs font-bold bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 transition" data-i18n="matTabGen">Languages &amp; Values</button>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" id="materialsContainer">
+      <!-- Injected via JavaScript -->
+    </div>
+  </section>
+
+  <!-- SECTION 8: ASSIGNMENT & PRACTICAL JOURNAL DEADLINES -->
+  <section id="deadlines" class="py-16 px-4 sm:px-6 max-w-7xl mx-auto border-b border-slate-200">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+      <div>
+        <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-royal-800 bg-royal-100 px-3 py-1 rounded-md border border-royal-200 mb-2">
+          <i data-lucide="calendar-alert" class="w-4 h-4 text-royal-700"></i>
+          <span data-i18n="deadlinesBadge">ACADEMIC SUBMISSION SCHEDULE</span>
+        </div>
+        <h3 class="text-2xl sm:text-4xl font-black text-slate-900" data-i18n="deadlinesTitle">
+          Assignment &amp; Practical Journal <span class="text-royal-700">Deadlines</span>
+        </h3>
+        <p class="text-xs sm:text-sm text-slate-600 mt-1 max-w-2xl" data-i18n="deadlinesSubtitle">
+          Stay on track with upcoming submission dates for laboratory records, assignments, and practical journals across departments.
+        </p>
+      </div>
+
+      <!-- Isolated Passkey Protected Button for Deadlines -->
+      <button onclick="promptPasskeyForAction('deadlineManage', 'Add Submission Deadline')" class="px-4 py-2 rounded-xl bg-royal-700 hover:bg-royal-800 text-white text-xs font-bold shadow-md transition flex items-center gap-1.5">
+        <i data-lucide="plus" class="w-3.5 h-3.5 text-amber-300"></i> <span data-i18n="addDeadlineBtn">Add / Update Deadline</span>
+      </button>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4" id="deadlinesGrid">
+      <!-- Injected by JavaScript -->
+    </div>
+  </section>
+
+  <!-- SECTION 9: STUDENT STRENGTH REGISTRY -->
+  <section id="strength" class="py-16 px-4 sm:px-6 max-w-7xl mx-auto border-b border-slate-200">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+      <div>
+        <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-royal-800 bg-royal-100 px-3 py-1 rounded-md border border-royal-200 mb-2">
+          <i data-lucide="database" class="w-4 h-4 text-royal-700"></i>
+          <span data-i18n="strengthBadge">OFFICIAL ADMISSION REGISTRY</span>
+        </div>
+        <h3 class="text-2xl sm:text-4xl font-black text-slate-900" data-i18n="strengthTitle">
+          Student Strength <span class="text-royal-700">Registry</span>
+        </h3>
+        <p class="text-xs sm:text-sm text-slate-600 mt-1 max-w-2xl" data-i18n="strengthSubtitle">
+          Verified student enrollment figures across BA, B.Com, and B.Sc streams. Updates in real-time according to official admission registers.
+        </p>
+      </div>
+
+      <!-- Isolated Passkey Protected Button for Strength Registry -->
+      <button onclick="promptPasskeyForAction('strengthManage', 'Update Admission Counts')" class="px-5 py-2.5 rounded-xl bg-royal-700 hover:bg-royal-800 text-white font-bold text-xs shadow-md shadow-royal-700/20 transition flex items-center gap-2">
+        <i data-lucide="edit-3" class="w-3.5 h-3.5 text-amber-300"></i>
+        <span data-i18n="strengthEditBtn">Update Admission Counts</span>
+      </button>
+    </div>
+
+    <!-- Analytics Cards -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+      <div class="luxury-card p-5 rounded-2xl border-slate-200">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold text-slate-500 uppercase" data-i18n="cardBscLabel">B.SC SCHOLARS</span>
+          <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800" id="badgeBscShare">38%</span>
+        </div>
+        <div class="text-3xl font-black text-emerald-700 font-mono mt-2" id="sumBsc">430</div>
+        <div class="text-[11px] text-slate-400 mt-1" data-i18n="cardBscSub">Science Faculty Total</div>
+      </div>
+
+      <div class="luxury-card p-5 rounded-2xl border-slate-200">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold text-slate-500 uppercase" data-i18n="cardBcomLabel">B.COM SCHOLARS</span>
+          <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-100 text-blue-800" id="badgeBcomShare">34%</span>
+        </div>
+        <div class="text-3xl font-black text-blue-700 font-mono mt-2" id="sumBcom">385</div>
+        <div class="text-[11px] text-slate-400 mt-1" data-i18n="cardBcomSub">Commerce Faculty Total</div>
+      </div>
+
+      <div class="luxury-card p-5 rounded-2xl border-slate-200">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold text-slate-500 uppercase" data-i18n="cardBaLabel">B.A SCHOLARS</span>
+          <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800" id="badgeBaShare">28%</span>
+        </div>
+        <div class="text-3xl font-black text-amber-700 font-mono mt-2" id="sumBa">325</div>
+        <div class="text-[11px] text-slate-400 mt-1" data-i18n="cardBaSub">Arts Faculty Total</div>
+      </div>
+
+      <div class="luxury-card p-5 rounded-2xl border-royal-200 bg-royal-50/60">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold text-royal-900 uppercase" data-i18n="cardTotalLabel">TOTAL DEGREE ENROLLMENT</span>
+          <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-royal-200 text-royal-950">100%</span>
+        </div>
+        <div class="text-3xl font-black text-royal-900 font-mono mt-2" id="sumGrand">1,140</div>
+        <div class="text-[11px] text-royal-700 mt-1" data-i18n="cardTotalSub">Active Undergraduate Scholars</div>
+      </div>
+    </div>
+
+    <!-- Strength Master Table -->
+    <div class="overflow-x-auto rounded-2xl luxury-card shadow-sm border border-slate-200">
+      <table class="w-full text-left text-xs border-collapse">
+        <thead>
+          <tr class="bg-royal-950 text-white font-mono uppercase text-[11px] tracking-wider">
+            <th class="py-4 px-6 font-bold" data-i18n="tblColProgram">Program / Academic Stream</th>
+            <th class="py-4 px-6 font-bold" data-i18n="tblColYear1">1st Year (Sem I &amp; II)</th>
+            <th class="py-4 px-6 font-bold" data-i18n="tblColYear2">2nd Year (Sem III &amp; IV)</th>
+            <th class="py-4 px-6 font-bold" data-i18n="tblColYear3">3rd Year (Sem V &amp; VI)</th>
+            <th class="py-4 px-6 text-right font-bold" data-i18n="tblColTotal">Stream Total</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100 font-mono">
+          <!-- BA -->
+          <tr class="hover:bg-slate-50/80 transition">
+            <td class="py-4 px-6 font-bold font-sans flex items-center gap-2.5 text-slate-900">
+              <span class="w-3 h-3 rounded-md bg-amber-500 inline-block shadow-sm"></span>
+              <span data-i18n="rowBaTitle">Bachelor of Arts (B.A.)</span>
+            </td>
+            <td class="py-4 px-6 text-slate-700 font-medium" id="disp-ba-1">120</td>
+            <td class="py-4 px-6 text-slate-700 font-medium" id="disp-ba-2">110</td>
+            <td class="py-4 px-6 text-slate-700 font-medium" id="disp-ba-3">95</td>
+            <td class="py-4 px-6 text-right font-bold text-amber-700 text-sm" id="disp-ba-total">325</td>
+          </tr>
+
+          <!-- BCOM -->
+          <tr class="hover:bg-slate-50/80 transition">
+            <td class="py-4 px-6 font-bold font-sans flex items-center gap-2.5 text-slate-900">
+              <span class="w-3 h-3 rounded-md bg-blue-600 inline-block shadow-sm"></span>
+              <span data-i18n="rowBcomTitle">Bachelor of Commerce (B.Com.)</span>
+            </td>
+            <td class="py-4 px-6 text-slate-700 font-medium" id="disp-bcom-1">140</td>
+            <td class="py-4 px-6 text-slate-700 font-medium" id="disp-bcom-2">130</td>
+            <td class="py-4 px-6 text-slate-700 font-medium" id="disp-bcom-3">115</td>
+            <td class="py-4 px-6 text-right font-bold text-blue-700 text-sm" id="disp-bcom-total">385</td>
+          </tr>
+
+          <!-- BSC -->
+          <tr class="hover:bg-slate-50/80 transition">
+            <td class="py-4 px-6 font-bold font-sans flex items-center gap-2.5 text-slate-900">
+              <span class="w-3 h-3 rounded-md bg-emerald-600 inline-block shadow-sm"></span>
+              <span data-i18n="rowBscTitle">Bachelor of Science (B.Sc.)</span>
+            </td>
+            <td class="py-4 px-6 text-slate-700 font-medium" id="disp-bsc-1">160</td>
+            <td class="py-4 px-6 text-slate-700 font-medium" id="disp-bsc-2">145</td>
+            <td class="py-4 px-6 text-slate-700 font-medium" id="disp-bsc-3">125</td>
+            <td class="py-4 px-6 text-right font-bold text-emerald-700 text-sm" id="disp-bsc-total">430</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr class="bg-royal-50 font-bold text-slate-900 border-t border-slate-200 text-xs">
+            <td class="py-4 px-6 font-sans font-black text-royal-950" data-i18n="tblColYearTotals">Year-Wise Enrollment Totals:</td>
+            <td class="py-4 px-6 font-mono text-royal-800" id="disp-foot-y1">420</td>
+            <td class="py-4 px-6 font-mono text-royal-800" id="disp-foot-y2">385</td>
+            <td class="py-4 px-6 font-mono text-royal-800" id="disp-foot-y3">335</td>
+            <td class="py-4 px-6 font-mono text-right text-base text-royal-950 font-black" id="disp-foot-grand">1,140</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </section>
+
+  <!-- SECTION 10: SPORTS HUB & ATHLETIC PAVILION -->
+  <section id="sports" class="py-16 px-4 sm:px-6 max-w-7xl mx-auto border-b border-slate-200 bg-gradient-to-b from-white to-emerald-50/30 rounded-3xl p-6 sm:p-10 my-8 shadow-sm border border-slate-200">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+      <div>
+        <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-turf-800 bg-emerald-100 px-3 py-1 rounded-md border border-emerald-300 mb-2">
+          <i data-lucide="medal" class="w-4 h-4 text-turf-700"></i>
+          <span data-i18n="sportsBadge">SSBM ATHLETIC PAVILION &bull; SPORTS HUB</span>
+        </div>
+        <h3 class="text-2xl sm:text-4xl font-black text-slate-900" data-i18n="sportsTitle">
+          Inter-Departmental Sports &amp; Games <span class="text-turf-700">Champions</span>
+        </h3>
+        <p class="text-xs sm:text-sm text-slate-600 mt-1 max-w-2xl" data-i18n="sportsSubtitle">
+          Celebrating achievements across Cricket, Volleyball, Kabaddi, Athletics, Badminton, and Chess. Full champion rosters, runner-up squads, and historic match awards.
+        </p>
+      </div>
+
+      <!-- Isolated Passkey Protected Button for Sports -->
+      <button onclick="promptPasskeyForAction('sportsManage', 'Add Tournament Roster')" class="px-4 py-2.5 rounded-xl bg-turf-700 hover:bg-turf-800 text-white text-xs font-bold shadow-md transition flex items-center gap-2">
+        <i data-lucide="trophy" class="w-4 h-4 text-amber-300"></i>
+        <span data-i18n="editSportsBtn">Add Tournament Roster</span>
+      </button>
+    </div>
+
+    <!-- Sport Category Selector Pills -->
+    <div class="flex flex-wrap gap-2 mb-8 pb-3 border-b border-slate-200/80" id="sportsFilterTabs">
+      <button onclick="filterSportsCategory('ALL')" id="sport-tab-ALL" class="sport-tab-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-turf-700 text-white shadow-sm transition">All Sports</button>
+      <button onclick="filterSportsCategory('Cricket')" id="sport-tab-Cricket" class="sport-tab-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 transition">Cricket Trophy</button>
+      <button onclick="filterSportsCategory('Volleyball')" id="sport-tab-Volleyball" class="sport-tab-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 transition">Volleyball</button>
+      <button onclick="filterSportsCategory('Kabaddi')" id="sport-tab-Kabaddi" class="sport-tab-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 transition">Kabaddi</button>
+      <button onclick="filterSportsCategory('Athletics')" id="sport-tab-Athletics" class="sport-tab-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 transition">Athletics</button>
+      <button onclick="filterSportsCategory('Badminton')" id="sport-tab-Badminton" class="sport-tab-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 transition">Badminton</button>
+      <button onclick="filterSportsCategory('Chess')" id="sport-tab-Chess" class="sport-tab-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 transition">Chess</button>
+    </div>
+
+    <!-- Sports Container -->
+    <div class="space-y-8" id="sportsTournamentsContainer">
+      <!-- Injected by JavaScript -->
+    </div>
+  </section>
+
+  <!-- SECTION 11: TALENT HUNT 2026 ARCHIVE -->
+  <section id="talenthunt" class="py-16 px-4 sm:px-6 max-w-7xl mx-auto border-b border-slate-200">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+      <div>
+        <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-800 bg-amber-100 px-3 py-1 rounded-md border border-amber-300 mb-2">
+          <i data-lucide="sparkles" class="w-4 h-4 text-amber-700"></i>
+          <span data-i18n="talentBadge">CULTURAL FESTIVAL ARCHIVE</span>
+        </div>
+        <h3 class="text-2xl sm:text-4xl font-black text-slate-900" data-i18n="talentTitle">
+          Talent Hunt 2026 <span class="text-amber-600">Wall of Winners</span>
+        </h3>
+        <p class="text-xs sm:text-sm text-slate-600 mt-1 max-w-2xl" data-i18n="talentSubtitle">
+          Celebrating the daily champions across debate, fine arts, classical music, and cultural events during the inter-collegiate festival.
+        </p>
+      </div>
+
+      <!-- Isolated Passkey Protected Button for Talent Records -->
+      <button onclick="promptPasskeyForAction('talentManage', 'Update Talent Records')" class="px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold shadow-md transition flex items-center gap-2">
+        <i data-lucide="edit" class="w-3.5 h-3.5 text-white"></i>
+        <span data-i18n="editTalentBtn">Update Talent Records</span>
+      </button>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" id="talentContainer">
+      <!-- Injected by JavaScript -->
+    </div>
+  </section>
+
+  <!-- SECTION 12: DEVELOPER & ROXSTARLABS -->
+  <section id="developers" class="py-16 px-4 sm:px-6 max-w-7xl mx-auto border-b border-slate-200">
+    <div class="luxury-card rounded-3xl p-8 sm:p-12 border-slate-200 bg-gradient-to-br from-white via-royal-50/30 to-amber-50/20 shadow-md">
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <span class="text-xs font-bold uppercase tracking-widest text-royal-800 bg-royal-100 px-3.5 py-1 rounded-full border border-royal-200" data-i18n="devBadge">
+          DIGITAL ARCHITECT &bull; ಅಭಿವೃದ್ಧಿ ತಂಡ
+        </span>
+        <h3 class="text-2xl sm:text-4xl font-black text-slate-900 mt-3" data-i18n="devTitle">
+          Engineered by <span class="text-royal-700">Rahulkumar K</span>
+        </h3>
+        <p class="text-xs sm:text-sm text-slate-600 mt-2" data-i18n="devSubtitle">
+          A dedicated student-led digital initiative designed and engineered for Shri S.B. Mamadapur Degree College, Badami under Roxstarlabs.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 items-center max-w-4xl mx-auto">
+        
+        <!-- Rahulkumar K Profile Card -->
+        <div class="luxury-card p-6 sm:p-8 rounded-2xl border-royal-200 bg-white shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-4 mb-4">
+              <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-royal-700 to-amber-500 p-1 flex-shrink-0 shadow-md">
+                <div class="w-full h-full rounded-[14px] bg-royal-950 text-white flex items-center justify-center font-black text-xl">
+                  RK
+                </div>
+              </div>
+              <div>
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-900 uppercase">Lead Architect &bull; B.Sc Scholar</span>
+                <h4 class="text-xl font-black text-slate-900 mt-1" data-i18n="devLeadName">Rahulkumar K</h4>
+                <p class="text-xs text-royal-700 font-semibold" data-i18n="devLeadRole">B.Sc 1st Semester &bull; SSBM College Badami</p>
+              </div>
+            </div>
+
+            <p class="text-xs text-slate-600 leading-relaxed" data-i18n="devLeadBio">
+              Initiated and developed this Unified Digital Campus Hub for Shri S.B. Mamadapur Arts, Commerce &amp; Science Degree College under <strong>Roxstarlabs</strong> to modernize access to internal test circulars, SEP learning modules, athletic pavilion scores, and institutional administration.
+            </p>
+          </div>
+
+          <div class="mt-6 pt-5 border-t border-slate-100 space-y-2.5 text-xs font-mono">
+            <a href="mailto:rahulkumarkabbaragi@gmail.com" class="flex items-center gap-2 text-slate-700 hover:text-royal-700 transition font-sans font-medium">
+              <div class="p-1.5 rounded-lg bg-royal-100 text-royal-800"><i data-lucide="mail" class="w-3.5 h-3.5"></i></div>
+              <span class="font-mono text-xs">rahulkumarkabbaragi@gmail.com</span>
+            </a>
+            <div class="flex items-center gap-2 text-slate-700 font-sans font-medium">
+              <div class="p-1.5 rounded-lg bg-amber-100 text-amber-800"><i data-lucide="map-pin" class="w-3.5 h-3.5"></i></div>
+              <span class="text-xs">Badami - 587201, Bagalkot District, Karnataka</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Roxstarlabs Organization Card -->
+        <div class="luxury-card p-6 sm:p-8 rounded-2xl bg-royal-950 text-white flex flex-col justify-between shadow-xl">
+          <div>
+            <div class="flex items-center gap-2 text-amber-400 font-bold text-xs uppercase mb-2">
+              <i data-lucide="terminal" class="w-4 h-4"></i> <span data-i18n="orgBadge">STUDENT INNOVATION LAB</span>
+            </div>
+            <h4 class="text-2xl font-black text-white tracking-tight">Roxstarlabs</h4>
+            <p class="text-xs text-slate-300 mt-2 leading-relaxed" data-i18n="orgDesc">
+              Roxstarlabs builds purpose-driven, ultra-fast web platforms, institutional software architectures, and automated portals to empower educational ecosystems across Karnataka.
+            </p>
+
+            <div class="mt-6 space-y-2 text-xs text-slate-300">
+              <div class="flex items-center gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
+                <span data-i18n="orgPt1">Single-file zero maintenance static deployment</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
+                <span data-i18n="orgPt2">Interactive Time-Machine academic year persistence</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
+                <span data-i18n="orgPt3">Built specifically for Bagalkot University SEP workflow</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8 pt-4 border-t border-white/10 flex items-center justify-between text-xs">
+            <span class="text-slate-400 font-mono">Architect: Rahulkumar K</span>
+            <span class="px-2.5 py-1 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30 font-bold">Production Ready</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-royal-950 text-slate-400 border-t border-royal-900 py-12 px-4 sm:px-6 text-xs mt-auto">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="text-center md:text-left">
+        <h4 class="text-white font-extrabold text-sm" data-i18n="footerCollegeName">Shri S. B. Mamadapur Arts, Commerce &amp; Science College</h4>
+        <p class="text-slate-400 text-xs mt-1" data-i18n="footerSamstha">Shri Veerapulakeshi Vidya Vardhak Samstha (SVPVVS, Est. 1956)</p>
+        <p class="text-slate-500 text-[11px] mt-0.5" data-i18n="footerAddress">Badami - 587201, Bagalkot District, Karnataka &bull; Affiliated to Bagalkot University</p>
+      </div>
+      <div class="text-center md:text-right font-mono text-[11px] text-slate-400">
+        <div>Developed by <span class="text-amber-400 font-bold">Rahulkumar K</span> &bull; Powered by <span class="text-white font-bold">Roxstarlabs</span></div>
+        <div class="text-slate-500 mt-1">&copy; 2026 SSBM College Badami. <span data-i18n="footerAllRights">All Rights Reserved.</span></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       MODALS: ISOLATED PASSKEY AUTHENTICATION + SECTION EDITORS
+       ========================================================================= -->
+
+  <!-- 1. ISOLATED PASSKEY PROMPT MODAL (Strictly NO Hints / NO Exposed Passwords) -->
+  <div id="passkeyModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white max-w-sm w-full rounded-3xl border border-slate-200 p-6 shadow-2xl relative">
+      <button onclick="closePasskeyModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="w-12 h-12 rounded-2xl bg-royal-100 text-royal-700 flex items-center justify-center mb-3">
+        <i data-lucide="lock" class="w-6 h-6"></i>
+      </div>
+      <h3 class="text-lg font-black text-slate-900" data-i18n="passModalTitle">Staff Authorization</h3>
+      <p class="text-xs text-slate-500 mt-1" id="passkeyActionPromptText">Enter the authorized campus passkey to proceed.</p>
+
+      <div class="mt-4">
+        <label class="block text-[11px] font-bold text-slate-700 mb-1" data-i18n="passModalLabel">Passkey</label>
+        <!-- Notice: No placeholder hint or default value -->
+        <input type="password" id="authPassInput" placeholder="Enter passkey" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-sm text-slate-900 font-mono focus:outline-none focus:border-royal-600" onkeydown="if(event.key==='Enter') verifyPasskeyForAction()" />
+        <span id="passErrorMsg" class="text-[11px] text-red-600 font-semibold mt-1 hidden block">Incorrect passkey. Access denied.</span>
+      </div>
+
+      <div class="mt-5 flex gap-2">
+        <button onclick="closePasskeyModal()" class="w-1/2 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold">Cancel</button>
+        <button onclick="verifyPasskeyForAction()" class="w-1/2 py-2 rounded-xl bg-royal-700 hover:bg-royal-800 text-white text-xs font-bold transition shadow-sm">Authorize</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. STUDENT STRENGTH MODAL -->
+  <div id="strengthEditModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white max-w-xl w-full rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-2xl relative">
+      <button onclick="closeModal('strengthEditModal')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="flex items-center gap-2 text-royal-700 text-xs font-bold uppercase mb-1">
+        <i data-lucide="database" class="w-4 h-4"></i> <span>Official Admission Registry</span>
+      </div>
+      <h3 class="text-xl font-bold text-slate-900">Update Student Enrollment Figures</h3>
+      <p class="text-xs text-slate-500 mt-1">Enter official counts from college registers. Percentages and totals recalculate live.</p>
+
+      <div class="mt-6 space-y-4 text-xs font-mono">
+        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="text-amber-800 font-bold font-sans mb-2 flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span> Bachelor of Arts (B.A.)
+          </div>
+          <div class="grid grid-cols-3 gap-3">
+            <div><label class="text-[10px] text-slate-500 block mb-1">1st Year</label><input type="number" id="m-ba-1" class="w-full bg-white border border-slate-300 rounded-lg p-2 text-slate-900" /></div>
+            <div><label class="text-[10px] text-slate-500 block mb-1">2nd Year</label><input type="number" id="m-ba-2" class="w-full bg-white border border-slate-300 rounded-lg p-2 text-slate-900" /></div>
+            <div><label class="text-[10px] text-slate-500 block mb-1">3rd Year</label><input type="number" id="m-ba-3" class="w-full bg-white border border-slate-300 rounded-lg p-2 text-slate-900" /></div>
+          </div>
+        </div>
+
+        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="text-blue-800 font-bold font-sans mb-2 flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-blue-600"></span> Bachelor of Commerce (B.Com.)
+          </div>
+          <div class="grid grid-cols-3 gap-3">
+            <div><label class="text-[10px] text-slate-500 block mb-1">1st Year</label><input type="number" id="m-bcom-1" class="w-full bg-white border border-slate-300 rounded-lg p-2 text-slate-900" /></div>
+            <div><label class="text-[10px] text-slate-500 block mb-1">2nd Year</label><input type="number" id="m-bcom-2" class="w-full bg-white border border-slate-300 rounded-lg p-2 text-slate-900" /></div>
+            <div><label class="text-[10px] text-slate-500 block mb-1">3rd Year</label><input type="number" id="m-bcom-3" class="w-full bg-white border border-slate-300 rounded-lg p-2 text-slate-900" /></div>
+          </div>
+        </div>
+
+        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="text-emerald-800 font-bold font-sans mb-2 flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span> Bachelor of Science (B.Sc.)
+          </div>
+          <div class="grid grid-cols-3 gap-3">
+            <div><label class="text-[10px] text-slate-500 block mb-1">1st Year</label><input type="number" id="m-bsc-1" class="w-full bg-white border border-slate-300 rounded-lg p-2 text-slate-900" /></div>
+            <div><label class="text-[10px] text-slate-500 block mb-1">2nd Year</label><input type="number" id="m-bsc-2" class="w-full bg-white border border-slate-300 rounded-lg p-2 text-slate-900" /></div>
+            <div><label class="text-[10px] text-slate-500 block mb-1">3rd Year</label><input type="number" id="m-bsc-3" class="w-full bg-white border border-slate-300 rounded-lg p-2 text-slate-900" /></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-6 flex justify-end gap-3">
+        <button onclick="closeModal('strengthEditModal')" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold">Cancel</button>
+        <button onclick="saveStudentStrength()" class="px-5 py-2 rounded-xl bg-royal-700 hover:bg-royal-800 text-white text-xs font-bold transition shadow-md">Save Registry</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. SPORTS TOURNAMENT MODAL -->
+  <div id="sportsEditModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white max-w-xl w-full rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+      <button onclick="closeModal('sportsEditModal')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="flex items-center gap-2 text-turf-700 text-xs font-bold uppercase mb-1">
+        <i data-lucide="trophy" class="w-4 h-4"></i> <span>Sports Pavilion Manager</span>
+      </div>
+      <h3 class="text-xl font-bold text-slate-900">Add Tournament Roster</h3>
+      <p class="text-xs text-slate-500 mt-1">Record winning teams, runner-ups, and player rosters.</p>
+
+      <div class="mt-6 space-y-4 text-xs">
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="font-bold text-slate-800 block mb-1">Sport Category</label>
+            <select id="mSportsCategory" class="w-full bg-white border border-slate-300 rounded-lg p-2">
+              <option value="Cricket">Cricket</option>
+              <option value="Volleyball">Volleyball</option>
+              <option value="Kabaddi">Kabaddi</option>
+              <option value="Athletics">Athletics</option>
+              <option value="Badminton">Badminton</option>
+              <option value="Chess">Chess</option>
+            </select>
+          </div>
+          <div>
+            <label class="font-bold text-slate-800 block mb-1">Tournament Title</label>
+            <input type="text" id="mSportsTitle" placeholder="e.g. Annual Inter-Stream Cup" class="w-full bg-white border border-slate-300 rounded-lg p-2" />
+          </div>
+        </div>
+
+        <div class="p-3.5 rounded-xl bg-amber-50 border border-amber-200">
+          <label class="font-bold text-amber-900 block mb-1">🥇 1st Place / Champions Team</label>
+          <input type="text" id="mSportsWinnerTeam" placeholder="e.g. Science Strikers (B.Sc)" class="w-full bg-white border border-amber-300 rounded-lg p-2 font-bold mb-2" />
+          <label class="text-[11px] text-slate-600 block mb-1">Squad Roster (Comma separated)</label>
+          <textarea id="mSportsWinnerRoster" rows="2" placeholder="Rahulkumar K (C), Sachin P., Basavaraj K..." class="w-full bg-white border border-amber-300 rounded-lg p-2"></textarea>
+        </div>
+
+        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+          <label class="font-bold text-slate-900 block mb-1">🥈 2nd Place / Runners-Up Team</label>
+          <input type="text" id="mSportsRunnerTeam" placeholder="e.g. Commerce Warriors (B.Com)" class="w-full bg-white border border-slate-300 rounded-lg p-2 font-bold mb-2" />
+          <label class="text-[11px] text-slate-600 block mb-1">Squad Roster</label>
+          <textarea id="mSportsRunnerRoster" rows="2" placeholder="Prakash D. (C), Chetan M., Megha B..." class="w-full bg-white border border-slate-300 rounded-lg p-2"></textarea>
+        </div>
+
+        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+          <label class="font-bold text-slate-900 block mb-1">🥉 3rd Place Team</label>
+          <input type="text" id="mSportsThirdTeam" placeholder="e.g. Arts Royal Challengers (B.A)" class="w-full bg-white border border-slate-300 rounded-lg p-2 font-bold mb-2" />
+          <label class="text-[11px] text-slate-600 block mb-1">Squad Roster</label>
+          <textarea id="mSportsThirdRoster" rows="2" placeholder="Veeresh K. (C), Ananya P., Sangamesh T..." class="w-full bg-white border border-slate-300 rounded-lg p-2"></textarea>
+        </div>
+      </div>
+
+      <div class="mt-6 flex justify-end gap-3">
+        <button onclick="closeModal('sportsEditModal')" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold">Cancel</button>
+        <button onclick="saveSportsTournament()" class="px-5 py-2 rounded-xl bg-turf-700 hover:bg-turf-800 text-white text-xs font-bold transition shadow-md">Publish Roster</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. SUBMISSION DEADLINES MODAL -->
+  <div id="deadlineEditModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white max-w-md w-full rounded-3xl border border-slate-200 p-6 shadow-2xl relative">
+      <button onclick="closeModal('deadlineEditModal')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
+      <h3 class="text-lg font-bold text-slate-900">Add Submission Deadline</h3>
+      <div class="mt-4 space-y-3 text-xs">
+        <div><label class="block font-semibold mb-1">Subject &amp; Task</label><input type="text" id="mDlTitle" placeholder="e.g. Physics Sem 1 Lab Journal" class="w-full border rounded-lg p-2" /></div>
+        <div><label class="block font-semibold mb-1">Target Stream &amp; Sem</label><input type="text" id="mDlStream" placeholder="e.g. B.Sc Sem I (PCM &amp; CBZ)" class="w-full border rounded-lg p-2" /></div>
+        <div><label class="block font-semibold mb-1">Deadline Date</label><input type="date" id="mDlDate" class="w-full border rounded-lg p-2" /></div>
+        <div><label class="block font-semibold mb-1">Faculty In-Charge</label><input type="text" id="mDlFaculty" placeholder="e.g. Department of Physics" class="w-full border rounded-lg p-2" /></div>
+      </div>
+      <div class="mt-5 flex justify-end gap-2">
+        <button onclick="closeModal('deadlineEditModal')" class="px-4 py-2 bg-slate-100 rounded-lg text-xs font-semibold">Cancel</button>
+        <button onclick="saveNewDeadline()" class="px-4 py-2 bg-royal-700 text-white rounded-lg text-xs font-bold">Add Deadline</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. TEACHING STAFF MODAL -->
+  <div id="staffEditModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white max-w-md w-full rounded-3xl border border-slate-200 p-6 shadow-2xl relative">
+      <button onclick="closeModal('staffEditModal')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
+      <h3 class="text-lg font-bold text-slate-900">Add Teaching Faculty Member</h3>
+      <div class="mt-4 space-y-3 text-xs">
+        <div>
+          <label class="block font-semibold mb-1">Faculty Stream</label>
+          <select id="mStaffDept" class="w-full border rounded-lg p-2">
+            <option value="BSC">Science Faculty (B.Sc)</option>
+            <option value="BCOM">Commerce Faculty (B.Com)</option>
+            <option value="BA">Arts Faculty (B.A)</option>
+          </select>
+        </div>
+        <div><label class="block font-semibold mb-1">Lecturer / Professor Name</label><input type="text" id="mStaffName" placeholder="e.g. Prof. Ramesh Patil" class="w-full border rounded-lg p-2" /></div>
+        <div><label class="block font-semibold mb-1">Designation &amp; Qualification</label><input type="text" id="mStaffRole" placeholder="e.g. Assistant Professor, M.Sc., Ph.D." class="w-full border rounded-lg p-2" /></div>
+        <div><label class="block font-semibold mb-1">Subject / Department</label><input type="text" id="mStaffSubject" placeholder="e.g. Department of Physics" class="w-full border rounded-lg p-2" /></div>
+      </div>
+      <div class="mt-5 flex justify-end gap-2">
+        <button onclick="closeModal('staffEditModal')" class="px-4 py-2 bg-slate-100 rounded-lg text-xs font-semibold">Cancel</button>
+        <button onclick="saveNewStaffMember()" class="px-4 py-2 bg-royal-700 text-white rounded-lg text-xs font-bold">Add Faculty</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. STUDENT COUNCIL MODAL (With Photo upload & Name) -->
+  <div id="councilEditModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white max-w-md w-full rounded-3xl border border-slate-200 p-6 shadow-2xl relative">
+      <button onclick="closeModal('councilEditModal')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
+      <div class="flex items-center gap-2 text-royal-700 text-xs font-bold uppercase mb-1">
+        <i data-lucide="user-check" class="w-4 h-4"></i> <span>Student Leadership</span>
+      </div>
+      <h3 class="text-lg font-bold text-slate-900">Add Student Leader / CR</h3>
+      <p class="text-xs text-slate-500 mt-0.5">Enter details and optionally attach student photo.</p>
+
+      <div class="mt-4 space-y-3 text-xs">
+        <div>
+          <label class="block font-semibold mb-1">Leadership Role</label>
+          <input type="text" id="mCouncilRole" placeholder="e.g. General Secretary (GS) or CR - B.Sc 1st Year" class="w-full border rounded-lg p-2" />
+        </div>
+        <div>
+          <label class="block font-semibold mb-1">Student Full Name</label>
+          <input type="text" id="mCouncilName" placeholder="e.g. Student Name" class="w-full border rounded-lg p-2 font-bold" />
+        </div>
+        <div>
+          <label class="block font-semibold mb-1">Stream &amp; Class</label>
+          <input type="text" id="mCouncilStream" placeholder="e.g. B.Sc 1st Semester (PCM/CBZ)" class="w-full border rounded-lg p-2" />
+        </div>
+        <div>
+          <label class="block font-semibold mb-1">Student Photo (Optional)</label>
+          <input type="file" id="mCouncilPhotoInput" accept="image/*" class="w-full border rounded-lg p-1.5 text-xs text-slate-600 bg-slate-50" />
+        </div>
+      </div>
+      <div class="mt-5 flex justify-end gap-2">
+        <button onclick="closeModal('councilEditModal')" class="px-4 py-2 bg-slate-100 rounded-lg text-xs font-semibold">Cancel</button>
+        <button onclick="saveCouncilMember()" class="px-4 py-2 bg-royal-700 text-white rounded-lg text-xs font-bold">Save Student Leader</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. ADD IA EXAM SLOT MODAL -->
+  <div id="iaAddSlotModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white max-w-md w-full rounded-3xl border border-slate-200 p-6 shadow-2xl relative">
+      <button onclick="closeModal('iaAddSlotModal')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
+      <div class="flex items-center gap-2 text-royal-700 text-xs font-bold uppercase mb-1">
+        <i data-lucide="calendar-plus" class="w-4 h-4"></i> <span>Internal Assessment Manager</span>
+      </div>
+      <h3 class="text-lg font-bold text-slate-900">Add IA Exam Slot</h3>
+      <div class="mt-4 space-y-3 text-xs">
+        <div class="grid grid-cols-2 gap-2">
+          <div><label class="block font-semibold mb-1">Date (DD-MM-YYYY)</label><input type="text" id="mIaDate" placeholder="e.g. 10-10-2026" class="w-full border rounded-lg p-2" /></div>
+          <div><label class="block font-semibold mb-1">Day</label><input type="text" id="mIaDay" placeholder="e.g. Saturday" class="w-full border rounded-lg p-2" /></div>
+        </div>
+        <div><label class="block font-semibold mb-1">Time Slot</label><input type="text" id="mIaTime" placeholder="e.g. 8:00 AM - 9:00 AM" class="w-full border rounded-lg p-2" /></div>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block font-semibold mb-1">Stream</label>
+            <select id="mIaStream" class="w-full border rounded-lg p-2">
+              <option value="BSC">B.Sc</option>
+              <option value="BCOM">B.Com</option>
+              <option value="BA">B.A</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-semibold mb-1">Semester</label>
+            <select id="mIaSem" class="w-full border rounded-lg p-2">
+              <option value="I">Sem I</option>
+              <option value="III">Sem III</option>
+              <option value="V">Sem V</option>
+            </select>
+          </div>
+        </div>
+        <div><label class="block font-semibold mb-1">Subject / Paper Name</label><input type="text" id="mIaSubject" placeholder="e.g. Physics / Zoology" class="w-full border rounded-lg p-2" /></div>
+        <div><label class="block font-semibold mb-1">Paper Type</label><input type="text" id="mIaType" placeholder="e.g. DSC Core" class="w-full border rounded-lg p-2" /></div>
+      </div>
+      <div class="mt-5 flex justify-end gap-2">
+        <button onclick="closeModal('iaAddSlotModal')" class="px-4 py-2 bg-slate-100 rounded-lg text-xs font-semibold">Cancel</button>
+        <button onclick="saveIaSlot()" class="px-4 py-2 bg-royal-700 text-white rounded-lg text-xs font-bold">Add IA Slot</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Box -->
+  <div id="toastBox" class="fixed bottom-6 right-6 z-50 bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-xl text-xs font-bold flex items-center gap-2.5 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+    <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
+    <span id="toastBoxMsg">Operation completed successfully.</span>
+  </div>
+
+  <!-- JavaScript Application Engine -->
+  <script>
+    lucide.createIcons();
+
+    // Mobile Navigation Toggle
+    document.getElementById('mobileMenuToggle').addEventListener('click', () => {
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+    });
+
+    /* =========================================================================
+       1. STRICT ISOLATED PASSKEY AUTHENTICATION SYSTEM
+       - Every section action independently asks for the passkey.
+       - No single global session is kept unlocked.
+       ========================================================================= */
+    const AUTH_PASSKEY = "SSBM2026";
+    let pendingIsolatedAction = null;
+
+    function promptPasskeyForAction(actionName, actionFriendlyName) {
+      pendingIsolatedAction = actionName;
+      document.getElementById('authPassInput').value = '';
+      document.getElementById('passErrorMsg').classList.add('hidden');
+      document.getElementById('passkeyActionPromptText').innerText = `Authorization required to: ${actionFriendlyName}`;
+      
+      const modal = document.getElementById('passkeyModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      setTimeout(() => document.getElementById('authPassInput').focus(), 100);
+    }
+
+    function closePasskeyModal() {
+      const modal = document.getElementById('passkeyModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      pendingIsolatedAction = null;
+    }
+
+    function verifyPasskeyForAction() {
+      const entered = document.getElementById('authPassInput').value.trim();
+      if (entered === AUTH_PASSKEY) {
+        const actionToRun = pendingIsolatedAction;
+        closePasskeyModal();
+        showToast("Authorization verified.");
+        if (actionToRun) {
+          executeIsolatedAction(actionToRun);
+        }
+      } else {
+        document.getElementById('passErrorMsg').classList.remove('hidden');
+      }
+    }
+
+    function executeIsolatedAction(action) {
+      if (action === 'principalPhoto') {
+        document.getElementById('principalFileInput').click();
+      } else if (action === 'staffManage') {
+        openModal('staffEditModal');
+      } else if (action === 'councilManage') {
+        openModal('councilEditModal');
+      } else if (action === 'strengthManage') {
+        openStrengthEditor();
+      } else if (action === 'deadlineManage') {
+        openModal('deadlineEditModal');
+      } else if (action === 'sportsManage') {
+        openSportsEditor();
+      } else if (action === 'iaAddSlot') {
+        openModal('iaAddSlotModal');
+      } else if (action === 'iaDeleteSection') {
+        deleteIaSchedule();
+      } else if (action === 'iaRestoreSection') {
+        restoreIaSchedule();
+      } else if (action === 'clearUnivExam') {
+        clearUnivExamBulletin();
+      } else if (action === 'talentManage') {
+        showToast("Talent records can be updated via sports/cultural office register.");
+      } else if (action.startsWith('deleteCouncil_')) {
+        const id = parseInt(action.replace('deleteCouncil_', ''));
+        deleteCouncilMember(id);
+      } else if (action.startsWith('deleteStaff_')) {
+        const id = parseInt(action.replace('deleteStaff_', ''));
+        deleteStaffMember(id);
+      } else if (action.startsWith('deleteDeadline_')) {
+        const id = parseInt(action.replace('deleteDeadline_', ''));
+        deleteDeadline(id);
+      } else if (action.startsWith('deleteSport_')) {
+        const id = action.replace('deleteSport_', '');
+        deleteSportTournament(id);
+      }
+    }
+
+    function openModal(id) {
+      document.getElementById(id).classList.remove('hidden');
+      document.getElementById(id).classList.add('flex');
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.add('hidden');
+      document.getElementById(id).classList.remove('flex');
+    }
+
+    /* =========================================================================
+       2. DATABASE STORE & TIME-MACHINE LOGIC
+       ========================================================================= */
+    let currentSelectedYear = '2026-2027';
+
+    const defaultDatabase = {
+      "2026-2027": {
+        topNotice: "2nd Internal Assessment Scheduled for Oct 07, 08 & 09, 2026 across BA, B.Com, & B.Sc.",
+        iaActive: true,
+        strength: {
+          ba: [120, 110, 95],
+          bcom: [140, 130, 115],
+          bsc: [160, 145, 125]
+        },
+        staffList: [
+          { id: 1, dept: "BSC", name: "Dr. Amaresh Topalakatti", role: "Principal & Head, Botany", qualification: "M.Sc., Ph.D." },
+          { id: 2, dept: "BSC", name: "Prof. S. R. Patil", role: "HOD Physics", qualification: "M.Sc., M.Phil." },
+          { id: 3, dept: "BSC", name: "Dr. V. B. Kulkarni", role: "HOD Chemistry", qualification: "M.Sc., Ph.D." },
+          { id: 4, dept: "BSC", name: "Prof. M. S. Hullur", role: "HOD Mathematics", qualification: "M.Sc." },
+          { id: 5, dept: "BSC", name: "Prof. K. N. Badami", role: "HOD Zoology", qualification: "M.Sc." },
+          { id: 6, dept: "BSC", name: "Prof. S. M. Hiremath", role: "Lecturer, Computer Science", qualification: "MCA, M.Sc." },
+          { id: 7, dept: "BCOM", name: "Prof. B. C. Talikoti", role: "HOD Commerce & Accounts", qualification: "M.Com., M.Phil." },
+          { id: 8, dept: "BCOM", name: "Prof. R. M. Desai", role: "Lecturer, Financial Management", qualification: "M.Com." },
+          { id: 9, dept: "BCOM", name: "Prof. A. S. Bagalkot", role: "Lecturer, Taxation & Law", qualification: "M.Com., NET" },
+          { id: 10, dept: "BA", name: "Dr. C. S. Navalgund", role: "HOD History", qualification: "M.A., Ph.D." },
+          { id: 11, dept: "BA", name: "Prof. S. P. Chalukya", role: "HOD Political Science", qualification: "M.A., KSET" },
+          { id: 12, dept: "BA", name: "Prof. V. R. Pujar", role: "HOD Economics", qualification: "M.A., M.Phil." },
+          { id: 13, dept: "BA", name: "Dr. G. M. Hiregoudar", role: "HOD Kannada & Culture", qualification: "M.A., Ph.D." }
+        ],
+        council: [
+          { id: 1, role: "General Secretary (GS)", name: "Elected Scholar 2026", stream: "B.Sc Final Year", photo: "" },
+          { id: 2, role: "Class Representative (CR)", name: "B.Sc 1st Sem CR", stream: "B.Sc I (PCM/CBZ)", photo: "" },
+          { id: 3, role: "Class Representative (CR)", name: "B.Com 1st Sem CR", stream: "B.Com I Sem", photo: "" },
+          { id: 4, role: "Class Representative (CR)", name: "B.A 1st Sem CR", stream: "B.A I Sem", photo: "" }
+        ],
+        deadlines: [
+          { id: 1, title: "Physics Lab Journal Submission", stream: "B.Sc Sem I", date: "2026-10-15", faculty: "Dept of Physics" },
+          { id: 2, title: "Cost Accounting Assignment - 1", stream: "B.Com Sem III", date: "2026-10-18", faculty: "Dept of Commerce" },
+          { id: 3, title: "Chalukya History Project File", stream: "B.A Sem I", date: "2026-10-20", faculty: "Dept of History" },
+          { id: 4, title: "Chemistry Semi-Micro Analysis Records", stream: "B.Sc Sem III", date: "2026-10-22", faculty: "Dept of Chemistry" }
+        ],
+        sportsList: [
+          {
+            id: "sp-1",
+            category: "Cricket",
+            title: "Annual Inter-Stream Cricket Championship",
+            winner: "SSBM Science Strikers (B.Sc)",
+            winnerPlayers: "Rahulkumar K (C), Sachin P., Basavaraj K., Anand M., Praveen B., Ramesh H., Santosh N., Manjunath K., Vidyadhar P., Shivanand G., Kiran T.",
+            runner: "Commerce Warriors (B.Com)",
+            runnerPlayers: "Prakash D. (C), Chetan M., Megha B., Sunil K., Vinod P., Raghavendra S., Mallikarjun B., Rohit J., Abhishek L., Suresh G., Prashant V.",
+            third: "Arts Royal Challengers (B.A)",
+            thirdPlayers: "Veeresh K. (C), Ananya P., Sangamesh T., Siddappa N., Ningappa M., Ravi B., Hanumanth P., Yallappa D., Maruti S., Somu L., Devendra K."
+          },
+          {
+            id: "sp-2",
+            category: "Volleyball",
+            title: "Badami Chalukya Inter-Collegiate Volleyball Cup",
+            winner: "SSBM Commerce Smashers (B.Com)",
+            winnerPlayers: "Manjunath T. (C), Ramesh B., Vinay K., Sunil D., Sagar M., Venkatesh P.",
+            runner: "Science Block Spikers (B.Sc)",
+            runnerPlayers: "Basavaraj H. (C), Anand S., Praveen G., Kiran N., Siddarth R., Maruti T.",
+            third: "Arts Tigers (B.A)",
+            thirdPlayers: "Ningappa K. (C), Hanumanth S., Mallappa B., Ravi P., Yallappa M., Prashant K."
+          },
+          {
+            id: "sp-3",
+            category: "Kabaddi",
+            title: "Taluk Level Pro-Kabaddi Championship",
+            winner: "Veerapulakeshi Warriors (B.A)",
+            winnerPlayers: "Hanumanth R. (C), Shankara K., Devendra N., Basappa T., Yallappa R., Suresh K., Maruti P.",
+            runner: "Commerce Raiders (B.Com)",
+            runnerPlayers: "Rohit P. (C), Raghavendra M., Prashant G., Vinod T., Sunil B., Ravi N., Prakash S.",
+            third: "Science Defenders (B.Sc)",
+            thirdPlayers: "Chetan S. (C), Jagadish M., Venkatesh B., Shivaraj P., Santosh H., Mallikarjun K., Vijay T."
+          }
+        ],
+        talentWinners: [
+          { day: "Day 1", event: "Kannada Debate & Elocution", first: "Student Scholar, B.A. III", second: "Student Scholar, B.Sc. I" },
+          { day: "Day 2", event: "Fine Arts & Pencil Sketching", first: "Student Scholar, B.Com. II", second: "Student Scholar, B.Sc. II" },
+          { day: "Day 3", event: "Classical & Folk Singing", first: "Student Scholar, B.A. I", second: "Student Scholar, B.Com. III" }
+        ],
+        univExam: { active: false, title: "", startDate: "", note: "" }
+      },
+      "2025-2026": {
+        topNotice: "Archival Academic Session 2025–2026. All degree examinations concluded.",
+        iaActive: false,
+        strength: {
+          ba: [115, 105, 90],
+          bcom: [135, 120, 110],
+          bsc: [150, 140, 120]
+        },
+        staffList: [],
+        council: [{ id: 1, role: "General Secretary (GS)", name: "Praveen Patil (Alumnus)", stream: "B.Com Final Year", photo: "" }],
+        deadlines: [],
+        sportsList: [],
+        talentWinners: [],
+        univExam: { active: false }
+      },
+      "2024-2025": {
+        topNotice: "Archival Session 2024–2025 records loaded successfully.",
+        iaActive: false,
+        strength: {
+          ba: [110, 100, 85],
+          bcom: [130, 115, 100],
+          bsc: [140, 130, 110]
+        },
+        staffList: [],
+        council: [{ id: 1, role: "General Secretary (GS)", name: "Mallikarjun Hullur", stream: "B.A Final Year", photo: "" }],
+        deadlines: [],
+        sportsList: [],
+        talentWinners: [],
+        univExam: { active: false }
+      }
+    };
+
+    let campusData = {};
+
+    function initDataStore() {
+      const saved = localStorage.getItem('ssbm_final_store_2026_isolated');
+      if (saved) {
+        try {
+          campusData = JSON.parse(saved);
+        } catch(e) {
+          campusData = defaultDatabase;
+        }
+      } else {
+        campusData = defaultDatabase;
+      }
+    }
+
+    function persistDataStore() {
+      localStorage.setItem('ssbm_final_store_2026_isolated', JSON.stringify(campusData));
+    }
+
+    function switchAcademicYear(year) {
+      currentSelectedYear = year;
+      const heroPill = document.getElementById('heroPill');
+      if (year === '2026-2027') {
+        heroPill.innerHTML = `Academic Session 2026–2027 &bull; Bagalkot University SEP Curriculum`;
+      } else {
+        heroPill.innerHTML = `Archival Record &bull; Academic Session ${year}`;
+      }
+      showToast(currentLang === 'kn' ? `${year} ಶೈಕ್ಷಣಿಕ ವರ್ಷದ ದಾಖಲೆಗಳು ಲೋಡ್ ಆಗಿವೆ.` : `Switched to ${year} academic session records.`);
+      refreshCurrentView();
+    }
+
+    function refreshCurrentView() {
+      const current = campusData[currentSelectedYear] || campusData["2026-2027"];
+      if (current.topNotice) {
+        document.getElementById('topNoticeMarquee').innerText = current.topNotice;
+      }
+
+      renderStaff(current.staffList || defaultDatabase["2026-2027"].staffList);
+      renderCouncil(current.council || defaultDatabase["2026-2027"].council);
+      renderStrength(current.strength || defaultDatabase["2026-2027"].strength);
+      renderDeadlines(current.deadlines || []);
+      renderSports(current.sportsList || defaultDatabase["2026-2027"].sportsList);
+      renderTalentHunt(current.talentWinners || defaultDatabase["2026-2027"].talentWinners);
+      renderUnivExam(current.univExam || { active: false });
+
+      // IA Section visibility
+      updateIaSectionVisibility(current.iaActive !== false);
+    }
+
+    /* =========================================================================
+       3. BILINGUAL LANGUAGE ENGINE (English <-> Kannada)
+       ========================================================================= */
+    const dictionary = {
+      en: {
+        announcementBadge: "OFFICIAL NOTICE",
+        topNoticeText: "2nd Internal Assessment Scheduled for Oct 07, 08 & 09, 2026 across BA, B.Com, & B.Sc.",
+        yearLabel: "Session:",
+        collegeTitle: "SHRI S. B. MAMADAPUR",
+        collegeSubtitle: "Arts, Commerce & Science Degree College, Badami",
+        samsthaTag: "Shri Veerapulakeshi Vidya Vardhak Samstha (Est. 1956) • Bagalkot Dist.",
+        navAbout: "About",
+        navPrincipal: "Principal",
+        navStaff: "Teaching Staff",
+        navCouncil: "Student Council",
+        navTimetable: "Internal Exams",
+        navStudyHub: "SEP Hub",
+        navDeadlines: "Submissions",
+        navStrength: "Students",
+        navSports: "Sports Hub",
+        navTalent: "Talent Hunt",
+        navDev: "Developer",
+        heroTitlePart1: "Fostering Academic Dignity in the",
+        heroTitlePart2: "Historic Land of Badami Chalukyas",
+        heroSubtitle: "The official digital campus portal for Shri S.B. Mamadapur Arts, Commerce & Science Degree College, Badami. Access verified timetables, university updates, SEP learning materials, athletic achievements, and institutional records.",
+        heroActionTimetable: "Internal Exam Timetable",
+        heroActionNotes: "SEP Study Repository",
+        heroActionDeadlines: "Submission Deadlines",
+        heroActionSports: "SSBM Sports Pavilion",
+        metricEstablished: "Degree Established",
+        metricSamstha: "Samstha Est. 1956",
+        metricScholars: "Enrolled Scholars",
+        metricFaculties: "BA, B.Com, B.Sc",
+        metricAffiliation: "Bagalkot University",
+        metricGovt: "UGC 2(f) & 12(B)",
+        metricDedicated: "Academic Mentorship",
+        metricFaculty: "Science, Comm. & Arts",
+        aboutBadge: "INSTITUTIONAL HERITAGE • ಸಂಸ್ಥೆಯ ಪರಿಚಯ",
+        aboutTitle: "About Shri S.B. Mamadapur Degree College",
+        aboutSubtitle: "Pioneering higher education for over four decades under Shri Veerapulakeshi Vidya Vardhak Samstha.",
+        aboutHistoryTitle: "Historical Foundations & Samstha Roots",
+        aboutHistorySubtitle: "Established in 1982 in the heritage city of Badami",
+        aboutHistoryP1: "<strong>Shri S.B. Mamadapur Arts, Commerce & Science College</strong> was established in 1982 to bring undergraduate higher education to the rural and semi-urban youth of Badami, Guledagudda, Kerur, and surrounding rural taluks of Bagalkot district. The college is run by the prestigious <strong>Shri Veerapulakeshi Vidya Vardhak Samstha (SVPVVS)</strong>, founded in 1956 to memorialize the valor and cultural patronship of the immortal Badami Chalukya monarch, Pulakeshi II.",
+        aboutHistoryP2: "Starting with Arts and Commerce faculties, the Science division was inaugurated in 1987–88, equipping students with state-of-the-art physics, chemistry, botany, zoology, and mathematics labs. Affiliated with <strong>Bagalkot University (Jamkhandi)</strong>, the college adheres strictly to the State Education Policy (SEP).",
+        aboutVisionTitle: "Vision & Mission",
+        aboutVisionSubtitle: "Institutional charter",
+        visionLabel: "OUR VISION",
+        visionText: "\"To impart holistic, value-based higher education to the rural and backward community youth, transforming them into globally competent and socially committed citizens.\"",
+        missionLabel: "OUR MISSION",
+        missionText: "\"To foster academic excellence in Science, Commerce, and Arts through skilled faculty, modern infrastructure, scientific temperament, and ethical responsibility.\"",
+        samsthaMotto: "SVPVVS Samstha • Badami",
+        principalBadge: "Principal & Head of Institution",
+        principalName: "Dr. Amaresh Topalakatti",
+        principalQual: "M.Sc., Ph.D. • InSc Best Researcher Awardee",
+        principalDept: "Principal & Head, Department of Botany",
+        principalMessageHeader: "Message from the Principal's Desk",
+        principalQuote: "\"Welcome to Shri S.B. Mamadapur Arts, Commerce & Science College, Badami. Since 1982, our institution has stood as an academic sanctuary, carrying forward the great civilizational legacy of the Badami Chalukyas.\"",
+        principalBody1: "Under our affiliation with <strong>Bagalkot University (Jamkhandi)</strong>, we impart high-rigor undergraduate education across B.Sc, B.Com, and B.A. programs. Our focus is cultivating disciplined inquiry, research aptitude through laboratory sessions, and character-building through sports and cultural events.",
+        principalBody2: "I commend our BSc 1st semester scholars under Roxstarlabs for engineering this campus portal. Maintaining our <strong>Internal Examination schedules</strong>, Bagalkot University SEP resources, athletic tournament records, and student statistics in an accessible, bilingual hub keeps every student ahead.",
+        staffBadge: "FACULTY OF ARTS, COMMERCE & SCIENCE",
+        staffTitle: "Teaching Staff <span class=\"text-royal-700\">Directory</span>",
+        staffSubtitle: "Distinguished professors, heads of departments, and lecturers dedicated to academic excellence across undergraduate streams.",
+        addStaffBtn: "Add / Manage Staff",
+        councilBadge: "STUDENT COUNCIL LEADERSHIP",
+        councilTitle: "General Secretary & Class Representatives <span class=\"text-royal-700\">(GS & CRs)</span>",
+        councilSubtitle: "Student leadership representing BA, B.Com, and B.Sc streams. Photo management, full names, roles, and department assignments.",
+        updateCouncilBtn: "Add Student Leader / CR",
+        ttBadge: "OFFICIAL CIRCULAR VERIFIED • 2026–27",
+        ttTitle: "1st, 3rd & 5th Semester <span class=\"text-royal-700\">Internal Test</span> Timetable",
+        ttSubtitle: "Conducted by SSBM Examination Committee. Matches official notification signed by Examination Chairman & Principal Dr. Amaresh Topalakatti.",
+        ttPrintBtn: "Print Timetable",
+        filterStreamLabel: "Stream:",
+        filterAllStreams: "All Streams",
+        filterSemLabel: "Semester:",
+        filterAllSems: "All Sems",
+        thDate: "Date & Day",
+        thTime: "Time Slot",
+        thStream: "Stream",
+        thSemester: "Semester",
+        thSubject: "Paper / Subject Name",
+        thType: "Paper Type",
+        thAction: "Study Notes",
+        iaConcludedTitle: "Internal Assessments Concluded for Current Cycle",
+        iaConcludedSubtitle: "All scheduled internal examinations have been completed. The next Internal Assessment schedule will be published here as soon as released by the SSBM Examination Committee.",
+        iaAnnounceNewBtn: "Announce / Re-schedule IA",
+        univExamBadge: "OFFICIAL UNIVERSITY EXAMINATION BULLETIN",
+        sepBadge: "BAGALKOT UNIVERSITY ACADEMIC REPOSITORY",
+        sepTitle: "SEP Curriculum <span class=\"text-royal-700\">Study Materials & Blueprints</span>",
+        sepSubtitle: "Verified syllabus blueprints, lecture notes, lab manuals, and previous internal question papers for Semester 1, 3, and 5.",
+        matTabAll: "All Subjects",
+        matTabBsc: "B.Sc Science Hub",
+        matTabBcom: "B.Com Commerce Hub",
+        matTabBa: "B.A Arts Hub",
+        matTabGen: "Languages & Values",
+        deadlinesBadge: "ACADEMIC SUBMISSION SCHEDULE",
+        deadlinesTitle: "Assignment & Practical Journal <span class=\"text-royal-700\">Deadlines</span>",
+        deadlinesSubtitle: "Stay on track with upcoming submission dates for laboratory records, assignments, and practical journals across departments.",
+        addDeadlineBtn: "Add / Update Deadline",
+        strengthBadge: "OFFICIAL ADMISSION REGISTRY",
+        strengthTitle: "Student Strength <span class=\"text-royal-700\">Registry</span>",
+        strengthSubtitle: "Verified student enrollment figures across BA, B.Com, and B.Sc streams. Updates in real-time according to official admission registers.",
+        strengthEditBtn: "Update Admission Counts",
+        cardBscLabel: "B.SC SCHOLARS",
+        cardBscSub: "Science Faculty Total",
+        cardBcomLabel: "B.COM SCHOLARS",
+        cardBcomSub: "Commerce Faculty Total",
+        cardBaLabel: "B.A SCHOLARS",
+        cardBaSub: "Arts Faculty Total",
+        cardTotalLabel: "TOTAL DEGREE ENROLLMENT",
+        cardTotalSub: "Active Undergraduate Scholars",
+        tblColProgram: "Program / Academic Stream",
+        tblColYear1: "1st Year (Sem I & II)",
+        tblColYear2: "2nd Year (Sem III & IV)",
+        tblColYear3: "3rd Year (Sem V & VI)",
+        tblColTotal: "Stream Total",
+        rowBaTitle: "Bachelor of Arts (B.A.)",
+        rowBcomTitle: "Bachelor of Commerce (B.Com.)",
+        rowBscTitle: "Bachelor of Science (B.Sc.)",
+        tblColYearTotals: "Year-Wise Enrollment Totals:",
+        sportsBadge: "SSBM ATHLETIC PAVILION • SPORTS HUB",
+        sportsTitle: "Inter-Departmental Sports & Games <span class=\"text-turf-700\">Champions</span>",
+        sportsSubtitle: "Celebrating achievements across Cricket, Volleyball, Kabaddi, Athletics, Badminton, and Chess. Full champion rosters, runner-up squads, and historic match awards.",
+        editSportsBtn: "Add Tournament Roster",
+        talentBadge: "CULTURAL FESTIVAL ARCHIVE",
+        talentTitle: "Talent Hunt 2026 <span class=\"text-amber-600\">Wall of Winners</span>",
+        talentSubtitle: "Celebrating the daily champions across debate, fine arts, classical music, and cultural events during the inter-collegiate festival.",
+        editTalentBtn: "Update Talent Records",
+        devBadge: "DIGITAL ARCHITECT • ಅಭಿವೃದ್ಧಿ ತಂಡ",
+        devTitle: "Engineered by <span class=\"text-royal-700\">Rahulkumar K</span>",
+        devSubtitle: "A dedicated student-led digital initiative designed and engineered for Shri S.B. Mamadapur Degree College, Badami under Roxstarlabs.",
+        devLeadName: "Rahulkumar K",
+        devLeadRole: "B.Sc 1st Semester • SSBM College Badami",
+        devLeadBio: "Initiated and developed this Unified Digital Campus Hub for Shri S.B. Mamadapur Arts, Commerce & Science Degree College under <strong>Roxstarlabs</strong> to modernize access to internal test circulars, SEP learning modules, athletic pavilion scores, and institutional administration.",
+        orgBadge: "STUDENT INNOVATION LAB",
+        orgDesc: "Roxstarlabs builds purpose-driven, ultra-fast web platforms, institutional software architectures, and automated portals to empower educational ecosystems across Karnataka.",
+        orgPt1: "Single-file zero maintenance static deployment",
+        orgPt2: "Interactive Time-Machine academic year persistence",
+        orgPt3: "Built specifically for Bagalkot University SEP workflow",
+        footerCollegeName: "Shri S. B. Mamadapur Arts, Commerce & Science College",
+        footerSamstha: "Shri Veerapulakeshi Vidya Vardhak Samstha (SVPVVS, Est. 1956)",
+        footerAddress: "Badami - 587201, Bagalkot District, Karnataka • Affiliated to Bagalkot University",
+        footerAllRights: "All Rights Reserved.",
+        passModalTitle: "Staff Authorization",
+        passModalLabel: "Passkey"
+      },
+      kn: {
+        announcementBadge: "ಅಧಿಕೃತ ಪ್ರಕಟಣೆ",
+        topNoticeText: "ಬಿ.ಎ, ಬಿ.ಕಾಂ ಮತ್ತು ಬಿ.ಎಸ್ಸಿ 2ನೇ ಆಂತರಿಕ ಪರೀಕ್ಷೆಗಳು ಅಕ್ಟೋಬರ್ 07, 08 ಮತ್ತು 09, 2026 ರಂದು ನಡೆಯಲಿವೆ.",
+        yearLabel: "ಶೈಕ್ಷಣಿಕ ಸಾಲು:",
+        collegeTitle: "ಶ್ರೀ ಎಸ್. ಬಿ. ಮಮದಾಪೂರ",
+        collegeSubtitle: "ಕಲಾ, ವಾಣಿಜ್ಯ ಮತ್ತು ವಿಜ್ಞಾನ ಪದವಿ ಮಹಾವಿದ್ಯಾಲಯ, ಬಾದಾಮಿ",
+        samsthaTag: "ಶ್ರೀ ವೀರಪುಲಿಕೇಶಿ ವಿದ್ಯಾವರ್ಧಕ ಸಂಸ್ಥೆ (ಸ್ಥಾಪನೆ 1956) • ಬಾಗಲಕೋಟೆ ಜಿಲ್ಲೆ",
+        navAbout: "ಪರಿಚಯ",
+        navPrincipal: "ಪ್ರಾಚಾರ್ಯರು",
+        navStaff: "ಬೋಧಕ ವೃಂದ",
+        navCouncil: "ವಿದ್ಯಾರ್ಥಿ ಪರಿಷತ್",
+        navTimetable: "ಆಂತರಿಕ ಪರೀಕ್ಷೆ",
+        navStudyHub: "SEP ಕೇಂದ್ರ",
+        navDeadlines: "ಸಲ್ಲಿಕೆ ದಿನಾಂಕ",
+        navStrength: "ದಾಖಲಾತಿ",
+        navSports: "ಕ್ರೀಡಾ ಕೇಂದ್ರ",
+        navTalent: "ಟ್ಯಾಲೆಂಟ್ ಹಂಟ್",
+        navDev: "ಡೆವಲಪರ್",
+        heroTitlePart1: "ಐತಿಹಾಸಿಕ ಬಾದಾಮಿ ಚಾಲುಕ್ಯರ ನಾಡಿನಲ್ಲಿ",
+        heroTitlePart2: "ಗುಣಮಟ್ಟದ ಉನ್ನತ ಶಿಕ್ಷಣದ ಜ್ಯೋತಿ",
+        heroSubtitle: "ಶ್ರೀ ಎಸ್.ಬಿ. ಮಮದಾಪೂರ ಪದವಿ ಕಾಲೇಜಿನ ಅಧಿಕೃತ ಡಿಜಿಟಲ್ ಪೋರ್ಟಲ್. ಆಂತರಿಕ ಪರೀಕ್ಷಾ ವೇಳಾಪಟ್ಟಿ, ವಿಶ್ವವಿದ್ಯಾಲಯ ಪರೀಕ್ಷೆಗಳು, ಜರ್ನಲ್ ಸಲ್ಲಿಕೆ ದಿನಾಂಕಗಳು ಮತ್ತು ಕ್ರೀಡಾ ದಾಖಲೆಗಳು ಇಲ್ಲಿ ಲಭ್ಯ.",
+        heroActionTimetable: "ಆಂತರಿಕ ಪರೀಕ್ಷಾ ವೇಳಾಪಟ್ಟಿ",
+        heroActionNotes: "SEP ಅಧ್ಯಯನ ಸಾಮಗ್ರಿಗಳು",
+        heroActionDeadlines: "ಸಲ್ಲಿಕೆಯ ಕೊನೆಯ ದಿನಾಂಕ",
+        heroActionSports: "ಎಸ್.ಎಸ್.ಬಿ.ಎಂ ಕ್ರೀಡಾ ಪೆವಿಲಿಯನ್",
+        metricEstablished: "ಪದವಿ ಆರಂಭ",
+        metricSamstha: "ಸಂಸ್ಥೆ ಸ್ಥಾಪನೆ 1956",
+        metricScholars: "ದಾಖಲಾದ ವಿದ್ಯಾರ್ಥಿಗಳು",
+        metricFaculties: "ಬಿ.ಎ, ಬಿ.ಕಾಂ, ಬಿ.ಎಸ್ಸಿ",
+        metricAffiliation: "ಬಾಗಲಕೋಟೆ ವಿ.ವಿ",
+        metricGovt: "UGC 2(f) ಮತ್ತು 12(B)",
+        metricDedicated: "ಅರ್ಪಣಾ ಶಿಕ್ಷಕ ವೃಂದ",
+        metricFaculty: "ವಿಜ್ಞಾನ, ವಾಣಿಜ್ಯ ಮತ್ತು ಕಲಾ",
+        aboutBadge: "ಸಂಸ್ಥೆಯ ಇತಿಹಾಸ ಮತ್ತು ಪರಂಪರೆ",
+        aboutTitle: "ಶ್ರೀ ಎಸ್.ಬಿ. ಮಮದಾಪೂರ ಪದವಿ ಕಾಲೇಜು ಬಾದಾಮಿ",
+        aboutSubtitle: "ಶ್ರೀ ವೀರಪುಲಿಕೇಶಿ ವಿದ್ಯಾವರ್ಧಕ ಸಂಸ್ಥೆಯ ಅಡಿಯಲ್ಲಿ ನಾಲ್ಕು ದಶಕಗಳಿಗೂ ಹೆಚ್ಚು ಕಾಲ ಗ್ರಾಮೀಣ ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಜ್ಞಾನದಾಸೋಹ.",
+        aboutHistoryTitle: "ಸಂಸ್ಥೆಯ ಹಿನ್ನೆಲೆ ಮತ್ತು ಇತಿಹಾಸ",
+        aboutHistorySubtitle: "1982 ರಲ್ಲಿ ಐತಿಹಾಸಿಕ ಬಾದಾಮಿ ನಗರದಲ್ಲಿ ಪ್ರಾರಂಭ",
+        aboutHistoryP1: "<strong>ಶ್ರೀ ಎಸ್.ಬಿ. ಮಮದಾಪೂರ ಕಲಾ, ವಾಣಿಜ್ಯ ಮತ್ತು ವಿಜ್ಞಾನ ಮಹಾವಿದ್ಯಾಲಯವು</strong> ಬಾದಾಮಿ, ಗುಳೇದಗುಡ್ಡ, ಕೆರೂರು ಹಾಗೂ ಸುತ್ತಮುತ್ತಲಿನ ಗ್ರಾಮೀಣ ಭಾಗದ ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಗುಣಮಟ್ಟದ ಪದವಿ ಶಿಕ್ಷಣ ನೀಡುವ ಉದ್ದೇಶದಿಂದ 1982 ರಲ್ಲಿ ಆರಂಭವಾಯಿತು. ಈ ಕಾಲೇಜನ್ನು 1956 ರಲ್ಲಿ ಸ್ಥಾಪಿತವಾದ <strong>ಶ್ರೀ ವೀರಪುಲಿಕೇಶಿ ವಿದ್ಯಾವರ್ಧಕ ಸಂಸ್ಥೆ (SVPVVS)</strong> ಮುನ್ನಡೆಸುತ್ತಿದೆ.",
+        aboutHistoryP2: "ಆರಂಭದಲ್ಲಿ ಕಲಾ ಮತ್ತು ವಾಣಿಜ್ಯ ವಿಭಾಗಗಳಿಂದ ಆರಂಭಗೊಂಡು, 1987-88 ರಲ್ಲಿ ವಿಜ್ಞಾನ ವಿಭಾಗವನ್ನು ಆರಂಭಿಸಲಾಯಿತು. ಕಾಲೇಜು ಪ್ರಸ್ತುತ ನೂತನ <strong>ಬಾಗಲಕೋಟೆ ವಿಶ್ವವಿದ್ಯಾಲಯ (ಜಮಖಂಡಿ)</strong> ಸಂಯೋಜನೆಗೆ ಒಳಪಟ್ಟಿದೆ.",
+        aboutVisionTitle: "ಧ್ಯೇಯೋದ್ದೇಶಗಳು (Vision & Mission)",
+        aboutVisionSubtitle: "ನಮ್ಮ ಶೈಕ್ಷಣಿಕ ಗುರಿ ಮತ್ತು ಸಂಕಲ್ಪ",
+        visionLabel: "ನಮ್ಮ ದೃಷ್ಟಿಕೋನ (VISION)",
+        visionText: "\"ಗ್ರಾಮೀಣ ಮತ್ತು ಹಿಂದುಳಿದ ವರ್ಗದ ಯುವಜನರಿಗೆ ಮೌಲ್ಯಾಧಾರಿತ, ಉನ್ನತ ಗುಣಮಟ್ಟದ ಶಿಕ್ಷಣವನ್ನು ನೀಡಿ, ಅವರನ್ನು ಜಾಗತಿಕ ಮಟ್ಟದಲ್ಲಿ ಸ್ಪರ್ಧಾತ್ಮಕ ಮತ್ತು ಸಾಮಾಜಿಕ ಜವಾಬ್ದಾರಿಯುತ ಪ್ರಜೆಗಳನ್ನಾಗಿ ರೂಪಿಸುವುದು.\"",
+        missionLabel: "ನಮ್ಮ ಗುರಿ (MISSION)",
+        missionText: "\"ವಿಜ್ಞಾನ, ವಾಣಿಜ್ಯ ಮತ್ತು ಕಲಾ ವಿಭಾಗಗಳಲ್ಲಿ ನುರಿತ ಅಧ್ಯಾಪಕರು, ಆಧುನಿಕ ಪ್ರಯೋಗಾಲಯಗಳು ಮತ್ತು ವೈಜ್ಞಾನಿಕ ಮನೋಭಾವದ ಮೂಲಕ ಶೈಕ್ಷಣಿಕ ಶ್ರೇಷ್ಠತೆಯನ್ನು ಸಾಧಿಸುವುದು.\"",
+        samsthaMotto: "ಶ್ರೀ ವೀರಪುಲಿಕೇಶಿ ಸಂಸ್ಥೆ • ಬಾದಾಮಿ",
+        principalBadge: "ಪ್ರಾಚಾರ್ಯರು ಮತ್ತು ಸಂಸ್ಥೆಯ ಮುಖ್ಯಸ್ಥರು",
+        principalName: "ಡಾ. ಅಮರೇಶ ತೋಪಲಕಟ್ಟಿ",
+        principalQual: "ಎಂ.ಎಸ್ಸಿ., ಪಿಎಚ್.ಡಿ. • InSc ಅತ್ಯುತ್ತಮ ಸಂಶೋಧಕ ಪ್ರಶಸ್ತಿ ಪುರಸ್ಕೃತರು",
+        principalDept: "ಪ್ರಾಚಾರ್ಯರು ಹಾಗೂ ಸಸ್ಯಶಾಸ್ತ್ರ ವಿಭಾಗದ ಮುಖ್ಯಸ್ಥರು",
+        principalMessageHeader: "ಪ್ರಾಚಾರ್ಯರ ಸಂದೇಶ",
+        principalQuote: "\"ಶ್ರೀ ಎಸ್.ಬಿ. ಮಮದಾಪೂರ ಕಲಾ, ವಾಣಿಜ್ಯ ಮತ್ತು ವಿಜ್ಞಾನ ಮಹಾವಿದ್ಯಾಲಯಕ್ಕೆ ಆತ್ಮೀಯ ಸ್ವಾಗತ. 1982 ರಿಂದ ನಮ್ಮ ಸಂಸ್ಥೆಯು ಬಾದಾಮಿ ಚಾಲುಕ್ಯರ ಭವ್ಯ ಪರಂಪರೆಯನ್ನು ಮುನ್ನಡೆಸುತ್ತಾ ಜ್ಞಾನದ ದೇಗುಲವಾಗಿ ಬೆಳಗುತ್ತಿದೆ.\"",
+        principalBody1: "<strong>ಬಾಗಲಕೋಟೆ ವಿಶ್ವವಿದ್ಯಾಲಯ (ಜಮಖಂಡಿ)</strong> ಸಂಯೋಜನೆಯ ಅಡಿಯಲ್ಲಿ ನಾವು ಬಿ.ಎಸ್ಸಿ, ಬಿ.ಕಾಂ ಮತ್ತು ಬಿ.ಎ ವಿಭಾಗಗಳಲ್ಲಿ ಕಠಿಣ ಮತ್ತು ಪ್ರಾಯೋಗಿಕ ಆಧಾರಿತ ಪದವಿ ಶಿಕ್ಷಣವನ್ನು ನೀಡುತ್ತಿದ್ದೇವೆ.",
+        principalBody2: "ನಮ್ಮ ಬಿ.ಎಸ್ಸಿ 1ನೇ ಸೆಮಿಸ್ಟರ್ ವಿದ್ಯಾರ್ಥಿ ರಾಹುಲ್‌ಕುಮಾರ್ ಕೆ ಮತ್ತು ರಾಕ್ಸ್ಟಾರ್ ಲ್ಯಾಬ್ಸ್ ತಂಡವು ಈ ಡಿಜಿಟಲ್ ಕ್ಯಾಂಪಸ್ ಪೋರ್ಟಲ್ ಅನ್ನು ರೂಪಿಸಿರುವುದು ಅತ್ಯಂತ ಶ್ಲಾಘನೀಯ.",
+        staffBadge: "ಬೋಧಕ ವೃಂದದ ವಿವರ",
+        staffTitle: "ಅಧ್ಯಾಪಕರ <span class=\"text-royal-700\">ನಿರ್ದೇಶಿಕೆ</span>",
+        staffSubtitle: "ವಿಜ್ಞಾನ, ವಾಣಿಜ್ಯ ಮತ್ತು ಕಲಾ ವಿಭಾಗಗಳಲ್ಲಿ ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಮಾರ್ಗದರ್ಶನ ನೀಡುತ್ತಿರುವ ಪ್ರಾಧ್ಯಾಪಕರು.",
+        addStaffBtn: "ಅಧ್ಯಾಪಕರ ವಿವರ ಸೇರಿಸಿ",
+        councilBadge: "ವಿದ್ಯಾರ್ಥಿ ಪರಿಷತ್ ನಾಯಕತ್ವ",
+        councilTitle: "ಜನರಲ್ ಸೆಕ್ರೆಟರಿ ಹಾಗೂ ಕ್ಲಾಸ್ ಪ್ರತಿನಿಧಿಗಳು <span class=\"text-royal-700\">(GS & CRs)</span>",
+        councilSubtitle: "ಬಿ.ಎ, ಬಿ.ಕಾಂ ಮತ್ತು ಬಿ.ಎಸ್ಸಿ ತರಗತಿಗಳನ್ನು ಮುನ್ನಡೆಸುವ ವಿದ್ಯಾರ್ಥಿ ನಾಯಕರ ಮಂಡಳಿ.",
+        updateCouncilBtn: "ವಿದ್ಯಾರ್ಥಿ ನಾಯಕರ ವಿವರ ಸೇರಿಸಿ / ಬದಲಿಸಿ",
+        ttBadge: "ಅಧಿಕೃತ ಸುತ್ತೋಲೆ ಅನುಮೋದಿತ • 2026–27",
+        ttTitle: "1ನೇ, 3ನೇ ಮತ್ತು 5ನೇ ಸೆಮಿಸ್ಟರ್ <span class=\"text-royal-700\">ಆಂತರಿಕ ಪರೀಕ್ಷಾ</span> ವೇಳಾಪಟ್ಟಿ",
+        ttSubtitle: "ಎಸ್.ಎಸ್.ಬಿ.ಎಂ ಪರೀಕ್ಷಾ ಸಮಿತಿಯಿಂದ ಪ್ರಕಟಿತ. ಪರೀಕ್ಷಾ ಸಮಿತಿ ಅಧ್ಯಕ್ಷರು ಮತ್ತು ಪ್ರಾಚಾರ್ಯರಾದ ಡಾ. ಅಮರೇಶ ತೋಪಲಕಟ್ಟಿ ಅವರಿಂದ ಅನುಮೋದಿತವಾಗಿದೆ.",
+        ttPrintBtn: "ವೇಳಾಪಟ್ಟಿ ಪ್ರಿಂಟ್ ಮಾಡಿ",
+        filterStreamLabel: "ವಿಭಾಗ:",
+        filterAllStreams: "ಎಲ್ಲ ವಿಭಾಗಗಳು",
+        filterSemLabel: "ಸೆಮಿಸ್ಟರ್:",
+        filterAllSems: "ಎಲ್ಲ ಸೆಮ್‌ಗಳು",
+        thDate: "ದಿನಾಂಕ ಮತ್ತು ವಾರ",
+        thTime: "ಸಮಯ",
+        thStream: "ವಿಭಾಗ",
+        thSemester: "ಸೆಮಿಸ್ಟರ್",
+        thSubject: "ವಿಷಯ / ಪತ್ರಿಕೆಯ ಹೆಸರು",
+        thType: "ಪತ್ರಿಕೆಯ ಪ್ರಕಾರ",
+        thAction: "ಟಿಪ್ಪಣಿಗಳು",
+        iaConcludedTitle: "ಪ್ರಸ್ತುತ ಆಂತರಿಕ ಪರೀಕ್ಷೆಗಳು ಮುಕ್ತಾಯಗೊಂಡಿವೆ",
+        iaConcludedSubtitle: "ಈ ಅವಧಿಯ ಆಂತರಿಕ ಪರೀಕ್ಷೆಗಳು ಮುಗಿದಿವೆ. ಮುಂದಿನ ಆಂತರಿಕ ಪರೀಕ್ಷೆಯ ವೇಳಾಪಟ್ಟಿಯನ್ನು ಪರೀಕ್ಷಾ ಸಮಿತಿಯು ಪ್ರಕಟಿಸಿದ ತಕ್ಷಣ ಇಲ್ಲಿ ಅಪ್ಡೇಟ್ ಮಾಡಲಾಗುತ್ತದೆ.",
+        iaAnnounceNewBtn: "ಹೊಸ IA ವೇಳಾಪಟ್ಟಿ ಪ್ರಕಟಿಸಿ",
+        univExamBadge: "ಬಾಗಲಕೋಟೆ ವಿಶ್ವವಿದ್ಯಾಲಯ ಪರೀಕ್ಷಾ ಪ್ರಕಟಣೆ",
+        sepBadge: "ಬಾಗಲಕೋಟೆ ವಿಶ್ವವಿದ್ಯಾಲಯ ಶೈಕ್ಷಣಿಕ ಕೇಂದ್ರ",
+        sepTitle: "SEP ಪಠ್ಯಕ್ರಮದ <span class=\"text-royal-700\">ಅಧ್ಯಯನ ಸಾಮಗ್ರಿಗಳು ಮತ್ತು ಬ್ಲೂಪ್ರಿಂಟ್</span>",
+        sepSubtitle: "1, 3 ಮತ್ತು 5ನೇ ಸೆಮಿಸ್ಟರ್‌ನ ಅಧಿಕೃತ ಪಠ್ಯಕ್ರಮ, ಅಧ್ಯಾಪಕರ ಟಿಪ್ಪಣಿಗಳು, ಲ್ಯಾಬ್ ಮ್ಯಾನುಯಲ್ ಮತ್ತು ಮಾದರಿ ಪ್ರಶ್ನೆಪತ್ರಿಕೆಗಳು.",
+        matTabAll: "ಎಲ್ಲ ವಿಷಯಗಳು",
+        matTabBsc: "ಬಿ.ಎಸ್ಸಿ ವಿಜ್ಞಾನ ಕೇಂದ್ರ",
+        matTabBcom: "ಬಿ.ಕಾಂ ವಾಣಿಜ್ಯ ಕೇಂದ್ರ",
+        matTabBa: "ಬಿ.ಎ ಕಲಾ ಕೇಂದ್ರ",
+        matTabGen: "ಭಾಷೆಗಳು ಮತ್ತು ಮೌಲ್ಯಗಳು",
+        deadlinesBadge: "ಶೈಕ್ಷಣಿಕ ಸಲ್ಲಿಕೆಗಳ ದಿನಸೂಚಿ",
+        deadlinesTitle: "ಅಸೈನ್‌ಮೆಂಟ್ ಮತ್ತು ಜರ್ನಲ್ <span class=\"text-royal-700\">ಸಲ್ಲಿಕೆಯ ದಿನಾಂಕಗಳು</span>",
+        deadlinesSubtitle: "ವಿವಿಧ ವಿಭಾಗಗಳ ಪ್ರಯೋಗಾಲಯ ದಾಖಲೆಗಳು ಮತ್ತು ಅಸೈನ್‌ಮೆಂಟ್ ಸಲ್ಲಿಕೆಯ ನಿಗದಿತ ಅಂತಿಮ ದಿನಾಂಕಗಳು.",
+        addDeadlineBtn: "ಸಲ್ಲಿಕೆ ದಿನಾಂಕ ಸೇರಿಸಿ",
+        strengthBadge: "ಅಧಿಕೃತ ಪ್ರವೇಶ ದಾಖಲೆಗಳು",
+        strengthTitle: "ವಿದ್ಯಾರ್ಥಿಗಳ <span class=\"text-royal-700\">ಸಂಖ್ಯಾ ನೋಂದಣಿ ಪುಸ್ತಕ</span>",
+        strengthSubtitle: "ಬಿ.ಎ, ಬಿ.ಕಾಂ ಮತ್ತು ಬಿ.ಎಸ್ಸಿ ವಿದ್ಯಾರ್ಥಿಗಳ ನೈಜ ದಾಖಲಾತಿ ವಿವರ.",
+        strengthEditBtn: "ಪ್ರವೇಶ ಸಂಖ್ಯೆ ನವೀಕರಿಸಿ",
+        cardBscLabel: "ಬಿ.ಎಸ್ಸಿ ವಿದ್ಯಾರ್ಥಿಗಳು",
+        cardBscSub: "ವಿಜ್ಞಾನ ವಿಭಾಗದ ಒಟ್ಟು ಸಂಖ್ಯೆ",
+        cardBcomLabel: "ಬಿ.ಕಾಂ ವಿದ್ಯಾರ್ಥಿಗಳು",
+        cardBcomSub: "ವಾಣಿಜ್ಯ ವಿಭಾಗದ ಒಟ್ಟು ಸಂಖ್ಯೆ",
+        cardBaLabel: "ಬಿ.ಎ ವಿದ್ಯಾರ್ಥಿಗಳು",
+        cardBaSub: "ಕಲಾ ವಿಭಾಗದ ಒಟ್ಟು ಸಂಖ್ಯೆ",
+        cardTotalLabel: "ಒಟ್ಟು ಪದವಿ ವಿದ್ಯಾರ್ಥಿಗಳು",
+        cardTotalSub: "ಕಾಲೇಜಿನ ಒಟ್ಟು ಸಕ್ರಿಯ ವಿದ್ಯಾರ್ಥಿಗಳು",
+        tblColProgram: "ಪದವಿ ಕೋರ್ಸ್ / ವಿಭಾಗ",
+        tblColYear1: "1ನೇ ವರ್ಷ (ಸೆಮ್ I & II)",
+        tblColYear2: "2ನೇ ವರ್ಷ (ಸೆಮ್ III & IV)",
+        tblColYear3: "3ನೇ ವರ್ಷ (ಸೆಮ್ V & VI)",
+        tblColTotal: "ಒಟ್ಟು ಸಂಖ್ಯೆ",
+        rowBaTitle: "ಬ್ಯಾಚುಲರ್ ಆಫ್ ಆರ್ಟ್ಸ್ (ಬಿ.ಎ)",
+        rowBcomTitle: "ಬ್ಯಾಚುಲರ್ ಆಫ್ ಕಾಮರ್ಸ್ (ಬಿ.ಕಾಂ)",
+        rowBscTitle: "ಬ್ಯಾಚುಲರ್ ಆಫ್ ಸೈನ್ಸ್ (ಬಿ.ಎಸ್ಸಿ)",
+        tblColYearTotals: "ವರ್ಷವಾರು ಒಟ್ಟು ದಾಖಲಾತಿ:",
+        sportsBadge: "ಎಸ್.ಎಸ್.ಬಿ.ಎಂ ಅಥ್ಲೆಟಿಕ್ ಪೆವಿಲಿಯನ್ • ಕ್ರೀಡಾ ಕೇಂದ್ರ",
+        sportsTitle: "ವಿಭಾಗವಾರು ಕ್ರೀಡಾ ಪಂದ್ಯಾವಳಿಗಳ <span class=\"text-turf-700\">ಚಾಂಪಿಯನ್ ತಂಡಗಳು</span>",
+        sportsSubtitle: "ಕ್ರಿಕೆಟ್, ವಾಲಿಬಾಲ್, ಕಬಡ್ಡಿ, ಅಥ್ಲೆಟಿಕ್ಸ್, ಬ್ಯಾಡ್ಮಿಂಟನ್ ಹಾಗೂ ಚೆಸ್ ಪಂದ್ಯಾವಳಿಗಳ ವಿಜೇತರು ಹಾಗೂ ಆಟಗಾರರ ಸಮಗ್ರ ವಿವರ.",
+        editSportsBtn: "ಕ್ರೀಡಾ ಫಲಿತಾಂಶ ಸೇರಿಸಿ",
+        talentBadge: "ಸಾಂಸ್ಕೃತಿಕ ಹಬ್ಬದ ದಾಖಲೆಗಳು",
+        talentTitle: "ಟ್ಯಾಲೆಂಟ್ ಹಂಟ್ 2026 <span class=\"text-amber-600\">ವಿಜೇತರ ಪಟ್ಟಿ</span>",
+        talentSubtitle: "ವಿಕೃತ ಸ್ಪರ್ಧೆಗಳು, ಭಾಷಣ, ಚಿತ್ರಕಲೆ ಹಾಗೂ ಸಂಗೀತ ಸ್ಪರ್ಧೆಗಳ ದಿನವಾರು ವಿಜೇತರ ಸಮಗ್ರ ವಿವರ.",
+        editTalentBtn: "ವಿಜೇತರ ವಿವರ ನವೀಕರಿಸಿ",
+        devBadge: "ಡಿಜಿಟಲ್ ವಾಸ್ತುಶಿಲ್ಪಿ • ಅಭಿವೃದ್ಧಿ ತಂಡ",
+        devTitle: "ವಿನ್ಯಾಸ ಮತ್ತು ನಿರ್ಮಾಣ: <span class=\"text-royal-700\">ರಾಹುಲ್‌ಕುಮಾರ್ ಕೆ</span>",
+        devSubtitle: "ಶ್ರೀ ಎಸ್.ಬಿ. ಮಮದಾಪೂರ ಪದವಿ ಮಹಾವಿದ್ಯಾಲಯಕ್ಕಾಗಿ ರಾಕ್ಸ್ಟಾರ್ ಲ್ಯಾಬ್ಸ್ ಅಡಿಯಲ್ಲಿ ವಿದ್ಯಾರ್ಥಿಗಳಿಂದಲೇ ಅಭಿವೃದ್ಧಿಪಡಿಸಲಾದ ವೇದಿಕೆ.",
+        devLeadName: "ರಾಹುಲ್‌ಕುಮಾರ್ ಕೆ",
+        devLeadRole: "ಬಿ.ಎಸ್ಸಿ 1ನೇ ಸೆಮಿಸ್ಟರ್ • ಎಸ್.ಎಸ್.ಬಿ.ಎಂ ಕಾಲೇಜು ಬಾದಾಮಿ",
+        devLeadBio: "<strong>ರಾಕ್ಸ್ಟಾರ್ ಲ್ಯಾಬ್ಸ್</strong> ವತಿಯಿಂದ ಕಾಲೇಜಿನ ಪರೀಕ್ಷಾ ವೇಳಾಪಟ್ಟಿಗಳು, ನೋಟ್ಸ್‌ಗಳು ಮತ್ತು ಕ್ರೀಡಾ ದಾಖಲೆಗಳನ್ನು ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಸುಲಭವಾಗಿ ತಲುಪಿಸಲು ಈ ವ್ಯವಸ್ಥೆಯನ್ನು ರೂಪಿಸಲಾಗಿದೆ.",
+        orgBadge: "ವಿದ್ಯಾರ್ಥಿ ಇನ್ನೋವೇಶನ್ ಲ್ಯಾಬ್",
+        orgDesc: "ಕರ್ನಾಟಕದ ಗ್ರಾಮೀಣ ಶೈಕ್ಷಣಿಕ ಪರಿಸರ ವ್ಯವಸ್ಥೆಯನ್ನು ಸಬಲೀಕರಣಗೊಳಿಸಲು ರಾಕ್ಸ್ಟಾರ್ ಲ್ಯಾಬ್ಸ್ ಉನ್ನತ ಗುಣಮಟ್ಟದ ಸಾಫ್ಟ್‌ವೇರ್ ಮತ್ತು ವೆಬ್ ಪೋರ್ಟಲ್‌ಗಳನ್ನು ನಿರ್ಮಿಸುತ್ತದೆ.",
+        orgPt1: "ಏಕ-ಫೈಲ್ ಜಿರೋ ಮೇಂಟೆನೆನ್ಸ್ ಸ್ಟಾಟಿಕ್ ತಂತ್ರಜ್ಞಾನ",
+        orgPt2: "ಶೈಕ್ಷಣಿಕ ವರ್ಷದ ಟೈಮ್-ಮಷಿನ್ ದಾಖಲೆಗಳ ಸಂಗ್ರಹಣೆ",
+        orgPt3: "ಬಾಗಲಕೋಟೆ ವಿ.ವಿ SEP ಪಠ್ಯಕ್ರಮಕ್ಕಾಗಿ ವಿಶೇಷ ವಿನ್ಯಾಸ",
+        footerCollegeName: "ಶ್ರೀ ಎಸ್. ಬಿ. ಮಮದಾಪೂರ ಕಲಾ, ವಾಣಿಜ್ಯ ಮತ್ತು ವಿಜ್ಞಾನ ಮಹಾವಿದ್ಯಾಲಯ",
+        footerSamstha: "ಶ್ರೀ ವೀರಪುಲಿಕೇಶಿ ವಿದ್ಯಾವರ್ಧಕ ಸಂಸ್ಥೆ (SVPVVS, ಸ್ಥಾಪನೆ 1956)",
+        footerAddress: "ಬಾದಾಮಿ - 587201, ಬಾಗಲಕೋಟೆ ಜಿಲ್ಲೆ, ಕರ್ನಾಟಕ • ಬಾಗಲಕೋಟೆ ವಿ.ವಿ ಸಂಯೋಜಿತ",
+        footerAllRights: "ಸರ್ವ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ.",
+        passModalTitle: "ಸಿಬ್ಬಂದಿ ಅಧಿಕೃತ ಪ್ರವೇಶ",
+        passModalLabel: "ಪಾಸ್‌ಕೀ"
+      }
+    };
+
+    let currentLang = 'en';
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      const dict = dictionary[lang] || dictionary.en;
+
+      const btnEn = document.getElementById('btnLangEn');
+      const btnKn = document.getElementById('btnLangKn');
+      if (lang === 'kn') {
+        btnKn.className = "px-2.5 py-1 rounded text-xs font-bold transition bg-white text-royal-950 shadow-sm";
+        btnEn.className = "px-2.5 py-1 rounded text-xs font-medium text-slate-300 hover:text-white transition";
+        document.body.classList.add('kannada-mode');
+      } else {
+        btnEn.className = "px-2.5 py-1 rounded text-xs font-bold transition bg-white text-royal-950 shadow-sm";
+        btnKn.className = "px-2.5 py-1 rounded text-xs font-medium text-slate-300 hover:text-white transition";
+        document.body.classList.remove('kannada-mode');
+      }
+
+      document.querySelectorAll('[data-i18n]').forEach(elem => {
+        const key = elem.getAttribute('data-i18n');
+        if (dict[key]) {
+          elem.innerHTML = dict[key];
+        }
+      });
+
+      renderTimetable();
+      renderMaterials(studyMaterials);
+      refreshCurrentView();
+      localStorage.setItem('ssbm_pref_lang', lang);
+    }
+
+    /* =========================================================================
+       4. TEACHING STAFF SECTION
+       ========================================================================= */
+    let currentStaffDept = 'ALL';
+
+    function renderStaff(list) {
+      const container = document.getElementById('staffContainer');
+      if (!container) return;
+      container.innerHTML = '';
+
+      const filtered = list.filter(item => {
+        return currentStaffDept === 'ALL' || item.dept === currentStaffDept;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-400 font-mono text-xs">No teaching staff records found for this faculty.</div>`;
+        return;
+      }
+
+      filtered.forEach(s => {
+        let badgeColor = "bg-slate-100 text-slate-700";
+        if (s.dept === 'BSC') badgeColor = "bg-emerald-100 text-emerald-800 font-bold";
+        if (s.dept === 'BCOM') badgeColor = "bg-blue-100 text-blue-800 font-bold";
+        if (s.dept === 'BA') badgeColor = "bg-amber-100 text-amber-800 font-bold";
+
+        const card = document.createElement('div');
+        card.className = "luxury-card p-5 rounded-2xl flex flex-col justify-between relative group";
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-2 py-0.5 rounded text-[10px] ${badgeColor}">${s.dept} Faculty</span>
+              <!-- Isolated passkey delete action -->
+              <button onclick="promptPasskeyForAction('deleteStaff_${s.id}', 'Remove Staff: ${s.name}')" class="opacity-0 group-hover:opacity-100 text-red-500 hover:text-red-700 transition p-1" title="Remove (Staff)">
+                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+            <h4 class="font-bold text-slate-900 text-sm">${s.name}</h4>
+            <p class="text-xs text-royal-700 font-semibold mt-0.5">${s.role}</p>
+            <p class="text-[11px] text-slate-500 mt-1 font-mono">${s.qualification}</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
+            <span>SSBM Badami</span>
+            <span class="text-emerald-600 font-medium flex items-center gap-1"><i data-lucide="check" class="w-3 h-3"></i> Verified</span>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+      lucide.createIcons();
+    }
+
+    function filterStaffDept(dept) {
+      currentStaffDept = dept;
+      document.querySelectorAll('.staff-tab-btn').forEach(btn => {
+        btn.className = "staff-tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 transition";
+      });
+      const activeBtn = document.getElementById(`staff-tab-${dept}`);
+      if (activeBtn) {
+        activeBtn.className = "staff-tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-royal-700 text-white shadow-sm transition";
+      }
+
+      const current = campusData[currentSelectedYear] || defaultDatabase["2026-2027"];
+      renderStaff(current.staffList || defaultDatabase["2026-2027"].staffList);
+    }
+
+    function saveNewStaffMember() {
+      const dept = document.getElementById('mStaffDept').value;
+      const name = document.getElementById('mStaffName').value.trim();
+      const role = document.getElementById('mStaffRole').value.trim();
+      const qualification = document.getElementById('mStaffSubject').value.trim();
+
+      if (!name) {
+        showToast("Please provide the faculty name.");
+        return;
+      }
+
+      if (!campusData[currentSelectedYear]) campusData[currentSelectedYear] = {};
+      if (!campusData[currentSelectedYear].staffList) campusData[currentSelectedYear].staffList = [];
+
+      campusData[currentSelectedYear].staffList.push({
+        id: Date.now(),
+        dept,
+        name,
+        role: role || 'Faculty Member',
+        qualification: qualification || 'M.A / M.Sc / M.Com'
+      });
+
+      persistDataStore();
+      renderStaff(campusData[currentSelectedYear].staffList);
+      closeModal('staffEditModal');
+      showToast("Teaching faculty member added successfully.");
+    }
+
+    function deleteStaffMember(id) {
+      if (!campusData[currentSelectedYear] || !campusData[currentSelectedYear].staffList) return;
+      campusData[currentSelectedYear].staffList = campusData[currentSelectedYear].staffList.filter(s => s.id !== id);
+      persistDataStore();
+      renderStaff(campusData[currentSelectedYear].staffList);
+      showToast("Faculty entry removed.");
+    }
+
+    /* =========================================================================
+       5. STUDENT COUNCIL & CLASS REPRESENTATIVES (GS & CRs)
+       ========================================================================= */
+    function renderCouncil(list) {
+      const container = document.getElementById('councilContainer');
+      if (!container) return;
+      container.innerHTML = '';
+
+      if (!list || list.length === 0) {
+        container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-400 font-mono text-xs">No student council representatives recorded yet.</div>`;
+        return;
+      }
+
+      list.forEach((c) => {
+        const card = document.createElement('div');
+        card.className = "luxury-card p-5 rounded-2xl flex flex-col items-center text-center justify-between relative group";
+        
+        const photoHtml = c.photo 
+          ? `<img src="${c.photo}" alt="${c.name}" class="w-full h-full object-cover" />`
+          : `<div class="w-full h-full flex flex-col items-center justify-center bg-royal-950 text-amber-400"><i data-lucide="user-check" class="w-8 h-8 mb-1 text-slate-300"></i><span class="text-[9px] font-mono text-slate-400">Scholar</span></div>`;
+
+        card.innerHTML = `
+          <!-- Isolated Passkey Protected Delete Button -->
+          <button onclick="promptPasskeyForAction('deleteCouncil_${c.id}', 'Remove Student Leader: ${c.name}')" class="absolute top-3 right-3 text-slate-400 hover:text-red-600 opacity-0 group-hover:opacity-100 transition p-1" title="Remove Member">
+            <i data-lucide="trash-2" class="w-4 h-4"></i>
+          </button>
+
+          <div class="flex flex-col items-center w-full">
+            <div class="w-24 h-28 rounded-2xl overflow-hidden bg-slate-100 border-2 border-white shadow-md mb-3 flex items-center justify-center">
+              ${photoHtml}
+            </div>
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wide bg-royal-100 text-royal-800 mb-1.5">${c.role}</span>
+            <h4 class="font-bold text-slate-900 text-sm">${c.name}</h4>
+            <p class="text-xs text-slate-500 mt-0.5">${c.stream}</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 w-full text-[11px] font-mono text-slate-400 flex items-center justify-center gap-1">
+            <i data-lucide="award" class="w-3 h-3 text-amber-500"></i> SSBM Council &bull; 2026–27
+          </div>
+        `;
+        container.appendChild(card);
+      });
+      lucide.createIcons();
+    }
+
+    function saveCouncilMember() {
+      const role = document.getElementById('mCouncilRole').value.trim();
+      const name = document.getElementById('mCouncilName').value.trim();
+      const stream = document.getElementById('mCouncilStream').value.trim();
+      const photoInput = document.getElementById('mCouncilPhotoInput');
+
+      if (!name) {
+        showToast("Please enter student name.");
+        return;
+      }
+
+      if (!campusData[currentSelectedYear]) campusData[currentSelectedYear] = {};
+      if (!campusData[currentSelectedYear].council) campusData[currentSelectedYear].council = [];
+
+      const member = {
+        id: Date.now(),
+        role: role || 'Class Representative (CR)',
+        name,
+        stream: stream || 'Undergraduate Stream',
+        photo: ""
+      };
+
+      if (photoInput.files && photoInput.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          member.photo = e.target.result;
+          campusData[currentSelectedYear].council.push(member);
+          persistDataStore();
+          renderCouncil(campusData[currentSelectedYear].council);
+          closeModal('councilEditModal');
+          showToast("Student leader added with portrait photo.");
+        };
+        reader.readAsDataURL(photoInput.files[0]);
+      } else {
+        campusData[currentSelectedYear].council.push(member);
+        persistDataStore();
+        renderCouncil(campusData[currentSelectedYear].council);
+        closeModal('councilEditModal');
+        showToast("Student leader added successfully.");
+      }
+    }
+
+    function deleteCouncilMember(id) {
+      if (!campusData[currentSelectedYear] || !campusData[currentSelectedYear].council) return;
+      campusData[currentSelectedYear].council = campusData[currentSelectedYear].council.filter(c => c.id !== id);
+      persistDataStore();
+      renderCouncil(campusData[currentSelectedYear].council);
+      showToast("Student council member removed.");
+    }
+
+    /* =========================================================================
+       6. INTERNAL ASSESSMENT (IA) TIMETABLE LIFECYCLE
+       ========================================================================= */
+    let timetableDataset = [
+      // 07-10-2026 (Wednesday) - 8:00 AM TO 9:00 AM
+      { id: 1, date: "07-10-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "8:00 AM - 9:00 AM", sem: "I", stream: "BA", subject: "Basic Kannada", subjectKn: "ಬೇಸಿಕ್ ಕನ್ನಡ", paperType: "AECC" },
+      { id: 2, date: "07-10-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "8:00 AM - 9:00 AM", sem: "I", stream: "BCOM", subject: "Basic English", subjectKn: "ಬೇಸಿಕ್ ಇಂಗ್ಲಿಷ್", paperType: "AECC" },
+      { id: 3, date: "07-10-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "8:00 AM - 9:00 AM", sem: "I", stream: "BSC", subject: "Chemistry / CS", subjectKn: "ರಸಾಯನಶಾಸ್ತ್ರ / ಗಣಕವಿಜ್ಞಾನ", paperType: "DSC Core" },
+      { id: 4, date: "07-10-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "8:00 AM - 9:00 AM", sem: "III", stream: "BA", subject: "Opt. Eng / Kan / Hindi / Stat", subjectKn: "ಐಚ್ಛಿಕ ಇಂಗ್ಲಿಷ್/ಕನ್ನಡ/ಹಿಂದಿ/ಸಂಖ್ಯಾ", paperType: "DSC Core" },
+      { id: 5, date: "07-10-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "8:00 AM - 9:00 AM", sem: "III", stream: "BCOM", subject: "Statistics (Stat)", subjectKn: "ಸಂಖ್ಯಾಶಾಸ್ತ್ರ (Stat)", paperType: "DSC Core" },
+      { id: 6, date: "07-10-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "8:00 AM - 9:00 AM", sem: "III", stream: "BSC", subject: "Physics / Zoology", subjectKn: "ಭೌತಶಾಸ್ತ್ರ / ಪ್ರಾಣಿಶಾಸ್ತ್ರ", paperType: "DSC Core" },
+      { id: 7, date: "07-10-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "8:00 AM - 9:00 AM", sem: "V", stream: "BA", subject: "Paper - I Economics", subjectKn: "ಪತ್ರಿಕೆ - 1 ಅರ್ಥಶಾಸ್ತ್ರ", paperType: "DSE Elective" },
+      { id: 8, date: "07-10-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "8:00 AM - 9:00 AM", sem: "V", stream: "BCOM", subject: "SA & ESG", subjectKn: "ಎಸ್.ಎ ಮತ್ತು ಇ.ಎಸ್.ಜಿ", paperType: "Major Core" },
+      { id: 9, date: "07-10-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "8:00 AM - 9:00 AM", sem: "V", stream: "BSC", subject: "Paper - I Mathematics / Botany", subjectKn: "ಪತ್ರಿಕೆ - 1 ಗಣಿತ / ಸಸ್ಯಶಾಸ್ತ್ರ", paperType: "DSE Elective" },
+
+      // 07-10-2026 (Wednesday) - 9:30 AM TO 10:30 AM
+      { id: 10, date: "07-10-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "9:30 AM - 10:30 AM", sem: "I", stream: "BA", subject: "Political Science", subjectKn: "ರಾಜ್ಯಶಾಸ್ತ್ರ", paperType: "DSC Core" },
+      { id: 11, date: "07-10-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "9:30 AM - 10:30 AM", sem: "I", stream: "BCOM", subject: "Financial Accounting (F.A.)", subjectKn: "ಆರ್ಥಿಕ ಲೆಕ್ಕಶಾಸ್ತ್ರ (F.A.)", paperType: "DSC Core" },
+      { id: 12, date: "07-10-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "9:30 AM - 10:30 AM", sem: "I", stream: "BSC", subject: "Mathematics / Botany", subjectKn: "ಗಣಿತಶಾಸ್ತ್ರ / ಸಸ್ಯಶಾಸ್ತ್ರ", paperType: "DSC Core" },
+      { id: 13, date: "07-10-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "9:30 AM - 10:30 AM", sem: "III", stream: "BA", subject: "Basic Kannada / Hindi", subjectKn: "ಬೇಸಿಕ್ ಕನ್ನಡ / ಹಿಂದಿ", paperType: "AECC" },
+      { id: 14, date: "07-10-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "9:30 AM - 10:30 AM", sem: "III", stream: "BCOM", subject: "Business Economics (B.E.)", subjectKn: "ವ್ಯವಹಾರ ಅರ್ಥಶಾಸ್ತ್ರ (B.E.)", paperType: "DSC Core" },
+      { id: 15, date: "07-10-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "9:30 AM - 10:30 AM", sem: "III", stream: "BSC", subject: "Basic Kannada / Hindi", subjectKn: "ಬೇಸಿಕ್ ಕನ್ನಡ / ಹಿಂದಿ", paperType: "AECC" },
+      { id: 16, date: "07-10-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "9:30 AM - 10:30 AM", sem: "V", stream: "BA", subject: "Paper - I History", subjectKn: "ಪತ್ರಿಕೆ - 1 ಇತಿಹಾಸ", paperType: "DSE Elective" },
+      { id: 17, date: "07-10-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "9:30 AM - 10:30 AM", sem: "V", stream: "BCOM", subject: "Income Tax (I.T.)", subjectKn: "ಆದಾಯ ತೆರಿಗೆ (I.T.)", paperType: "Major Core" },
+      { id: 18, date: "07-10-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "9:30 AM - 10:30 AM", sem: "V", stream: "BSC", subject: "Paper - I Chemistry / Stat / CS", subjectKn: "ಪತ್ರಿಕೆ - 1 ರಸಾಯನ / ಸಂಖ್ಯಾ / ಸಿ.ಎಸ್", paperType: "DSE Elective" },
+
+      // 07-10-2026 (Wednesday) - 11:00 AM TO 12:00 PM
+      { id: 19, date: "07-10-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "11:00 AM - 12:00 PM", sem: "I", stream: "BA", subject: "Economics", subjectKn: "ಅರ್ಥಶಾಸ್ತ್ರ", paperType: "DSC Core" },
+      { id: 20, date: "07-10-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "11:00 AM - 12:00 PM", sem: "I", stream: "BCOM", subject: "Cost Accounting (C.A.)", subjectKn: "ವೆಚ್ಚ ಲೆಕ್ಕಶಾಸ್ತ್ರ (C.A.)", paperType: "DSC Core" },
+      { id: 21, date: "07-10-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "11:00 AM - 12:00 PM", sem: "I", stream: "BSC", subject: "Basic Kannada / Hindi", subjectKn: "ಬೇಸಿಕ್ ಕನ್ನಡ / ಹಿಂದಿ", paperType: "AECC" },
+      { id: 22, date: "07-10-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "11:00 AM - 12:00 PM", sem: "III", stream: "BA", subject: "History", subjectKn: "ಇತಿಹಾಸ", paperType: "DSC Core" },
+      { id: 23, date: "07-10-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "11:00 AM - 12:00 PM", sem: "III", stream: "BCOM", subject: "Corporate Accounting (Corp A/c)", subjectKn: "ಕಾರ್ಪೊರೇಟ್ ಲೆಕ್ಕಶಾಸ್ತ್ರ", paperType: "DSC Core" },
+      { id: 24, date: "07-10-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "11:00 AM - 12:00 PM", sem: "III", stream: "BSC", subject: "Mathematics / Botany", subjectKn: "ಗಣಿತಶಾಸ್ತ್ರ / ಸಸ್ಯಶಾಸ್ತ್ರ", paperType: "DSC Core" },
+      { id: 25, date: "07-10-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "11:00 AM - 12:00 PM", sem: "V", stream: "BA", subject: "Paper - I Kan / Eng / Hindi / Stat", subjectKn: "ಪತ್ರಿಕೆ - 1 ಕನ್ನಡ/ಇಂಗ್ಲಿಷ್/ಹಿಂದಿ", paperType: "DSE Elective" },
+      { id: 26, date: "07-10-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "11:00 AM - 12:00 PM", sem: "V", stream: "BCOM", subject: "Auditing", subjectKn: "ಲೆಕ್ಕಪರಿಶೋಧನೆ (ಆಡಿಟಿಂಗ್)", paperType: "Major Core" },
+      { id: 27, date: "07-10-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "11:00 AM - 12:00 PM", sem: "V", stream: "BSC", subject: "Paper - I Physics / Zoology", subjectKn: "ಪತ್ರಿಕೆ - 1 ಭೌತಶಾಸ್ತ್ರ / ಪ್ರಾಣಿಶಾಸ್ತ್ರ", paperType: "DSE Elective" },
+
+      // 08-10-2026 (Thursday)
+      { id: 28, date: "08-10-2026", day: "Thu", dayKn: "ಗುರುವಾರ", time: "8:00 AM - 9:00 AM", sem: "I", stream: "BA", subject: "History", subjectKn: "ಇತಿಹಾಸ", paperType: "DSC Core" },
+      { id: 29, date: "08-10-2026", day: "Thu", dayKn: "ಗುರುವಾರ", time: "8:00 AM - 9:00 AM", sem: "I", stream: "BCOM", subject: "Basic Kannada / Hindi", subjectKn: "ಬೇಸಿಕ್ ಕನ್ನಡ / ಹಿಂದಿ", paperType: "AECC" },
+      { id: 30, date: "08-10-2026", day: "Thu", dayKn: "ಗುರುವಾರ", time: "8:00 AM - 9:00 AM", sem: "I", stream: "BSC", subject: "Basic English", subjectKn: "ಬೇಸಿಕ್ ಇಂಗ್ಲಿಷ್", paperType: "AECC" },
+      { id: 31, date: "08-10-2026", day: "Thu", dayKn: "ಗುರುವಾರ", time: "8:00 AM - 9:00 AM", sem: "III", stream: "BA", subject: "Basic English / Hindi", subjectKn: "ಬೇಸಿಕ್ ಇಂಗ್ಲಿಷ್ / ಹಿಂದಿ", paperType: "AECC" },
+      { id: 32, date: "08-10-2026", day: "Thu", dayKn: "ಗುರುವಾರ", time: "8:00 AM - 9:00 AM", sem: "III", stream: "BCOM", subject: "Basic Kannada / Hindi", subjectKn: "ಬೇಸಿಕ್ ಕನ್ನಡ / ಹಿಂದಿ", paperType: "AECC" },
+      { id: 33, date: "08-10-2026", day: "Thu", dayKn: "ಗುರುವಾರ", time: "8:00 AM - 9:00 AM", sem: "III", stream: "BSC", subject: "Chem / CS", subjectKn: "ರಸಾಯನಶಾಸ್ತ್ರ / ಗಣಕವಿಜ್ಞಾನ", paperType: "DSC Core" },
+      { id: 34, date: "08-10-2026", day: "Thu", dayKn: "ಗುರುವಾರ", time: "8:00 AM - 9:00 AM", sem: "V", stream: "BA", subject: "Paper - I Political Science", subjectKn: "ಪತ್ರಿಕೆ - 1 ರಾಜ್ಯಶಾಸ್ತ್ರ", paperType: "DSE Elective" },
+      { id: 35, date: "08-10-2026", day: "Thu", dayKn: "ಗುರುವಾರ", time: "8:00 AM - 9:00 AM", sem: "V", stream: "BCOM", subject: "Research Methodology", subjectKn: "ಸಂಶೋಧನಾ ವಿಧಾನ", paperType: "Major Core" },
+      { id: 36, date: "08-10-2026", day: "Thu", dayKn: "ಗುರುವಾರ", time: "8:00 AM - 9:00 AM", sem: "V", stream: "BSC", subject: "Paper - II Physics / Zoology", subjectKn: "ಪತ್ರಿಕೆ - 2 ಭೌತಶಾಸ್ತ್ರ / ಪ್ರಾಣಿಶಾಸ್ತ್ರ", paperType: "DSE Elective" },
+
+      { id: 37, date: "08-10-2026", day: "Thu", dayKn: "ಗುರುವಾರ", time: "9:30 AM - 10:30 AM", sem: "I", stream: "BA", subject: "Basic English / Hindi", subjectKn: "ಬೇಸಿಕ್ ಇಂಗ್ಲಿಷ್ / ಹಿಂದಿ", paperType: "AECC" },
+      { id: 38, date: "08-10-2026", day: "Thu", dayKn: "ಗುರುವಾರ", time: "9:30 AM - 10:30 AM", sem: "I", stream: "BCOM", subject: "Financial Management (F.M.)", subjectKn: "ಹಣಕಾಸು ನಿರ್ವಹಣೆ (F.M.)", paperType: "DSC Core" },
+      { id: 39, date: "08-10-2026", day: "Thu", dayKn: "ಗುರುವಾರ", time: "9:30 AM - 10:30 AM", sem: "I", stream: "BSC", subject: "Physics / Zoology", subjectKn: "ಭೌತಶಾಸ್ತ್ರ / ಪ್ರಾಣಿಶಾಸ್ತ್ರ", paperType: "DSC Core" },
+      { id: 40, date: "08-10-2026", day: "Thu", dayKn: "ಗುರುವಾರ", time: "9:30 AM - 10:30 AM", sem: "III", stream: "BA", subject: "Political Science", subjectKn: "ರಾಜ್ಯಶಾಸ್ತ್ರ", paperType: "DSC Core" },
+      { id: 41, date: "08-10-2026", day: "Thu", dayKn: "ಗುರುವಾರ", time: "9:30 AM - 10:30 AM", sem: "III", stream: "BCOM", subject: "Basic English", subjectKn: "ಬೇಸಿಕ್ ಇಂಗ್ಲಿಷ್", paperType: "AECC" },
+      { id: 42, date: "08-10-2026", day: "Thu", dayKn: "ಗುರುವಾರ", time: "9:30 AM - 10:30 AM", sem: "III", stream: "BSC", subject: "All CEC Subjects", subjectKn: "ಎಲ್ಲ CEC ವಿಷಯಗಳು", paperType: "CEC Elective" },
+      { id: 43, date: "08-10-2026", day: "Thu", dayKn: "ಗುರುವಾರ", time: "9:30 AM - 10:30 AM", sem: "V", stream: "BA", subject: "Paper - II Economics", subjectKn: "ಪತ್ರಿಕೆ - 2 ಅರ್ಥಶಾಸ್ತ್ರ", paperType: "DSE Elective" },
+      { id: 44, date: "08-10-2026", day: "Thu", dayKn: "ಗುರುವಾರ", time: "9:30 AM - 10:30 AM", sem: "V", stream: "BCOM", subject: "Skill Based Subject", subjectKn: "ಕೌಶಲ್ಯಾಧಾರಿತ ವಿಷಯ", paperType: "SEC Skill" },
+      { id: 45, date: "08-10-2026", day: "Thu", dayKn: "ಗುರುವಾರ", time: "9:30 AM - 10:30 AM", sem: "V", stream: "BSC", subject: "Paper - II Mathematics / Botany", subjectKn: "ಪತ್ರಿಕೆ - 2 ಗಣಿತ / ಸಸ್ಯಶಾಸ್ತ್ರ", paperType: "DSE Elective" },
+
+      { id: 46, date: "08-10-2026", day: "Thu", dayKn: "ಗುರುವಾರ", time: "11:00 AM - 12:00 PM", sem: "I", stream: "BA", subject: "Constitutional Values", subjectKn: "ಸಂವಿಧಾನದ ಮೌಲ್ಯಗಳು", paperType: "Value Added" },
+      { id: 47, date: "08-10-2026", day: "Thu", dayKn: "ಗುರುವಾರ", time: "11:00 AM - 12:00 PM", sem: "I", stream: "BCOM", subject: "Constitutional Values", subjectKn: "ಸಂವಿಧಾನದ ಮೌಲ್ಯಗಳು", paperType: "Value Added" },
+      { id: 48, date: "08-10-2026", day: "Thu", dayKn: "ಗುರುವಾರ", time: "11:00 AM - 12:00 PM", sem: "I", stream: "BSC", subject: "Constitutional Values", subjectKn: "ಸಂವಿಧಾನದ ಮೌಲ್ಯಗಳು", paperType: "Value Added" },
+      { id: 49, date: "08-10-2026", day: "Thu", dayKn: "ಗುರುವಾರ", time: "11:00 AM - 12:00 PM", sem: "III", stream: "BA", subject: "Economics", subjectKn: "ಅರ್ಥಶಾಸ್ತ್ರ", paperType: "DSC Core" },
+      { id: 50, date: "08-10-2026", day: "Thu", dayKn: "ಗುರುವಾರ", time: "11:00 AM - 12:00 PM", sem: "III", stream: "BCOM", subject: "Cost Accounting (Cost A/c)", subjectKn: "ವೆಚ್ಚ ಲೆಕ್ಕಶಾಸ್ತ್ರ (Cost A/c)", paperType: "DSC Core" },
+      { id: 51, date: "08-10-2026", day: "Thu", dayKn: "ಗುರುವಾರ", time: "11:00 AM - 12:00 PM", sem: "III", stream: "BSC", subject: "Basic English", subjectKn: "ಬೇಸಿಕ್ ಇಂಗ್ಲಿಷ್", paperType: "AECC" },
+      { id: 52, date: "08-10-2026", day: "Thu", dayKn: "ಗುರುವಾರ", time: "11:00 AM - 12:00 PM", sem: "V", stream: "BA", subject: "Paper - II Kan / Eng / Hindi / Stat", subjectKn: "ಪತ್ರಿಕೆ - 2 ಐಚ್ಛಿಕ ಭಾಷೆಗಳು", paperType: "DSE Elective" },
+      { id: 53, date: "08-10-2026", day: "Thu", dayKn: "ಗುರುವಾರ", time: "11:00 AM - 12:00 PM", sem: "V", stream: "BCOM", subject: "Security Market (S.M.)", subjectKn: "ಷೇರು ಮಾರುಕಟ್ಟೆ (S.M.)", paperType: "Major Core" },
+      { id: 54, date: "08-10-2026", day: "Thu", dayKn: "ಗುರುವಾರ", time: "11:00 AM - 12:00 PM", sem: "V", stream: "BSC", subject: "Paper - II Chemistry / Stat / CS", subjectKn: "ಪತ್ರಿಕೆ - 2 ರಸಾಯನ / ಸಂಖ್ಯಾ / ಸಿ.ಎಸ್", paperType: "DSE Elective" },
+
+      // 09-10-2026 (Friday)
+      { id: 55, date: "09-10-2026", day: "Fri", dayKn: "ಶುಕ್ರವಾರ", time: "8:00 AM - 9:00 AM", sem: "I", stream: "BA", subject: "Opt. Eng / Kan / Hindi / Stat", subjectKn: "ಐಚ್ಛಿಕ ಇಂಗ್ಲಿಷ್/ಕನ್ನಡ/ಹಿಂದಿ/ಸಂಖ್ಯಾ", paperType: "DSC Core" },
+      { id: 56, date: "09-10-2026", day: "Fri", dayKn: "ಶುಕ್ರವಾರ", time: "8:00 AM - 9:00 AM", sem: "I", stream: "BCOM", subject: "Marketing Management (M.M.)", subjectKn: "ಮಾರುಕಟ್ಟೆ ನಿರ್ವಹಣೆ (M.M.)", paperType: "DSC Core" },
+      { id: 57, date: "09-10-2026", day: "Fri", dayKn: "ಶುಕ್ರವಾರ", time: "8:00 AM - 9:00 AM", sem: "III", stream: "BA", subject: "All CEC Subjects", subjectKn: "ಎಲ್ಲ CEC ವಿಷಯಗಳು", paperType: "CEC Elective" },
+      { id: 58, date: "09-10-2026", day: "Fri", dayKn: "ಶುಕ್ರವಾರ", time: "8:00 AM - 9:00 AM", sem: "III", stream: "BCOM", subject: "Rural Marketing (R.M.)", subjectKn: "ಗ್ರಾಮೀಣ ಮಾರುಕಟ್ಟೆ (R.M.)", paperType: "DSC Core" },
+      { id: 59, date: "09-10-2026", day: "Fri", dayKn: "ಶುಕ್ರವಾರ", time: "8:00 AM - 9:00 AM", sem: "V", stream: "BA", subject: "Paper - II History", subjectKn: "ಪತ್ರಿಕೆ - 2 ಇತಿಹಾಸ", paperType: "DSE Elective" },
+      { id: 60, date: "09-10-2026", day: "Fri", dayKn: "ಶುಕ್ರವಾರ", time: "8:00 AM - 9:00 AM", sem: "V", stream: "BCOM", subject: "Taxation Management (T.M.)", subjectKn: "ತೆರಿಗೆ ನಿರ್ವಹಣೆ (T.M.)", paperType: "Major Core" },
+      { id: 61, date: "09-10-2026", day: "Fri", dayKn: "ಶುಕ್ರವಾರ", time: "8:00 AM - 9:00 AM", sem: "V", stream: "BSC", subject: "All SEC / VBC Subjects", subjectKn: "ಎಲ್ಲ SEC / VBC ವಿಷಯಗಳು", paperType: "Skill / Value" },
+      { id: 62, date: "09-10-2026", day: "Fri", dayKn: "ಶುಕ್ರವಾರ", time: "9:30 AM - 10:30 AM", sem: "V", stream: "BA", subject: "Paper - II Political Science", subjectKn: "ಪತ್ರಿಕೆ - 2 ರಾಜ್ಯಶಾಸ್ತ್ರ", paperType: "DSE Elective" },
+      { id: 63, date: "09-10-2026", day: "Fri", dayKn: "ಶುಕ್ರವಾರ", time: "11:00 AM - 12:00 PM", sem: "V", stream: "BA", subject: "All SEC / VBC Subjects", subjectKn: "ಎಲ್ಲ SEC / VBC ವಿಷಯಗಳು", paperType: "Skill / Value" }
+    ];
+
+    let currentStream = 'ALL';
+    let currentSem = 'ALL';
+
+    function renderTimetable() {
+      const tbody = document.getElementById('timetableBody');
+      tbody.innerHTML = '';
+
+      const filtered = timetableDataset.filter(row => {
+        const okStream = (currentStream === 'ALL' || row.stream === currentStream);
+        const okSem = (currentSem === 'ALL' || row.sem === currentSem);
+        return okStream && okSem;
+      });
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" class="py-8 text-center text-slate-400 font-mono">${currentLang === 'kn' ? 'ಯಾವುದೇ ಪರೀಕ್ಷಾ ವೇಳಾಪಟ್ಟಿ ಲಭ್ಯವಿಲ್ಲ.' : 'No sessions match the selected filter criteria.'}</td></tr>`;
+        return;
+      }
+
+      filtered.forEach(row => {
+        let badgeStyle = 'bg-slate-100 text-slate-800 border border-slate-200';
+        if (row.stream === 'BSC') badgeStyle = 'bg-emerald-50 text-emerald-800 border border-emerald-300 font-bold';
+        if (row.stream === 'BCOM') badgeStyle = 'bg-blue-50 text-blue-800 border border-blue-300 font-bold';
+        if (row.stream === 'BA') badgeStyle = 'bg-amber-50 text-amber-800 border border-amber-300 font-bold';
+
+        const subjectText = currentLang === 'kn' ? (row.subjectKn || row.subject) : row.subject;
+        const dayText = currentLang === 'kn' ? (row.dayKn || row.day) : row.day;
+
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-slate-50/80 transition duration-150";
+        tr.innerHTML = `
+          <td class="py-3 px-4 font-mono font-medium text-slate-700 whitespace-nowrap">
+            <span class="text-slate-900 font-bold">${row.date}</span> <span class="text-slate-400">(${dayText})</span>
+          </td>
+          <td class="py-3 px-4 font-mono font-semibold text-royal-700 whitespace-nowrap">
+            ${row.time}
+          </td>
+          <td class="py-3 px-4">
+            <span class="px-2 py-0.5 rounded text-[11px] ${badgeStyle}">${row.stream}</span>
+          </td>
+          <td class="py-3 px-4 font-mono text-slate-700 font-medium">
+            Sem ${row.sem}
+          </td>
+          <td class="py-3 px-4">
+            <div class="font-bold text-slate-900">${subjectText}</div>
+          </td>
+          <td class="py-3 px-4">
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-100 text-slate-600 border border-slate-200">${row.paperType}</span>
+          </td>
+          <td class="py-3 px-4 text-center">
+            <a href="#materials" class="px-2.5 py-1 rounded-lg bg-royal-50 hover:bg-royal-700 hover:text-white text-royal-700 border border-royal-200 transition text-[11px] font-bold inline-flex items-center gap-1">
+              <i data-lucide="file-text" class="w-3 h-3"></i> ${currentLang === 'kn' ? 'ನೋಟ್ಸ್' : 'Notes'}
+            </a>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+      lucide.createIcons();
+    }
+
+    function filterTimetableStream(stream) {
+      currentStream = stream;
+      document.querySelectorAll('.tt-stream-btn').forEach(btn => {
+        btn.classList.remove('bg-royal-700', 'text-white');
+        btn.classList.add('bg-slate-100', 'text-slate-700');
+      });
+      const target = document.getElementById(`stream-btn-${stream}`);
+      if (target) {
+        target.classList.add('bg-royal-700', 'text-white');
+        target.classList.remove('bg-slate-100', 'text-slate-700');
+      }
+      renderTimetable();
+    }
+
+    function filterTimetableSem(sem) {
+      currentSem = sem;
+      document.querySelectorAll('.tt-sem-btn').forEach(btn => {
+        btn.classList.remove('bg-amber-500', 'text-slate-950');
+        btn.classList.add('bg-slate-100', 'text-slate-700');
+      });
+      const target = document.getElementById(`sem-btn-${sem}`);
+      if (target) {
+        target.classList.add('bg-amber-500', 'text-slate-950');
+        target.classList.remove('bg-slate-100', 'text-slate-700');
+      }
+      renderTimetable();
+    }
+
+    function saveIaSlot() {
+      const date = document.getElementById('mIaDate').value.trim();
+      const day = document.getElementById('mIaDay').value.trim();
+      const time = document.getElementById('mIaTime').value.trim();
+      const stream = document.getElementById('mIaStream').value;
+      const sem = document.getElementById('mIaSem').value;
+      const subject = document.getElementById('mIaSubject').value.trim();
+      const paperType = document.getElementById('mIaType').value.trim();
+
+      if (!date || !subject) {
+        showToast("Please provide exam date and subject name.");
+        return;
+      }
+
+      timetableDataset.push({
+        id: Date.now(),
+        date,
+        day: day || 'Exam Day',
+        dayKn: day || 'ಪರೀಕ್ಷಾ ದಿನ',
+        time: time || '10:00 AM - 11:30 AM',
+        stream,
+        sem,
+        subject,
+        subjectKn: subject,
+        paperType: paperType || 'DSC Core'
+      });
+
+      renderTimetable();
+      closeModal('iaAddSlotModal');
+      showToast("Internal test slot added.");
+    }
+
+    function deleteIaSchedule() {
+      if (!campusData[currentSelectedYear]) campusData[currentSelectedYear] = {};
+      campusData[currentSelectedYear].iaActive = false;
+      persistDataStore();
+      updateIaSectionVisibility(false);
+      showToast("Internal Assessment cycle marked as concluded.");
+    }
+
+    function restoreIaSchedule() {
+      if (!campusData[currentSelectedYear]) campusData[currentSelectedYear] = {};
+      campusData[currentSelectedYear].iaActive = true;
+      persistDataStore();
+      updateIaSectionVisibility(true);
+      showToast("Internal Assessment timetable activated.");
+    }
+
+    function updateIaSectionVisibility(isActive) {
+      const activeBlock = document.getElementById('iaActiveBlock');
+      const hiddenBlock = document.getElementById('iaHiddenBlock');
+      if (isActive) {
+        activeBlock.classList.remove('hidden');
+        hiddenBlock.classList.add('hidden');
+      } else {
+        activeBlock.classList.add('hidden');
+        hiddenBlock.classList.remove('hidden');
+      }
+    }
+
+    /* =========================================================================
+       7. SEP STUDY MATERIALS
+       ========================================================================= */
+    const studyMaterials = [
+      { id: "m-1", stream: "BSC", title: "Chemistry & Qualitative Salt Analysis", titleKn: "ರಸಾಯನಶಾಸ್ತ್ರ ಮತ್ತು ಗುಣಾತ್ಮಕ ವಿಶ್ಲೇಷಣೆ", category: "Physical & Inorganic Chemistry", desc: "Chemical Bonding, Periodic Properties, Aliphatic Hydrocarbons, and qualitative salt analysis manual.", descKn: "ರಾಸಾಯನಿಕ ಬಂಧ, ಆವರ್ತಕ ಗುಣಲಕ್ಷಣಗಳು ಮತ್ತು ಪ್ರಾಯೋಗಿಕ ಲ್ಯಾಬ್ ಮ್ಯಾನುಯಲ್.", sem: "Sem I / III / V" },
+      { id: "m-2", stream: "BSC", title: "Physics: Mechanics & Mathematical Methods", titleKn: "ಭೌತಶಾಸ್ತ್ರ: ಚಲನಶಾಸ್ತ್ರ ಮತ್ತು ಗಣಿತೀಯ ವಿಧಾನಗಳು", category: "Classical Mechanics & Calculus", desc: "Newtonian Mechanics, Conservation of Energy, Rotational Dynamics, and solved numerical sets.", descKn: "ನ್ಯೂಟನ್ ನಿಯಮಗಳು, ಶಕ್ತಿಯ ಸಂರಕ್ಷಣೆ ಮತ್ತು ಪರಿಹರಿಸಲಾದ ಲೆಕ್ಕಗಳು.", sem: "Sem I / III" },
+      { id: "m-3", stream: "BSC", title: "Mathematics: Differential & Integral Calculus", titleKn: "ಗಣಿತಶಾಸ್ತ್ರ: ಕಲನಶಾಸ್ತ್ರ ಮತ್ತು ಮ್ಯಾಟ್ರಿಕ್ಸ್", category: "Calculus & Linear Algebra", desc: "Successive differentiation, Leibnitz theorem, Matrix rank, and BGKU model questions.", descKn: "ಲೈಬ್ನಿಟ್ಜ್ ಪ್ರಮೇಯ, ಮ್ಯಾಟ್ರಿಕ್ಸ್ ರ್ಯಾಂಕ್ ಮತ್ತು ವಿಶ್ವವಿದ್ಯಾಲಯ ಪ್ರಶ್ನೆಗಳು.", sem: "Sem I / III / V" },
+      { id: "m-4", stream: "BSC", title: "Botany: Microbial Diversity & Cryptogams", titleKn: "ಸಸ್ಯಶಾಸ್ತ್ರ: ಸೂಕ್ಷ್ಮಾಣುಜೀವಿ ವೈವಿಧ್ಯ", category: "Plant Sciences & Anatomy", desc: "Viruses, Bacteria, Algae, Fungi, Bryophytes morphology, and herbarium guidelines.", descKn: "ವೈರಸ್, ಬ್ಯಾಕ್ಟೀರಿಯಾ, ಪಾಚಿ ಹಾಗೂ ಹರ್ಬೇರಿಯಂ ಸಿದ್ಧಪಡಿಸುವ ನಿಯಮಾವಳಿ.", sem: "Sem I / III" },
+      { id: "m-5", stream: "BSC", title: "Zoology: Animal Diversity & Cytogenetics", titleKn: "ಪ್ರಾಣಿಶಾಸ್ತ್ರ: ಪ್ರಾಣಿ ವೈವಿಧ್ಯ ಮತ್ತು ಕೋಶ ಜೀವಶಾಸ್ತ್ರ", category: "Non-Chordates & Cell Biology", desc: "Taxonomy of Invertebrates, organ systems, and Mendelian genetics.", descKn: "ಅಕಶೇರುಕಗಳ ವರ್ಗೀಕರಣ ಮತ್ತು ಮೆಂಡೆಲ್ ಅನುವಂಶೀಯ ನಿಯಮಗಳು.", sem: "Sem I / III" },
+      { id: "m-6", stream: "BSC", title: "Computer Science: Problem Solving with C", titleKn: "ಗಣಕವಿಜ್ಞಾನ: 'ಸಿ' ಪ್ರೋಗ್ರಾಮಿಂಗ್ ಭಾಷೆ", category: "Programming & Data Structures", desc: "Flowcharts, pointers, dynamic memory allocation, and lab scripts.", descKn: "ಅಲ್ಗಾರಿದಮ್, ಪಾಯಿಂಟರ್ಸ್ ಮತ್ತು ಲ್ಯಾಬ್ ಪ್ರಾಯೋಗಿಕ ಕೋಡ್‌‌ಗಳು.", sem: "Sem I / III / V" },
+      { id: "m-7", stream: "BCOM", title: "Financial Accounting (F.A. I & II)", titleKn: "ಹಣಕಾಸು ಲೆಕ್ಕಶಾಸ್ತ್ರ (F.A. I & II)", category: "Core Commerce Accounting", desc: "Consignment Accounts, Royalty Accounts, and Partnership balance sheet models.", descKn: "ಕನ್ಸೈನ್‌ಮೆಂಟ್ ಖಾತೆಗಳು, ರಾಯಧನ ಖಾತೆಗಳು ಮತ್ತು ಬ್ಯಾಲೆನ್ಸ್ ಶೀಟ್.", sem: "Sem I / III" },
+      { id: "m-8", stream: "BCOM", title: "Corporate Accounting & Cost A/c", titleKn: "ಕಾರ್ಪೊರೇಟ್ ಮತ್ತು ವೆಚ್ಚ ಲೆಕ್ಕಶಾಸ್ತ್ರ", category: "Corporate Finance & Costing", desc: "Issue and redemption of shares, Valuation of goodwill, and Cost sheets.", descKn: "ಷೇರುಗಳ ವಿತರಣೆ, ಗುಡ್‌ವಿಲ್ ಮೌಲ್ಯಮಾಪನ ಮತ್ತು ಕಾಸ್ಟ್ ಶೀಟ್.", sem: "Sem III" },
+      { id: "m-9", stream: "BCOM", title: "Income Tax (I.T.) & GST Law", titleKn: "ಆದಾಯ ತೆರಿಗೆ (I.T.) ಮತ್ತು ಜಿ.ಎಸ್.ಟಿ", category: "Direct & Indirect Taxation", desc: "Assessment of salaries, house properties, capital gains, and GST invoicing.", descKn: "ವೇತನದ ಮೇಲಿನ ತೆರಿಗೆ, ಬಂಡವಾಳ ಲಾಭ ಹಾಗೂ ಜಿಎಸ್‌ಟಿ ನಿಯಮಗಳು.", sem: "Sem V" },
+      { id: "m-10", stream: "BA", title: "History of Karnataka & Badami Chalukyas", titleKn: "ಕರ್ನಾಟಕ ಇತಿಹಾಸ ಮತ್ತು ಬಾದಾಮಿ ಚಾಲುಕ್ಯರು", category: "Regional Archaeology & Dynasty", desc: "Reign of Pulakeshi II, Aihole Inscription, and Badami rock-cut architecture.", descKn: "ಇಮ್ಮಡಿ ಪುಲಿಕೇಶಿಯ ಆಡಳಿತ, ಐಹೊಳೆ ಶಾಸನ ಮತ್ತು ಚಾಲುಕ್ಯರ ವಾಸ್ತುಶಿಲ್ಪ.", sem: "Sem I / III / V" },
+      { id: "m-11", stream: "BA", title: "Political Science: Concepts & Indian Constitution", titleKn: "ರಾಜ್ಯಶಾಸ್ತ್ರ: ಭಾರತೀಯ ಸಂವಿಧಾನ ಮತ್ತು ಆಡಳಿತ", category: "Political Theory & Governance", desc: "Sovereignty, Rights, Fundamental Rights, and Parliamentary democracy.", descKn: "ಸಾರ್ವಭೌಮತ್ವ, ಮೂಲಭೂತ ಹಕ್ಕುಗಳು ಹಾಗೂ ಸಂಸದೀಯ ಪ್ರಜಾಪ್ರಭುತ್ವ.", sem: "Sem I / III / V" },
+      { id: "m-12", stream: "GEN", title: "Constitutional Values & Human Rights", titleKn: "ಸಂವಿಧಾನದ ಮೌಲ್ಯಗಳು ಮತ್ತು ಮಾನವ ಹಕ್ಕುಗಳು", category: "Mandatory Value Added Course", desc: "Preamble philosophy, Fundamental Duties, and Supreme Court rulings.", descKn: "ಪ್ರಸ್ತಾವನೆಯ ಆಶಯ, ಮೂಲಭೂತ ಕರ್ತವ್ಯಗಳು ಮತ್ತು ಮಾನವ ಹಕ್ಕುಗಳು.", sem: "Compulsory Sem I" }
+    ];
+
+    let currentMaterialCategory = 'ALL';
+
+    function renderMaterials(list) {
+      const container = document.getElementById('materialsContainer');
+      container.innerHTML = '';
+
+      if (list.length === 0) {
+        container.innerHTML = `<div class="col-span-full text-center py-10 text-slate-400 font-mono text-xs">${currentLang === 'kn' ? 'ಯಾವುದೇ ವಿಷಯ ಲಭ್ಯವಿಲ್ಲ.' : 'No subjects match your search.'}</div>`;
+        return;
+      }
+
+      list.forEach(m => {
+        let streamBadge = 'bg-slate-100 text-slate-700';
+        if (m.stream === 'BSC') streamBadge = 'bg-emerald-100 text-emerald-800 font-bold';
+        if (m.stream === 'BCOM') streamBadge = 'bg-blue-100 text-blue-800 font-bold';
+        if (m.stream === 'BA') streamBadge = 'bg-amber-100 text-amber-800 font-bold';
+        if (m.stream === 'GEN') streamBadge = 'bg-purple-100 text-purple-800 font-bold';
+
+        const displayTitle = currentLang === 'kn' ? (m.titleKn || m.title) : m.title;
+        const displayDesc = currentLang === 'kn' ? (m.descKn || m.desc) : m.desc;
+
+        const card = document.createElement('div');
+        card.className = "luxury-card p-6 rounded-2xl flex flex-col justify-between";
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-2.5 py-0.5 rounded text-[10px] ${streamBadge}">${m.stream}</span>
+              <span class="text-[10px] font-mono font-medium text-slate-400">${m.sem}</span>
+            </div>
+            <h4 class="text-base font-bold text-slate-900 mb-1">${displayTitle}</h4>
+            <div class="text-[11px] font-mono text-royal-700 font-semibold mb-2">${m.category}</div>
+            <p class="text-xs text-slate-600 leading-relaxed">${displayDesc}</p>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+            <span class="text-[10px] font-bold text-slate-400 flex items-center gap-1">
+              <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i> BGKU Verified
+            </span>
+            <button onclick="downloadStudyNotes('${displayTitle}')" class="px-3 py-1.5 rounded-lg bg-royal-50 hover:bg-royal-700 hover:text-white text-royal-800 border border-royal-200 text-xs font-bold transition flex items-center gap-1.5">
+              <span>${currentLang === 'kn' ? 'ನೋಟ್ಸ್ ಡೌನ್‌ಲೋಡ್' : 'Download Notes'}</span> <i data-lucide="download" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+      lucide.createIcons();
+    }
+
+    function filterMaterialsList(tab) {
+      currentMaterialCategory = tab;
+      document.querySelectorAll('.mat-tab').forEach(btn => {
+        btn.className = "mat-tab px-4 py-2 rounded-xl text-xs font-bold bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 transition";
+      });
+      const activeBtn = document.getElementById(`mat-tab-${tab}`);
+      if (activeBtn) {
+        activeBtn.className = "mat-tab px-4 py-2 rounded-xl text-xs font-bold bg-royal-700 text-white transition shadow-sm";
+      }
+
+      if (tab === 'ALL') {
+        renderMaterials(studyMaterials);
+      } else {
+        const filtered = studyMaterials.filter(item => item.stream === tab);
+        renderMaterials(filtered);
+      }
+    }
+
+    function searchMaterials() {
+      const q = document.getElementById('materialSearchInput').value.toLowerCase();
+      const filtered = studyMaterials.filter(item => {
+        const inTitle = item.title.toLowerCase().includes(q) || (item.titleKn && item.titleKn.includes(q));
+        const inDesc = item.desc.toLowerCase().includes(q) || (item.descKn && item.descKn.includes(q));
+        const inStream = (currentMaterialCategory === 'ALL' || item.stream === currentMaterialCategory);
+        return (inTitle || inDesc) && inStream;
+      });
+      renderMaterials(filtered);
+    }
+
+    function downloadStudyNotes(title) {
+      showToast(`Downloading official Bagalkot University SEP module for: ${title}`);
+    }
+
+    /* =========================================================================
+       8. SUBMISSION DEADLINES
+       ========================================================================= */
+    function renderDeadlines(deadlines) {
+      const container = document.getElementById('deadlinesGrid');
+      if (!container) return;
+      container.innerHTML = '';
+
+      if (!deadlines || deadlines.length === 0) {
+        container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-400 font-mono text-xs">No active submission deadlines scheduled.</div>`;
+        return;
+      }
+
+      deadlines.forEach(dl => {
+        const card = document.createElement('div');
+        card.className = "luxury-card p-4 rounded-2xl flex flex-col justify-between border-slate-200 relative group";
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-royal-100 text-royal-800">${dl.stream}</span>
+              <span class="text-[10px] font-mono text-slate-400"><i data-lucide="clock" class="w-3 h-3 inline mr-0.5"></i>Due</span>
+            </div>
+            <h4 class="font-bold text-slate-900 text-xs sm:text-sm">${dl.title}</h4>
+            <p class="text-[11px] text-slate-500 mt-1">${dl.faculty}</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+            <span class="font-mono font-bold text-amber-700"><i data-lucide="calendar" class="w-3.5 h-3.5 inline mr-1"></i>${dl.date}</span>
+            <button onclick="promptPasskeyForAction('deleteDeadline_${dl.id}', 'Delete Deadline: ${dl.title}')" class="opacity-0 group-hover:opacity-100 text-red-500 hover:text-red-700 transition p-1" title="Delete">
+              <i data-lucide="trash" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+      lucide.createIcons();
+    }
+
+    function saveNewDeadline() {
+      const title = document.getElementById('mDlTitle').value.trim();
+      const stream = document.getElementById('mDlStream').value.trim();
+      const date = document.getElementById('mDlDate').value;
+      const faculty = document.getElementById('mDlFaculty').value.trim();
+
+      if (!title || !date) {
+        showToast("Please provide task title and deadline date.");
+        return;
+      }
+
+      if (!campusData[currentSelectedYear]) campusData[currentSelectedYear] = {};
+      if (!campusData[currentSelectedYear].deadlines) campusData[currentSelectedYear].deadlines = [];
+
+      campusData[currentSelectedYear].deadlines.push({
+        id: Date.now(),
+        title,
+        stream: stream || 'All Streams',
+        date,
+        faculty: faculty || 'Department Faculty'
+      });
+
+      persistDataStore();
+      renderDeadlines(campusData[currentSelectedYear].deadlines);
+      closeModal('deadlineEditModal');
+      showToast("Submission deadline added.");
+    }
+
+    function deleteDeadline(id) {
+      if (!campusData[currentSelectedYear] || !campusData[currentSelectedYear].deadlines) return;
+      campusData[currentSelectedYear].deadlines = campusData[currentSelectedYear].deadlines.filter(item => item.id !== id);
+      persistDataStore();
+      renderDeadlines(campusData[currentSelectedYear].deadlines);
+      showToast("Deadline removed.");
+    }
+
+    /* =========================================================================
+       9. STUDENT STRENGTH TABLE & REGISTRY
+       ========================================================================= */
+    function renderStrength(strength) {
+      if (!strength) return;
+
+      const baSum = strength.ba[0] + strength.ba[1] + strength.ba[2];
+      const bcomSum = strength.bcom[0] + strength.bcom[1] + strength.bcom[2];
+      const bscSum = strength.bsc[0] + strength.bsc[1] + strength.bsc[2];
+
+      const y1Sum = strength.ba[0] + strength.bcom[0] + strength.bsc[0];
+      const y2Sum = strength.ba[1] + strength.bcom[1] + strength.bsc[1];
+      const y3Sum = strength.ba[2] + strength.bcom[2] + strength.bsc[2];
+      const grandTotal = baSum + bcomSum + bscSum;
+
+      document.getElementById('disp-ba-1').innerText = strength.ba[0];
+      document.getElementById('disp-ba-2').innerText = strength.ba[1];
+      document.getElementById('disp-ba-3').innerText = strength.ba[2];
+      document.getElementById('disp-ba-total').innerText = baSum.toLocaleString();
+
+      document.getElementById('disp-bcom-1').innerText = strength.bcom[0];
+      document.getElementById('disp-bcom-2').innerText = strength.bcom[1];
+      document.getElementById('disp-bcom-3').innerText = strength.bcom[2];
+      document.getElementById('disp-bcom-total').innerText = bcomSum.toLocaleString();
+
+      document.getElementById('disp-bsc-1').innerText = strength.bsc[0];
+      document.getElementById('disp-bsc-2').innerText = strength.bsc[1];
+      document.getElementById('disp-bsc-3').innerText = strength.bsc[2];
+      document.getElementById('disp-bsc-total').innerText = bscSum.toLocaleString();
+
+      document.getElementById('disp-foot-y1').innerText = y1Sum.toLocaleString();
+      document.getElementById('disp-foot-y2').innerText = y2Sum.toLocaleString();
+      document.getElementById('disp-foot-y3').innerText = y3Sum.toLocaleString();
+      document.getElementById('disp-foot-grand').innerText = grandTotal.toLocaleString();
+
+      document.getElementById('sumBa').innerText = baSum.toLocaleString();
+      document.getElementById('sumBcom').innerText = bcomSum.toLocaleString();
+      document.getElementById('sumBsc').innerText = bscSum.toLocaleString();
+      document.getElementById('sumGrand').innerText = grandTotal.toLocaleString();
+      document.getElementById('statScholarsCounter').innerText = grandTotal > 0 ? grandTotal.toLocaleString() : '1,140';
+
+      if (grandTotal > 0) {
+        document.getElementById('badgeBscShare').innerText = Math.round((bscSum / grandTotal) * 100) + '%';
+        document.getElementById('badgeBcomShare').innerText = Math.round((bcomSum / grandTotal) * 100) + '%';
+        document.getElementById('badgeBaShare').innerText = Math.round((baSum / grandTotal) * 100) + '%';
+      }
+    }
+
+    function openStrengthEditor() {
+      const strength = (campusData[currentSelectedYear] && campusData[currentSelectedYear].strength) || defaultDatabase["2026-2027"].strength;
+      document.getElementById('m-ba-1').value = strength.ba[0];
+      document.getElementById('m-ba-2').value = strength.ba[1];
+      document.getElementById('m-ba-3').value = strength.ba[2];
+
+      document.getElementById('m-bcom-1').value = strength.bcom[0];
+      document.getElementById('m-bcom-2').value = strength.bcom[1];
+      document.getElementById('m-bcom-3').value = strength.bcom[2];
+
+      document.getElementById('m-bsc-1').value = strength.bsc[0];
+      document.getElementById('m-bsc-2').value = strength.bsc[1];
+      document.getElementById('m-bsc-3').value = strength.bsc[2];
+
+      openModal('strengthEditModal');
+    }
+
+    function saveStudentStrength() {
+      if (!campusData[currentSelectedYear]) campusData[currentSelectedYear] = {};
+      campusData[currentSelectedYear].strength = {
+        ba: [
+          parseInt(document.getElementById('m-ba-1').value) || 0,
+          parseInt(document.getElementById('m-ba-2').value) || 0,
+          parseInt(document.getElementById('m-ba-3').value) || 0
+        ],
+        bcom: [
+          parseInt(document.getElementById('m-bcom-1').value) || 0,
+          parseInt(document.getElementById('m-bcom-2').value) || 0,
+          parseInt(document.getElementById('m-bcom-3').value) || 0
+        ],
+        bsc: [
+          parseInt(document.getElementById('m-bsc-1').value) || 0,
+          parseInt(document.getElementById('m-bsc-2').value) || 0,
+          parseInt(document.getElementById('m-bsc-3').value) || 0
+        ]
+      };
+
+      persistDataStore();
+      renderStrength(campusData[currentSelectedYear].strength);
+      closeModal('strengthEditModal');
+      showToast("Admission registry numbers successfully updated.");
+    }
+
+    /* =========================================================================
+       10. SPORTS HUB RENDERING
+       ========================================================================= */
+    let currentSport = 'ALL';
+
+    function renderSports(sportsList) {
+      const container = document.getElementById('sportsTournamentsContainer');
+      if (!container) return;
+      container.innerHTML = '';
+
+      const filtered = sportsList.filter(item => {
+        return currentSport === 'ALL' || item.category === currentSport;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<div class="p-8 text-center text-slate-400 font-mono text-xs luxury-card rounded-2xl">No tournament entries recorded for ${currentSport} in this academic year.</div>`;
+        return;
+      }
+
+      filtered.forEach((t) => {
+        const card = document.createElement('div');
+        card.className = "luxury-card p-6 sm:p-7 rounded-3xl border border-slate-200";
+
+        let badgeIcon = 'trophy';
+        if (t.category === 'Volleyball') badgeIcon = 'volleyball';
+        if (t.category === 'Kabaddi') badgeIcon = 'activity';
+        if (t.category === 'Athletics') badgeIcon = 'zap';
+        if (t.category === 'Badminton') badgeIcon = 'target';
+        if (t.category === 'Chess') badgeIcon = 'shield';
+
+        card.innerHTML = `
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4 mb-6">
+            <div class="flex items-center gap-3">
+              <span class="px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-emerald-100 text-turf-800 flex items-center gap-1.5 border border-emerald-300">
+                <i data-lucide="${badgeIcon}" class="w-3.5 h-3.5"></i> ${t.category}
+              </span>
+              <h4 class="text-lg sm:text-xl font-black text-slate-900">${t.title}</h4>
+            </div>
+            <button onclick="promptPasskeyForAction('deleteSport_${t.id}', 'Remove Tournament: ${t.title}')" class="text-slate-400 hover:text-red-600 transition p-1 self-start sm:self-auto" title="Remove Tournament">
+              <i data-lucide="trash-2" class="w-4 h-4"></i>
+            </button>
+          </div>
+
+          <div class="grid lg:grid-cols-3 gap-5">
+            <!-- Champions -->
+            <div class="p-5 rounded-2xl border border-amber-300 bg-gradient-to-b from-amber-50/60 to-white flex flex-col justify-between shadow-sm">
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="px-2.5 py-0.5 rounded-full bg-amber-500 text-slate-950 font-black text-[10px] flex items-center gap-1">
+                    <i data-lucide="crown" class="w-3 h-3"></i> 1st &bull; CHAMPIONS
+                  </span>
+                  <span class="text-[11px] font-mono font-bold text-amber-800">Gold Honors</span>
+                </div>
+                <h5 class="font-black text-slate-900 text-base mt-2">${t.winner}</h5>
+                <div class="mt-3 pt-2.5 border-t border-amber-200/80">
+                  <div class="text-[10px] font-bold text-slate-600 mb-1">Squad Roster:</div>
+                  <p class="text-xs text-slate-700 leading-relaxed font-mono bg-white/90 p-2 rounded-lg border border-amber-200">
+                    ${t.winnerPlayers || 'Roster recorded in department office'}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Runners-up -->
+            <div class="p-5 rounded-2xl border border-slate-200 bg-slate-50/50 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="px-2.5 py-0.5 rounded-full bg-slate-200 text-slate-800 font-black text-[10px] flex items-center gap-1">
+                    🥈 2nd &bull; RUNNERS UP
+                  </span>
+                  <span class="text-[11px] font-mono font-bold text-slate-500">Silver Cup</span>
+                </div>
+                <h5 class="font-black text-slate-900 text-base mt-2">${t.runner || 'To be scheduled'}</h5>
+                <div class="mt-3 pt-2.5 border-t border-slate-200">
+                  <div class="text-[10px] font-bold text-slate-600 mb-1">Squad Roster:</div>
+                  <p class="text-xs text-slate-600 leading-relaxed font-mono bg-white p-2 rounded-lg border border-slate-200">
+                    ${t.runnerPlayers || 'Squad registered'}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3rd Place -->
+            <div class="p-5 rounded-2xl border border-amber-800/10 bg-slate-50/50 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 font-black text-[10px] flex items-center gap-1">
+                    🥉 3rd &bull; SEMI-FINALIST
+                  </span>
+                  <span class="text-[11px] font-mono font-bold text-amber-800">Bronze Honors</span>
+                </div>
+                <h5 class="font-black text-slate-900 text-base mt-2">${t.third || 'To be scheduled'}</h5>
+                <div class="mt-3 pt-2.5 border-t border-slate-200">
+                  <div class="text-[10px] font-bold text-slate-600 mb-1">Squad Roster:</div>
+                  <p class="text-xs text-slate-600 leading-relaxed font-mono bg-white p-2 rounded-lg border border-slate-200">
+                    ${t.thirdPlayers || 'Squad registered'}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+      lucide.createIcons();
+    }
+
+    function filterSportsCategory(cat) {
+      currentSport = cat;
+      document.querySelectorAll('.sport-tab-btn').forEach(btn => {
+        btn.className = "sport-tab-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 transition";
+      });
+      const activeBtn = document.getElementById(`sport-tab-${cat}`);
+      if (activeBtn) {
+        activeBtn.className = "sport-tab-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-turf-700 text-white shadow-sm transition";
+      }
+
+      const activeList = (campusData[currentSelectedYear] && campusData[currentSelectedYear].sportsList) || defaultDatabase["2026-2027"].sportsList;
+      renderSports(activeList);
+    }
+
+    function openSportsEditor() {
+      document.getElementById('mSportsTitle').value = '';
+      document.getElementById('mSportsWinnerTeam').value = '';
+      document.getElementById('mSportsWinnerRoster').value = '';
+      document.getElementById('mSportsRunnerTeam').value = '';
+      document.getElementById('mSportsRunnerRoster').value = '';
+      document.getElementById('mSportsThirdTeam').value = '';
+      document.getElementById('mSportsThirdRoster').value = '';
+
+      openModal('sportsEditModal');
+    }
+
+    function saveSportsTournament() {
+      const cat = document.getElementById('mSportsCategory').value;
+      const title = document.getElementById('mSportsTitle').value.trim() || `${cat} Tournament`;
+      const winner = document.getElementById('mSportsWinnerTeam').value.trim();
+      const winnerPlayers = document.getElementById('mSportsWinnerRoster').value.trim();
+      const runner = document.getElementById('mSportsRunnerTeam').value.trim();
+      const runnerPlayers = document.getElementById('mSportsRunnerRoster').value.trim();
+      const third = document.getElementById('mSportsThirdTeam').value.trim();
+      const thirdPlayers = document.getElementById('mSportsThirdRoster').value.trim();
+
+      if (!winner) {
+        showToast("Please enter at least the Champions team name.");
+        return;
+      }
+
+      if (!campusData[currentSelectedYear]) campusData[currentSelectedYear] = {};
+      if (!campusData[currentSelectedYear].sportsList) campusData[currentSelectedYear].sportsList = [];
+
+      campusData[currentSelectedYear].sportsList.unshift({
+        id: "sp-" + Date.now(),
+        category: cat,
+        title,
+        winner,
+        winnerPlayers,
+        runner,
+        runnerPlayers,
+        third,
+        thirdPlayers
+      });
+
+      persistDataStore();
+      renderSports(campusData[currentSelectedYear].sportsList);
+      closeModal('sportsEditModal');
+      showToast("Sports tournament published.");
+    }
+
+    function deleteSportTournament(id) {
+      if (!campusData[currentSelectedYear] || !campusData[currentSelectedYear].sportsList) return;
+      campusData[currentSelectedYear].sportsList = campusData[currentSelectedYear].sportsList.filter(s => s.id !== id);
+      persistDataStore();
+      renderSports(campusData[currentSelectedYear].sportsList);
+      showToast("Tournament entry removed.");
+    }
+
+    /* =========================================================================
+       11. TALENT HUNT 2026 ARCHIVE
+       ========================================================================= */
+    function renderTalentHunt(winners) {
+      const container = document.getElementById('talentContainer');
+      if (!container) return;
+      container.innerHTML = '';
+
+      winners.forEach(w => {
+        const card = document.createElement('div');
+        card.className = "luxury-card p-6 rounded-2xl flex flex-col justify-between";
+        card.innerHTML = `
+          <div>
+            <span class="px-2.5 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-900 uppercase">${w.day}</span>
+            <h4 class="font-bold text-slate-900 text-base mt-2">${w.event}</h4>
+            <div class="mt-4 space-y-2 text-xs font-mono">
+              <div class="p-2 rounded-lg bg-amber-50/70 border border-amber-200">
+                <span class="text-amber-800 font-bold block text-[10px]">🥇 1st Place / ವಿಜೇತರು:</span>
+                <span class="text-slate-800 font-medium">${w.first}</span>
+              </div>
+              <div class="p-2 rounded-lg bg-slate-50 border border-slate-200">
+                <span class="text-slate-500 font-bold block text-[10px]">🥈 2nd Place / ರನ್ನರ್-ಅಪ್:</span>
+                <span class="text-slate-800 font-medium">${w.second}</span>
+              </div>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+      lucide.createIcons();
+    }
+
+    /* =========================================================================
+       12. PRINCIPAL PHOTO UPLOAD (Local Base64 Storage)
+       ========================================================================= */
+    function loadPrincipalPhoto() {
+      const saved = localStorage.getItem("ssbm_principal_photo_store");
+      if (saved) {
+        document.getElementById("principalImage").src = saved;
+      }
+    }
+
+    function uploadPrincipalImage(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const base64 = e.target.result;
+        try {
+          localStorage.setItem("ssbm_principal_photo_store", base64);
+          document.getElementById("principalImage").src = base64;
+          showToast("Principal portrait updated.");
+        } catch(err) {
+          document.getElementById("principalImage").src = base64;
+          showToast("Photo applied for current session.");
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+
+    /* =========================================================================
+       13. UNIVERSITY SEMESTER EXAMS BULLETIN
+       ========================================================================= */
+    function renderUnivExam(exam) {
+      const section = document.getElementById('univExamSection');
+      const container = document.getElementById('univExamCardsContainer');
+
+      if (!exam || !exam.active) {
+        section.classList.add('hidden');
+        return;
+      }
+
+      section.classList.remove('hidden');
+      document.getElementById('univExamTitleText').innerText = exam.title;
+      document.getElementById('univExamSubtitleText').innerText = exam.note;
+
+      container.innerHTML = `
+        <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
+          <div class="text-[10px] font-mono text-amber-300 uppercase">Commencement Date</div>
+          <div class="text-xl font-bold font-mono mt-1">${exam.startDate}</div>
+          <p class="text-xs text-slate-300 mt-2">Theory Examinations for BA, B.Com, &amp; B.Sc.</p>
+        </div>
+        <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
+          <div class="text-[10px] font-mono text-amber-300 uppercase">Examination Center</div>
+          <div class="text-xl font-bold font-mono mt-1">SSBM Center #201</div>
+          <p class="text-xs text-slate-300 mt-2">Badami Main Campus</p>
+        </div>
+        <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
+          <div class="text-[10px] font-mono text-amber-300 uppercase">Status</div>
+          <div class="text-xl font-bold text-emerald-400 mt-1">Notification Active</div>
+          <p class="text-xs text-slate-300 mt-2">Hall tickets issued at administrative office</p>
+        </div>
+      `;
+    }
+
+    function clearUnivExamBulletin() {
+      if (campusData[currentSelectedYear] && campusData[currentSelectedYear].univExam) {
+        campusData[currentSelectedYear].univExam.active = false;
+        persistDataStore();
+        renderUnivExam(campusData[currentSelectedYear].univExam);
+        showToast("University exam bulletin cleared.");
+      }
+    }
+
+    /* Helper: Toast System */
+    function showToast(msg) {
+      const toast = document.getElementById('toastBox');
+      document.getElementById('toastBoxMsg').innerText = msg;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 3200);
+    }
+
+    /* Initial Startup Sequence */
+    window.addEventListener('DOMContentLoaded', () => {
+      initDataStore();
+      loadPrincipalPhoto();
+      renderTimetable();
+      renderMaterials(studyMaterials);
+      refreshCurrentView();
+
+      const prefLang = localStorage.getItem('ssbm_pref_lang');
+      if (prefLang === 'kn') {
+        setLanguage('kn');
+      }
+    });
+  </script>
+</body>
+</html>
