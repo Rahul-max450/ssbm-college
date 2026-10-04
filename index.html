@@ -73,7 +73,7 @@
       body { background: white !important; color: black !important; }
       header, footer, #mobileMenu, .no-print, button { display: none !important; }
       .luxury-card { border: 1px solid #ddd !important; box-shadow: none !important; }
-      #timetable { display: block !important; }
+      #timetable, #class-routine { display: block !important; }
     }
   </style>
 </head>
@@ -154,9 +154,10 @@
       <nav class="hidden 2xl:flex items-center gap-4 text-xs font-bold text-slate-700">
         <a href="#about" class="hover:text-royal-700 transition py-1" data-i18n="navAbout">About</a>
         <a href="#principal" class="hover:text-royal-700 transition py-1" data-i18n="navPrincipal">Principal</a>
-        <a href="#staff" class="hover:text-royal-700 transition py-1" data-i18n="navStaff">Teaching Staff</a>
+        <a href="#staff" class="hover:text-royal-700 transition py-1" data-i18n="navStaff">Teaching Faculty</a>
         <a href="#council" class="hover:text-royal-700 transition py-1" data-i18n="navCouncil">Student Council</a>
-        <a href="#timetable" class="hover:text-royal-700 transition py-1 text-royal-700 font-extrabold" data-i18n="navTimetable">Internal Exams</a>
+        <a href="#class-routine" class="hover:text-royal-700 transition py-1 text-royal-700 font-extrabold" data-i18n="navRoutine">Class Timetable</a>
+        <a href="#timetable" class="hover:text-royal-700 transition py-1 text-amber-700 font-extrabold" data-i18n="navTimetable">Internal Exams</a>
         <a href="#materials" class="hover:text-royal-700 transition py-1" data-i18n="navStudyHub">SEP Hub</a>
         <a href="#deadlines" class="hover:text-royal-700 transition py-1" data-i18n="navDeadlines">Submissions</a>
         <a href="#strength" class="hover:text-royal-700 transition py-1" data-i18n="navStrength">Students</a>
@@ -177,9 +178,10 @@
     <div id="mobileMenu" class="hidden 2xl:hidden bg-white border-b border-slate-200 px-6 py-4 space-y-2 text-sm font-semibold shadow-lg">
       <a href="#about" class="block py-1 text-slate-700 hover:text-royal-700" data-i18n="navAbout">About College</a>
       <a href="#principal" class="block py-1 text-slate-700 hover:text-royal-700" data-i18n="navPrincipal">Principal's Desk</a>
-      <a href="#staff" class="block py-1 text-slate-700 hover:text-royal-700" data-i18n="navStaff">Teaching Staff Directory</a>
+      <a href="#staff" class="block py-1 text-slate-700 hover:text-royal-700" data-i18n="navStaff">Teaching Faculty Directory</a>
       <a href="#council" class="block py-1 text-slate-700 hover:text-royal-700" data-i18n="navCouncil">Student Council (GS &amp; CRs)</a>
-      <a href="#timetable" class="block py-1 text-royal-700 font-bold" data-i18n="navTimetable">Internal Assessment Exams</a>
+      <a href="#class-routine" class="block py-1 text-royal-700 font-bold" data-i18n="navRoutine">Class Lecture Timetable</a>
+      <a href="#timetable" class="block py-1 text-amber-700 font-bold" data-i18n="navTimetable">Internal Assessment Exams</a>
       <a href="#materials" class="block py-1 text-slate-700 hover:text-royal-700" data-i18n="navStudyHub">SEP Study Repository</a>
       <a href="#deadlines" class="block py-1 text-slate-700 hover:text-royal-700" data-i18n="navDeadlines">Assignment &amp; Journal Deadlines</a>
       <a href="#strength" class="block py-1 text-slate-700 hover:text-royal-700" data-i18n="navStrength">Student Strength Registry</a>
@@ -208,21 +210,21 @@
       </h2>
 
       <p class="mt-4 text-sm sm:text-base lg:text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed" data-i18n="heroSubtitle">
-        The official digital campus portal for Shri S.B. Mamadapur Arts, Commerce &amp; Science Degree College, Badami. Access verified timetables, university updates, SEP learning materials, athletic achievements, and institutional records.
+        The official digital campus portal for Shri S.B. Mamadapur Arts, Commerce &amp; Science Degree College, Badami. Access verified lecture routines, internal timetables, university circulars, SEP learning materials, athletic achievements, and institutional records.
       </p>
 
       <div class="mt-8 flex flex-wrap justify-center items-center gap-3.5">
-        <a href="#timetable" class="px-5 py-3 rounded-xl bg-royal-700 hover:bg-royal-800 text-white font-bold text-xs sm:text-sm shadow-lg shadow-royal-700/20 transition flex items-center gap-2">
-          <i data-lucide="calendar-check" class="w-4 h-4 text-amber-300"></i>
+        <a href="#class-routine" class="px-5 py-3 rounded-xl bg-royal-700 hover:bg-royal-800 text-white font-bold text-xs sm:text-sm shadow-lg shadow-royal-700/20 transition flex items-center gap-2">
+          <i data-lucide="clock" class="w-4 h-4 text-amber-300"></i>
+          <span data-i18n="heroActionRoutine">Daily Class Routine</span>
+        </a>
+        <a href="#timetable" class="px-5 py-3 rounded-xl bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 font-bold text-xs sm:text-sm shadow-sm transition flex items-center gap-2">
+          <i data-lucide="calendar-check" class="w-4 h-4 text-royal-700"></i>
           <span data-i18n="heroActionTimetable">Internal Exam Timetable</span>
         </a>
         <a href="#materials" class="px-5 py-3 rounded-xl bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 font-bold text-xs sm:text-sm shadow-sm transition flex items-center gap-2">
           <i data-lucide="book-marked" class="w-4 h-4 text-royal-700"></i>
           <span data-i18n="heroActionNotes">SEP Study Repository</span>
-        </a>
-        <a href="#deadlines" class="px-5 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs sm:text-sm shadow-md transition flex items-center gap-2">
-          <i data-lucide="clock" class="w-4 h-4 text-emerald-400"></i>
-          <span data-i18n="heroActionDeadlines">Submission Deadlines</span>
         </a>
         <a href="#sports" class="px-5 py-3 rounded-xl bg-turf-700 hover:bg-turf-800 text-white font-bold text-xs sm:text-sm shadow-md transition flex items-center gap-2">
           <i data-lucide="trophy" class="w-4 h-4 text-amber-300"></i>
@@ -251,9 +253,9 @@
         </div>
 
         <div class="luxury-card p-4 rounded-2xl text-center">
-          <div class="text-2xl sm:text-3xl font-black text-amber-600 font-mono">100%</div>
-          <div class="text-[11px] font-bold uppercase tracking-wider text-slate-500 mt-1" data-i18n="metricDedicated">Academic Mentorship</div>
-          <div class="text-[10px] text-slate-400 mt-0.5" data-i18n="metricFaculty">Science, Comm. &amp; Arts</div>
+          <div class="text-2xl sm:text-3xl font-black text-amber-600 font-mono">SEP</div>
+          <div class="text-[11px] font-bold uppercase tracking-wider text-slate-500 mt-1" data-i18n="metricDedicated">Academic Framework</div>
+          <div class="text-[10px] text-slate-400 mt-0.5" data-i18n="metricFaculty">State Education Policy</div>
         </div>
       </div>
 
@@ -289,7 +291,7 @@
           <strong>Shri S.B. Mamadapur Arts, Commerce &amp; Science College</strong> was established in 1982 to bring undergraduate higher education to the rural and semi-urban youth of Badami, Guledagudda, Kerur, and surrounding rural taluks of Bagalkot district. The college is run by the prestigious <strong>Shri Veerapulakeshi Vidya Vardhak Samstha (SVPVVS)</strong>, founded in 1956 to memorialize the valor and cultural patronship of the immortal Badami Chalukya monarch, Pulakeshi II.
         </p>
         <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mt-3" data-i18n="aboutHistoryP2">
-          Starting with Arts and Commerce faculties, the Science division was inaugurated in 1987–88, equipping students with state-of-the-art physics, chemistry, botany, zoology, and mathematics labs. Affiliated with <strong>Bagalkot University (Jamkhandi)</strong>, the college adheres strictly to the State Education Policy (SEP).
+          Starting with Arts and Commerce faculties, the Science division was inaugurated in 1987–88, equipping students with modern science laboratories. Affiliated with <strong>Bagalkot University (Jamkhandi)</strong>, the college adheres strictly to the State Education Policy (SEP).
         </p>
 
         <div class="mt-6 pt-4 border-t border-slate-100 flex flex-wrap items-center gap-3 text-xs">
@@ -324,7 +326,7 @@
             </div>
             <div class="p-3 rounded-xl bg-white/5 border border-white/10">
               <strong class="text-amber-400 block mb-1" data-i18n="missionLabel">OUR MISSION</strong>
-              <span data-i18n="missionText">"To foster academic excellence in Science, Commerce, and Arts through skilled faculty, modern infrastructure, scientific temperament, and ethical responsibility."</span>
+              <span data-i18n="missionText">"To foster academic excellence in Science, Commerce, and Arts through modern infrastructure, scientific temperament, and ethical responsibility."</span>
             </div>
           </div>
         </div>
@@ -348,9 +350,9 @@
             <div class="w-52 h-64 sm:w-60 sm:h-72 rounded-2xl overflow-hidden bg-slate-100 border-4 border-white shadow-xl shadow-royal-950/10 flex items-center justify-center relative">
               <img 
                 id="principalImage" 
-                src="principal.jpg" 
+                src="principal.jpeg" 
                 alt="Principal Dr. Amaresh Topalakatti" 
-                onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80';"
+                onerror="if (this.src.indexOf('principal.jpeg') !== -1) { this.src = 'principal.jpg.jpeg'; } else if (this.src.indexOf('principal.jpg.jpeg') !== -1) { this.src = 'principal.jpg'; }"
                 class="w-full h-full object-cover object-top"
               />
               <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-royal-950 via-royal-950/70 to-transparent p-3 pt-6 text-center">
@@ -360,7 +362,7 @@
               </div>
             </div>
 
-            <!-- Per-action passkey protected button for Principal photo -->
+            <!-- Passkey protected button for Principal photo -->
             <button onclick="promptPasskeyForAction('principalPhoto', 'Update Principal Photo')" title="Update photo (Staff Only)" class="absolute -bottom-2 -right-2 p-2.5 rounded-xl bg-royal-700 hover:bg-royal-800 text-white cursor-pointer shadow-md transition hover:scale-105 flex items-center justify-center">
               <i data-lucide="camera" class="w-4 h-4"></i>
             </button>
@@ -378,7 +380,7 @@
               M.Sc., Ph.D. &bull; InSc Best Researcher Awardee
             </p>
             <p class="text-xs text-slate-500 font-medium" data-i18n="principalDept">
-              Principal &amp; Head, Department of Botany
+              Principal &amp; Head of Institution
             </p>
           </div>
         </div>
@@ -398,7 +400,7 @@
           </p>
 
           <p data-i18n="principalBody2">
-            I commend our BSc 1st semester scholars under Roxstarlabs for engineering this campus portal. Maintaining our <strong>Internal Examination schedules</strong>, Bagalkot University SEP resources, athletic tournament records, and student statistics in an accessible, bilingual hub keeps every student ahead.
+            I commend our BSc 1st semester scholars under Roxstarlabs for engineering this campus portal. Maintaining our <strong>Class Routines</strong>, Internal Examination schedules, Bagalkot University SEP resources, athletic tournament records, and student statistics in an accessible, bilingual hub keeps every student ahead.
           </p>
 
           <div class="pt-4 border-t border-slate-200 flex flex-wrap gap-4 text-xs font-mono text-slate-600">
@@ -411,32 +413,32 @@
     </div>
   </section>
 
-  <!-- SECTION 3: TEACHING STAFF DIRECTORY -->
+  <!-- SECTION 3: TEACHING STAFF DIRECTORY (Structured by Department, HODs & Assistant Faculty) -->
   <section id="staff" class="py-16 px-4 sm:px-6 max-w-7xl mx-auto border-b border-slate-200">
     <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
       <div>
         <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-royal-800 bg-royal-100 px-3 py-1 rounded-md border border-royal-200 mb-2">
           <i data-lucide="users" class="w-4 h-4 text-royal-700"></i>
-          <span data-i18n="staffBadge">FACULTY OF ARTS, COMMERCE &amp; SCIENCE</span>
+          <span data-i18n="staffBadge">FACULTY OF SCIENCE, COMMERCE &amp; ARTS</span>
         </div>
         <h3 class="text-2xl sm:text-4xl font-black text-slate-900" data-i18n="staffTitle">
-          Teaching Staff <span class="text-royal-700">Directory</span>
+          Teaching Faculty <span class="text-royal-700">Directory</span>
         </h3>
         <p class="text-xs sm:text-sm text-slate-600 mt-1 max-w-2xl" data-i18n="staffSubtitle">
-          Distinguished professors, heads of departments, and lecturers dedicated to academic excellence across undergraduate streams.
+          Distinguished professors, department heads (HODs), and assistant lecturers dedicated to academic excellence across undergraduate streams.
         </p>
       </div>
 
       <!-- Action Button (Isolated Passkey Protected) -->
       <button onclick="promptPasskeyForAction('staffManage', 'Add / Manage Teaching Staff')" class="px-4 py-2.5 rounded-xl bg-royal-700 hover:bg-royal-800 text-white font-bold text-xs shadow-md transition flex items-center gap-2">
         <i data-lucide="user-plus" class="w-4 h-4 text-amber-300"></i>
-        <span data-i18n="addStaffBtn">Add / Manage Staff</span>
+        <span data-i18n="addStaffBtn">Add Faculty Member</span>
       </button>
     </div>
 
     <!-- Department Filter Tabs -->
     <div class="flex flex-wrap gap-2 mb-6 pb-2 border-b border-slate-200" id="staffFilterTabs">
-      <button onclick="filterStaffDept('ALL')" id="staff-tab-ALL" class="staff-tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-royal-700 text-white shadow-sm transition">All Departments</button>
+      <button onclick="filterStaffDept('ALL')" id="staff-tab-ALL" class="staff-tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-royal-700 text-white shadow-sm transition">All Faculties</button>
       <button onclick="filterStaffDept('BSC')" id="staff-tab-BSC" class="staff-tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 transition">Science Faculty (B.Sc)</button>
       <button onclick="filterStaffDept('BCOM')" id="staff-tab-BCOM" class="staff-tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 transition">Commerce Faculty (B.Com)</button>
       <button onclick="filterStaffDept('BA')" id="staff-tab-BA" class="staff-tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 transition">Arts Faculty (B.A)</button>
@@ -476,7 +478,55 @@
     </div>
   </section>
 
-  <!-- SECTION 5: INTERNAL ASSESSMENT (IA) EXAMINATION SECTION -->
+  <!-- SECTION 5: WEEKLY CLASS ROUTINE TIMETABLE (Academic Year 2026–2027) -->
+  <section id="class-routine" class="py-16 px-4 sm:px-6 max-w-7xl mx-auto border-b border-slate-200">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+      <div>
+        <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-royal-800 bg-royal-100 px-3 py-1 rounded-md border border-royal-200 mb-2">
+          <i data-lucide="clock" class="w-4 h-4 text-royal-700"></i>
+          <span>ACADEMIC YEAR 2026–2027 • WEEKLY CLASS TIMETABLE</span>
+        </div>
+        <h3 class="text-2xl sm:text-4xl font-black text-slate-900" data-i18n="routineSectionTitle">
+          Class Lecture <span class="text-royal-700">Timetable</span>
+        </h3>
+        <p class="text-xs sm:text-sm text-slate-600 mt-1 max-w-2xl" data-i18n="routineSectionSubtitle">
+          Daily period schedule for B.Sc, B.Com, and B.A with standard breakfast break from 10:30 AM to 11:00 AM.
+        </p>
+      </div>
+
+      <!-- Stream & Semester Dropdowns -->
+      <div class="flex flex-wrap items-center gap-2.5">
+        <select id="routineStreamSelect" onchange="updateRoutineView()" class="px-3.5 py-2 rounded-xl bg-white border border-slate-300 font-bold text-xs text-slate-800 focus:outline-none focus:border-royal-600 shadow-sm cursor-pointer">
+          <option value="BSC">B.Sc (Science)</option>
+          <option value="BCOM">B.Com (Commerce)</option>
+          <option value="BA">B.A (Arts)</option>
+        </select>
+        <select id="routineSemSelect" onchange="updateRoutineView()" class="px-3.5 py-2 rounded-xl bg-royal-700 text-white font-bold text-xs focus:outline-none shadow-sm cursor-pointer">
+          <option value="sem1">Semester I</option>
+          <option value="sem2">Semester II</option>
+          <option value="sem3">Semester III</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Table: Exactly 3 Columns (Day, Timing, Subject Name) -->
+    <div class="overflow-x-auto rounded-2xl luxury-card shadow-sm border border-slate-200 bg-white">
+      <table class="w-full text-left text-xs border-collapse">
+        <thead>
+          <tr class="bg-royal-950 text-white font-mono uppercase text-[11px] tracking-wider">
+            <th class="py-4 px-6 font-bold w-1/4" data-i18n="tblRoutineDay">Day of Week</th>
+            <th class="py-4 px-6 font-bold w-1/3" data-i18n="tblRoutineTime">Timing</th>
+            <th class="py-4 px-6 font-bold" data-i18n="tblRoutineSubject">Subject Name</th>
+          </tr>
+        </thead>
+        <tbody id="routineTableBody" class="divide-y divide-slate-100 font-sans text-slate-700">
+          <!-- Rendered via JavaScript -->
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- SECTION 6: INTERNAL ASSESSMENT (IA) EXAMINATION SECTION -->
   <section id="timetable" class="py-16 px-4 sm:px-6 max-w-7xl mx-auto border-b border-slate-200">
     
     <!-- Active IA Container (Shown when IA is active) -->
@@ -500,7 +550,6 @@
             <i data-lucide="printer" class="w-3.5 h-3.5 text-royal-700"></i> <span data-i18n="ttPrintBtn">Print Timetable</span>
           </button>
           
-          <!-- Individual passkey-protected actions for IA -->
           <button onclick="promptPasskeyForAction('iaAddSlot', 'Add IA Exam Slot')" class="px-3.5 py-2 rounded-xl bg-royal-700 hover:bg-royal-800 text-xs font-bold text-white transition flex items-center gap-1.5 shadow-sm">
             <i data-lucide="plus-circle" class="w-3.5 h-3.5 text-amber-300"></i> <span>Add Slot</span>
           </button>
@@ -576,7 +625,7 @@
 
   </section>
 
-  <!-- SECTION 6: UNIVERSITY SEMESTER EXAMS BULLETIN -->
+  <!-- SECTION 7: UNIVERSITY SEMESTER EXAMS BULLETIN -->
   <section id="univExamSection" class="py-10 px-4 sm:px-6 max-w-7xl mx-auto hidden">
     <div class="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-royal-900 via-royal-950 to-slate-950 text-white shadow-xl border border-royal-700/50 relative overflow-hidden">
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-6 mb-6">
@@ -588,7 +637,6 @@
           <p class="text-xs text-slate-300 mt-1" id="univExamSubtitleText">Official timetables and notifications from the Controller of Examinations.</p>
         </div>
         <div class="flex items-center gap-2">
-          <!-- Passkey protected clear button -->
           <button onclick="promptPasskeyForAction('clearUnivExam', 'Clear University Exam Bulletin')" class="px-3 py-1.5 rounded-lg bg-red-500/20 hover:bg-red-500/30 text-red-300 border border-red-500/30 text-xs font-bold transition flex items-center gap-1">
             <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> Clear Bulletin
           </button>
@@ -601,7 +649,7 @@
     </div>
   </section>
 
-  <!-- SECTION 7: SEP STUDY MATERIALS & CURRICULUM REPOSITORY -->
+  <!-- SECTION 8: SEP STUDY MATERIALS & CURRICULUM REPOSITORY -->
   <section id="materials" class="py-16 px-4 sm:px-6 max-w-7xl mx-auto border-b border-slate-200">
     <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
       <div>
@@ -637,7 +685,7 @@
     </div>
   </section>
 
-  <!-- SECTION 8: ASSIGNMENT & PRACTICAL JOURNAL DEADLINES -->
+  <!-- SECTION 9: ASSIGNMENT & PRACTICAL JOURNAL DEADLINES -->
   <section id="deadlines" class="py-16 px-4 sm:px-6 max-w-7xl mx-auto border-b border-slate-200">
     <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
       <div>
@@ -653,7 +701,6 @@
         </p>
       </div>
 
-      <!-- Isolated Passkey Protected Button for Deadlines -->
       <button onclick="promptPasskeyForAction('deadlineManage', 'Add Submission Deadline')" class="px-4 py-2 rounded-xl bg-royal-700 hover:bg-royal-800 text-white text-xs font-bold shadow-md transition flex items-center gap-1.5">
         <i data-lucide="plus" class="w-3.5 h-3.5 text-amber-300"></i> <span data-i18n="addDeadlineBtn">Add / Update Deadline</span>
       </button>
@@ -664,7 +711,7 @@
     </div>
   </section>
 
-  <!-- SECTION 9: STUDENT STRENGTH REGISTRY -->
+  <!-- SECTION 10: STUDENT STRENGTH REGISTRY -->
   <section id="strength" class="py-16 px-4 sm:px-6 max-w-7xl mx-auto border-b border-slate-200">
     <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
       <div>
@@ -680,7 +727,6 @@
         </p>
       </div>
 
-      <!-- Isolated Passkey Protected Button for Strength Registry -->
       <button onclick="promptPasskeyForAction('strengthManage', 'Update Admission Counts')" class="px-5 py-2.5 rounded-xl bg-royal-700 hover:bg-royal-800 text-white font-bold text-xs shadow-md shadow-royal-700/20 transition flex items-center gap-2">
         <i data-lucide="edit-3" class="w-3.5 h-3.5 text-amber-300"></i>
         <span data-i18n="strengthEditBtn">Update Admission Counts</span>
@@ -788,7 +834,7 @@
     </div>
   </section>
 
-  <!-- SECTION 10: SPORTS HUB & ATHLETIC PAVILION -->
+  <!-- SECTION 11: SPORTS HUB & ATHLETIC PAVILION -->
   <section id="sports" class="py-16 px-4 sm:px-6 max-w-7xl mx-auto border-b border-slate-200 bg-gradient-to-b from-white to-emerald-50/30 rounded-3xl p-6 sm:p-10 my-8 shadow-sm border border-slate-200">
     <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
       <div>
@@ -804,7 +850,6 @@
         </p>
       </div>
 
-      <!-- Isolated Passkey Protected Button for Sports -->
       <button onclick="promptPasskeyForAction('sportsManage', 'Add Tournament Roster')" class="px-4 py-2.5 rounded-xl bg-turf-700 hover:bg-turf-800 text-white text-xs font-bold shadow-md transition flex items-center gap-2">
         <i data-lucide="trophy" class="w-4 h-4 text-amber-300"></i>
         <span data-i18n="editSportsBtn">Add Tournament Roster</span>
@@ -828,7 +873,7 @@
     </div>
   </section>
 
-  <!-- SECTION 11: TALENT HUNT 2026 ARCHIVE -->
+  <!-- SECTION 12: TALENT HUNT 2026 ARCHIVE -->
   <section id="talenthunt" class="py-16 px-4 sm:px-6 max-w-7xl mx-auto border-b border-slate-200">
     <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
       <div>
@@ -840,11 +885,10 @@
           Talent Hunt 2026 <span class="text-amber-600">Wall of Winners</span>
         </h3>
         <p class="text-xs sm:text-sm text-slate-600 mt-1 max-w-2xl" data-i18n="talentSubtitle">
-          Celebrating the daily champions across debate, fine arts, classical music, and cultural events during the inter-collegiate festival.
+          Celebrating daily champions across debate, fine arts, classical music, and cultural events during the inter-collegiate festival.
         </p>
       </div>
 
-      <!-- Isolated Passkey Protected Button for Talent Records -->
       <button onclick="promptPasskeyForAction('talentManage', 'Update Talent Records')" class="px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold shadow-md transition flex items-center gap-2">
         <i data-lucide="edit" class="w-3.5 h-3.5 text-white"></i>
         <span data-i18n="editTalentBtn">Update Talent Records</span>
@@ -856,7 +900,7 @@
     </div>
   </section>
 
-  <!-- SECTION 12: DEVELOPER & ROXSTARLABS -->
+  <!-- SECTION 13: DEVELOPER & ROXSTARLABS -->
   <section id="developers" class="py-16 px-4 sm:px-6 max-w-7xl mx-auto border-b border-slate-200">
     <div class="luxury-card rounded-3xl p-8 sm:p-12 border-slate-200 bg-gradient-to-br from-white via-royal-50/30 to-amber-50/20 shadow-md">
       <div class="text-center max-w-2xl mx-auto mb-10">
@@ -890,7 +934,7 @@
             </div>
 
             <p class="text-xs text-slate-600 leading-relaxed" data-i18n="devLeadBio">
-              Initiated and developed this Unified Digital Campus Hub for Shri S.B. Mamadapur Arts, Commerce &amp; Science Degree College under <strong>Roxstarlabs</strong> to modernize access to internal test circulars, SEP learning modules, athletic pavilion scores, and institutional administration.
+              Initiated and developed this Unified Digital Campus Hub for Shri S.B. Mamadapur Arts, Commerce &amp; Science Degree College under <strong>Roxstarlabs</strong> to modernize access to internal test circulars, class timetables, faculty departments, SEP learning modules, athletic pavilion scores, and institutional administration.
             </p>
           </div>
 
@@ -977,7 +1021,6 @@
 
       <div class="mt-4">
         <label class="block text-[11px] font-bold text-slate-700 mb-1" data-i18n="passModalLabel">Passkey</label>
-        <!-- Notice: No placeholder hint or default value -->
         <input type="password" id="authPassInput" placeholder="Enter passkey" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-sm text-slate-900 font-mono focus:outline-none focus:border-royal-600" onkeydown="if(event.key==='Enter') verifyPasskeyForAction()" />
         <span id="passErrorMsg" class="text-[11px] text-red-600 font-semibold mt-1 hidden block">Incorrect passkey. Access denied.</span>
       </div>
@@ -1044,7 +1087,89 @@
     </div>
   </div>
 
-  <!-- 3. SPORTS TOURNAMENT MODAL -->
+  <!-- 3. TEACHING STAFF MODAL (With Photo upload, HOD/Assistant Role, and Subject) -->
+  <div id="staffEditModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white max-w-md w-full rounded-3xl border border-slate-200 p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+      <button onclick="closeModal('staffEditModal')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
+      <div class="flex items-center gap-2 text-royal-700 text-xs font-bold uppercase mb-1">
+        <i data-lucide="user-plus" class="w-4 h-4"></i> <span>Faculty Roster</span>
+      </div>
+      <h3 class="text-lg font-bold text-slate-900">Add Teaching Faculty Member</h3>
+      <p class="text-xs text-slate-500 mt-0.5">Enter details for Department HOD or Assistant Professor/Lecturer.</p>
+
+      <div class="mt-4 space-y-3 text-xs">
+        <div>
+          <label class="block font-semibold mb-1">Faculty Department / Stream</label>
+          <select id="mStaffDept" class="w-full border rounded-lg p-2 bg-slate-50">
+            <option value="BSC">Science Faculty (B.Sc)</option>
+            <option value="BCOM">Commerce Faculty (B.Com)</option>
+            <option value="BA">Arts Faculty (B.A)</option>
+          </select>
+        </div>
+        <div>
+          <label class="block font-semibold mb-1">Lecturer / Professor Full Name</label>
+          <input type="text" id="mStaffName" placeholder="e.g. Prof. S. R. Patil" class="w-full border rounded-lg p-2 font-bold" />
+        </div>
+        <div>
+          <label class="block font-semibold mb-1">Role / Designation</label>
+          <input type="text" id="mStaffRole" placeholder="e.g. Head of Department (HOD) or Assistant Professor" class="w-full border rounded-lg p-2" />
+        </div>
+        <div>
+          <label class="block font-semibold mb-1">Subject(s) Taught</label>
+          <input type="text" id="mStaffSubject" placeholder="e.g. Department of Physics / Mechanics" class="w-full border rounded-lg p-2" />
+        </div>
+        <div>
+          <label class="block font-semibold mb-1">Academic Qualifications</label>
+          <input type="text" id="mStaffQual" placeholder="e.g. M.Sc., M.Phil., NET / KSET" class="w-full border rounded-lg p-2" />
+        </div>
+        <div>
+          <label class="block font-semibold mb-1">Faculty Photo (Optional)</label>
+          <input type="file" id="mStaffPhotoInput" accept="image/*" class="w-full border rounded-lg p-1.5 text-xs text-slate-600 bg-slate-50" />
+        </div>
+      </div>
+      <div class="mt-5 flex justify-end gap-2">
+        <button onclick="closeModal('staffEditModal')" class="px-4 py-2 bg-slate-100 rounded-lg text-xs font-semibold">Cancel</button>
+        <button onclick="saveNewStaffMember()" class="px-4 py-2 bg-royal-700 text-white rounded-lg text-xs font-bold">Save Faculty Member</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. STUDENT COUNCIL MODAL -->
+  <div id="councilEditModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white max-w-md w-full rounded-3xl border border-slate-200 p-6 shadow-2xl relative">
+      <button onclick="closeModal('councilEditModal')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
+      <div class="flex items-center gap-2 text-royal-700 text-xs font-bold uppercase mb-1">
+        <i data-lucide="user-check" class="w-4 h-4"></i> <span>Student Leadership</span>
+      </div>
+      <h3 class="text-lg font-bold text-slate-900">Add Student Leader / CR</h3>
+      <p class="text-xs text-slate-500 mt-0.5">Enter details and optionally attach student photo.</p>
+
+      <div class="mt-4 space-y-3 text-xs">
+        <div>
+          <label class="block font-semibold mb-1">Leadership Role</label>
+          <input type="text" id="mCouncilRole" placeholder="e.g. General Secretary (GS) or CR - B.Sc 1st Year" class="w-full border rounded-lg p-2" />
+        </div>
+        <div>
+          <label class="block font-semibold mb-1">Student Full Name</label>
+          <input type="text" id="mCouncilName" placeholder="e.g. Student Name" class="w-full border rounded-lg p-2 font-bold" />
+        </div>
+        <div>
+          <label class="block font-semibold mb-1">Stream &amp; Class</label>
+          <input type="text" id="mCouncilStream" placeholder="e.g. B.Sc 1st Semester (PCM/CBZ)" class="w-full border rounded-lg p-2" />
+        </div>
+        <div>
+          <label class="block font-semibold mb-1">Student Photo (Optional)</label>
+          <input type="file" id="mCouncilPhotoInput" accept="image/*" class="w-full border rounded-lg p-1.5 text-xs text-slate-600 bg-slate-50" />
+        </div>
+      </div>
+      <div class="mt-5 flex justify-end gap-2">
+        <button onclick="closeModal('councilEditModal')" class="px-4 py-2 bg-slate-100 rounded-lg text-xs font-semibold">Cancel</button>
+        <button onclick="saveCouncilMember()" class="px-4 py-2 bg-royal-700 text-white rounded-lg text-xs font-bold">Save Student Leader</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. SPORTS TOURNAMENT MODAL -->
   <div id="sportsEditModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
     <div class="bg-white max-w-xl w-full rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
       <button onclick="closeModal('sportsEditModal')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700">
@@ -1105,7 +1230,7 @@
     </div>
   </div>
 
-  <!-- 4. SUBMISSION DEADLINES MODAL -->
+  <!-- 6. SUBMISSION DEADLINES MODAL -->
   <div id="deadlineEditModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
     <div class="bg-white max-w-md w-full rounded-3xl border border-slate-200 p-6 shadow-2xl relative">
       <button onclick="closeModal('deadlineEditModal')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
@@ -1114,71 +1239,11 @@
         <div><label class="block font-semibold mb-1">Subject &amp; Task</label><input type="text" id="mDlTitle" placeholder="e.g. Physics Sem 1 Lab Journal" class="w-full border rounded-lg p-2" /></div>
         <div><label class="block font-semibold mb-1">Target Stream &amp; Sem</label><input type="text" id="mDlStream" placeholder="e.g. B.Sc Sem I (PCM &amp; CBZ)" class="w-full border rounded-lg p-2" /></div>
         <div><label class="block font-semibold mb-1">Deadline Date</label><input type="date" id="mDlDate" class="w-full border rounded-lg p-2" /></div>
-        <div><label class="block font-semibold mb-1">Faculty In-Charge</label><input type="text" id="mDlFaculty" placeholder="e.g. Department of Physics" class="w-full border rounded-lg p-2" /></div>
+        <div><label class="block font-semibold mb-1">Department In-Charge</label><input type="text" id="mDlFaculty" placeholder="e.g. Department of Physics" class="w-full border rounded-lg p-2" /></div>
       </div>
       <div class="mt-5 flex justify-end gap-2">
         <button onclick="closeModal('deadlineEditModal')" class="px-4 py-2 bg-slate-100 rounded-lg text-xs font-semibold">Cancel</button>
         <button onclick="saveNewDeadline()" class="px-4 py-2 bg-royal-700 text-white rounded-lg text-xs font-bold">Add Deadline</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- 5. TEACHING STAFF MODAL -->
-  <div id="staffEditModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="bg-white max-w-md w-full rounded-3xl border border-slate-200 p-6 shadow-2xl relative">
-      <button onclick="closeModal('staffEditModal')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
-      <h3 class="text-lg font-bold text-slate-900">Add Teaching Faculty Member</h3>
-      <div class="mt-4 space-y-3 text-xs">
-        <div>
-          <label class="block font-semibold mb-1">Faculty Stream</label>
-          <select id="mStaffDept" class="w-full border rounded-lg p-2">
-            <option value="BSC">Science Faculty (B.Sc)</option>
-            <option value="BCOM">Commerce Faculty (B.Com)</option>
-            <option value="BA">Arts Faculty (B.A)</option>
-          </select>
-        </div>
-        <div><label class="block font-semibold mb-1">Lecturer / Professor Name</label><input type="text" id="mStaffName" placeholder="e.g. Prof. Ramesh Patil" class="w-full border rounded-lg p-2" /></div>
-        <div><label class="block font-semibold mb-1">Designation &amp; Qualification</label><input type="text" id="mStaffRole" placeholder="e.g. Assistant Professor, M.Sc., Ph.D." class="w-full border rounded-lg p-2" /></div>
-        <div><label class="block font-semibold mb-1">Subject / Department</label><input type="text" id="mStaffSubject" placeholder="e.g. Department of Physics" class="w-full border rounded-lg p-2" /></div>
-      </div>
-      <div class="mt-5 flex justify-end gap-2">
-        <button onclick="closeModal('staffEditModal')" class="px-4 py-2 bg-slate-100 rounded-lg text-xs font-semibold">Cancel</button>
-        <button onclick="saveNewStaffMember()" class="px-4 py-2 bg-royal-700 text-white rounded-lg text-xs font-bold">Add Faculty</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- 6. STUDENT COUNCIL MODAL (With Photo upload & Name) -->
-  <div id="councilEditModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="bg-white max-w-md w-full rounded-3xl border border-slate-200 p-6 shadow-2xl relative">
-      <button onclick="closeModal('councilEditModal')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
-      <div class="flex items-center gap-2 text-royal-700 text-xs font-bold uppercase mb-1">
-        <i data-lucide="user-check" class="w-4 h-4"></i> <span>Student Leadership</span>
-      </div>
-      <h3 class="text-lg font-bold text-slate-900">Add Student Leader / CR</h3>
-      <p class="text-xs text-slate-500 mt-0.5">Enter details and optionally attach student photo.</p>
-
-      <div class="mt-4 space-y-3 text-xs">
-        <div>
-          <label class="block font-semibold mb-1">Leadership Role</label>
-          <input type="text" id="mCouncilRole" placeholder="e.g. General Secretary (GS) or CR - B.Sc 1st Year" class="w-full border rounded-lg p-2" />
-        </div>
-        <div>
-          <label class="block font-semibold mb-1">Student Full Name</label>
-          <input type="text" id="mCouncilName" placeholder="e.g. Student Name" class="w-full border rounded-lg p-2 font-bold" />
-        </div>
-        <div>
-          <label class="block font-semibold mb-1">Stream &amp; Class</label>
-          <input type="text" id="mCouncilStream" placeholder="e.g. B.Sc 1st Semester (PCM/CBZ)" class="w-full border rounded-lg p-2" />
-        </div>
-        <div>
-          <label class="block font-semibold mb-1">Student Photo (Optional)</label>
-          <input type="file" id="mCouncilPhotoInput" accept="image/*" class="w-full border rounded-lg p-1.5 text-xs text-slate-600 bg-slate-50" />
-        </div>
-      </div>
-      <div class="mt-5 flex justify-end gap-2">
-        <button onclick="closeModal('councilEditModal')" class="px-4 py-2 bg-slate-100 rounded-lg text-xs font-semibold">Cancel</button>
-        <button onclick="saveCouncilMember()" class="px-4 py-2 bg-royal-700 text-white rounded-lg text-xs font-bold">Save Student Leader</button>
       </div>
     </div>
   </div>
@@ -1242,8 +1307,6 @@
 
     /* =========================================================================
        1. STRICT ISOLATED PASSKEY AUTHENTICATION SYSTEM
-       - Every section action independently asks for the passkey.
-       - No single global session is kept unlocked.
        ========================================================================= */
     const AUTH_PASSKEY = "SSBM2026";
     let pendingIsolatedAction = null;
@@ -1304,12 +1367,12 @@
         clearUnivExamBulletin();
       } else if (action === 'talentManage') {
         showToast("Talent records can be updated via sports/cultural office register.");
-      } else if (action.startsWith('deleteCouncil_')) {
-        const id = parseInt(action.replace('deleteCouncil_', ''));
-        deleteCouncilMember(id);
       } else if (action.startsWith('deleteStaff_')) {
         const id = parseInt(action.replace('deleteStaff_', ''));
         deleteStaffMember(id);
+      } else if (action.startsWith('deleteCouncil_')) {
+        const id = parseInt(action.replace('deleteCouncil_', ''));
+        deleteCouncilMember(id);
       } else if (action.startsWith('deleteDeadline_')) {
         const id = parseInt(action.replace('deleteDeadline_', ''));
         deleteDeadline(id);
@@ -1344,19 +1407,19 @@
           bsc: [160, 145, 125]
         },
         staffList: [
-          { id: 1, dept: "BSC", name: "Dr. Amaresh Topalakatti", role: "Principal & Head, Botany", qualification: "M.Sc., Ph.D." },
-          { id: 2, dept: "BSC", name: "Prof. S. R. Patil", role: "HOD Physics", qualification: "M.Sc., M.Phil." },
-          { id: 3, dept: "BSC", name: "Dr. V. B. Kulkarni", role: "HOD Chemistry", qualification: "M.Sc., Ph.D." },
-          { id: 4, dept: "BSC", name: "Prof. M. S. Hullur", role: "HOD Mathematics", qualification: "M.Sc." },
-          { id: 5, dept: "BSC", name: "Prof. K. N. Badami", role: "HOD Zoology", qualification: "M.Sc." },
-          { id: 6, dept: "BSC", name: "Prof. S. M. Hiremath", role: "Lecturer, Computer Science", qualification: "MCA, M.Sc." },
-          { id: 7, dept: "BCOM", name: "Prof. B. C. Talikoti", role: "HOD Commerce & Accounts", qualification: "M.Com., M.Phil." },
-          { id: 8, dept: "BCOM", name: "Prof. R. M. Desai", role: "Lecturer, Financial Management", qualification: "M.Com." },
-          { id: 9, dept: "BCOM", name: "Prof. A. S. Bagalkot", role: "Lecturer, Taxation & Law", qualification: "M.Com., NET" },
-          { id: 10, dept: "BA", name: "Dr. C. S. Navalgund", role: "HOD History", qualification: "M.A., Ph.D." },
-          { id: 11, dept: "BA", name: "Prof. S. P. Chalukya", role: "HOD Political Science", qualification: "M.A., KSET" },
-          { id: 12, dept: "BA", name: "Prof. V. R. Pujar", role: "HOD Economics", qualification: "M.A., M.Phil." },
-          { id: 13, dept: "BA", name: "Dr. G. M. Hiregoudar", role: "HOD Kannada & Culture", qualification: "M.A., Ph.D." }
+          { id: 1, dept: "BSC", name: "Dr. Amaresh Topalakatti", role: "Principal & Head of Department", subject: "Department of Botany", qualification: "M.Sc., Ph.D.", photo: "principal.jpeg" },
+          { id: 2, dept: "BSC", name: "Prof. S. R. Patil", role: "Head of Department (HOD)", subject: "Department of Physics", qualification: "M.Sc., M.Phil.", photo: "" },
+          { id: 3, dept: "BSC", name: "Dr. V. B. Kulkarni", role: "Head of Department (HOD)", subject: "Department of Chemistry", qualification: "M.Sc., Ph.D.", photo: "" },
+          { id: 4, dept: "BSC", name: "Prof. M. S. Hullur", role: "Head of Department (HOD)", subject: "Department of Mathematics", qualification: "M.Sc.", photo: "" },
+          { id: 5, dept: "BSC", name: "Prof. K. N. Badami", role: "Head of Department (HOD)", subject: "Department of Zoology", qualification: "M.Sc.", photo: "" },
+          { id: 6, dept: "BSC", name: "Prof. S. M. Hiremath", role: "Assistant Lecturer", subject: "Computer Science & IT", qualification: "MCA, M.Sc.", photo: "" },
+          { id: 7, dept: "BCOM", name: "Prof. B. C. Talikoti", role: "Head of Department (HOD)", subject: "Financial Accounting & Commerce", qualification: "M.Com., M.Phil.", photo: "" },
+          { id: 8, dept: "BCOM", name: "Prof. R. M. Desai", role: "Assistant Professor", subject: "Business Economics & FM", qualification: "M.Com.", photo: "" },
+          { id: 9, dept: "BCOM", name: "Prof. A. S. Bagalkot", role: "Assistant Lecturer", subject: "Corporate Law & Taxation", qualification: "M.Com., NET", photo: "" },
+          { id: 10, dept: "BA", name: "Dr. C. S. Navalgund", role: "Head of Department (HOD)", subject: "History of Karnataka & Archaeology", qualification: "M.A., Ph.D.", photo: "" },
+          { id: 11, dept: "BA", name: "Prof. S. P. Chalukya", role: "Head of Department (HOD)", subject: "Political Science & Constitution", qualification: "M.A., KSET", photo: "" },
+          { id: 12, dept: "BA", name: "Prof. V. R. Pujar", role: "Head of Department (HOD)", subject: "Economics & Public Finance", qualification: "M.A., M.Phil.", photo: "" },
+          { id: 13, dept: "BA", name: "Dr. G. M. Hiregoudar", role: "Head of Department (HOD)", subject: "Kannada Literature & Culture", qualification: "M.A., Ph.D.", photo: "" }
         ],
         council: [
           { id: 1, role: "General Secretary (GS)", name: "Elected Scholar 2026", stream: "B.Sc Final Year", photo: "" },
@@ -1506,8 +1569,9 @@
         samsthaTag: "Shri Veerapulakeshi Vidya Vardhak Samstha (Est. 1956) • Bagalkot Dist.",
         navAbout: "About",
         navPrincipal: "Principal",
-        navStaff: "Teaching Staff",
+        navStaff: "Teaching Faculty",
         navCouncil: "Student Council",
+        navRoutine: "Class Timetable",
         navTimetable: "Internal Exams",
         navStudyHub: "SEP Hub",
         navDeadlines: "Submissions",
@@ -1517,10 +1581,10 @@
         navDev: "Developer",
         heroTitlePart1: "Fostering Academic Dignity in the",
         heroTitlePart2: "Historic Land of Badami Chalukyas",
-        heroSubtitle: "The official digital campus portal for Shri S.B. Mamadapur Arts, Commerce & Science Degree College, Badami. Access verified timetables, university updates, SEP learning materials, athletic achievements, and institutional records.",
+        heroSubtitle: "The official digital campus portal for Shri S.B. Mamadapur Arts, Commerce & Science Degree College, Badami. Access verified lecture routines, internal timetables, university circulars, SEP learning materials, athletic achievements, and institutional records.",
+        heroActionRoutine: "Daily Class Routine",
         heroActionTimetable: "Internal Exam Timetable",
         heroActionNotes: "SEP Study Repository",
-        heroActionDeadlines: "Submission Deadlines",
         heroActionSports: "SSBM Sports Pavilion",
         metricEstablished: "Degree Established",
         metricSamstha: "Samstha Est. 1956",
@@ -1528,38 +1592,43 @@
         metricFaculties: "BA, B.Com, B.Sc",
         metricAffiliation: "Bagalkot University",
         metricGovt: "UGC 2(f) & 12(B)",
-        metricDedicated: "Academic Mentorship",
-        metricFaculty: "Science, Comm. & Arts",
+        metricDedicated: "Academic Framework",
+        metricFaculty: "State Education Policy",
         aboutBadge: "INSTITUTIONAL HERITAGE • ಸಂಸ್ಥೆಯ ಪರಿಚಯ",
         aboutTitle: "About Shri S.B. Mamadapur Degree College",
         aboutSubtitle: "Pioneering higher education for over four decades under Shri Veerapulakeshi Vidya Vardhak Samstha.",
         aboutHistoryTitle: "Historical Foundations & Samstha Roots",
         aboutHistorySubtitle: "Established in 1982 in the heritage city of Badami",
         aboutHistoryP1: "<strong>Shri S.B. Mamadapur Arts, Commerce & Science College</strong> was established in 1982 to bring undergraduate higher education to the rural and semi-urban youth of Badami, Guledagudda, Kerur, and surrounding rural taluks of Bagalkot district. The college is run by the prestigious <strong>Shri Veerapulakeshi Vidya Vardhak Samstha (SVPVVS)</strong>, founded in 1956 to memorialize the valor and cultural patronship of the immortal Badami Chalukya monarch, Pulakeshi II.",
-        aboutHistoryP2: "Starting with Arts and Commerce faculties, the Science division was inaugurated in 1987–88, equipping students with state-of-the-art physics, chemistry, botany, zoology, and mathematics labs. Affiliated with <strong>Bagalkot University (Jamkhandi)</strong>, the college adheres strictly to the State Education Policy (SEP).",
+        aboutHistoryP2: "Starting with Arts and Commerce faculties, the Science division was inaugurated in 1987–88, equipping students with modern science laboratories. Affiliated with <strong>Bagalkot University (Jamkhandi)</strong>, the college adheres strictly to the State Education Policy (SEP).",
         aboutVisionTitle: "Vision & Mission",
         aboutVisionSubtitle: "Institutional charter",
         visionLabel: "OUR VISION",
         visionText: "\"To impart holistic, value-based higher education to the rural and backward community youth, transforming them into globally competent and socially committed citizens.\"",
         missionLabel: "OUR MISSION",
-        missionText: "\"To foster academic excellence in Science, Commerce, and Arts through skilled faculty, modern infrastructure, scientific temperament, and ethical responsibility.\"",
+        missionText: "\"To foster academic excellence in Science, Commerce, and Arts through modern infrastructure, scientific temperament, and ethical responsibility.\"",
         samsthaMotto: "SVPVVS Samstha • Badami",
         principalBadge: "Principal & Head of Institution",
         principalName: "Dr. Amaresh Topalakatti",
         principalQual: "M.Sc., Ph.D. • InSc Best Researcher Awardee",
-        principalDept: "Principal & Head, Department of Botany",
+        principalDept: "Principal & Head of Institution",
         principalMessageHeader: "Message from the Principal's Desk",
         principalQuote: "\"Welcome to Shri S.B. Mamadapur Arts, Commerce & Science College, Badami. Since 1982, our institution has stood as an academic sanctuary, carrying forward the great civilizational legacy of the Badami Chalukyas.\"",
         principalBody1: "Under our affiliation with <strong>Bagalkot University (Jamkhandi)</strong>, we impart high-rigor undergraduate education across B.Sc, B.Com, and B.A. programs. Our focus is cultivating disciplined inquiry, research aptitude through laboratory sessions, and character-building through sports and cultural events.",
-        principalBody2: "I commend our BSc 1st semester scholars under Roxstarlabs for engineering this campus portal. Maintaining our <strong>Internal Examination schedules</strong>, Bagalkot University SEP resources, athletic tournament records, and student statistics in an accessible, bilingual hub keeps every student ahead.",
-        staffBadge: "FACULTY OF ARTS, COMMERCE & SCIENCE",
-        staffTitle: "Teaching Staff <span class=\"text-royal-700\">Directory</span>",
-        staffSubtitle: "Distinguished professors, heads of departments, and lecturers dedicated to academic excellence across undergraduate streams.",
-        addStaffBtn: "Add / Manage Staff",
+        principalBody2: "I commend our BSc 1st semester scholars under Roxstarlabs for engineering this campus portal. Maintaining our <strong>Class Routines</strong>, Internal Examination schedules, Bagalkot University SEP resources, athletic tournament records, and student statistics in an accessible, bilingual hub keeps every student ahead.",
+        staffBadge: "FACULTY OF SCIENCE, COMMERCE & ARTS",
+        staffTitle: "Teaching Faculty <span class=\"text-royal-700\">Directory</span>",
+        staffSubtitle: "Distinguished professors, department heads (HODs), and assistant lecturers dedicated to academic excellence across undergraduate streams.",
+        addStaffBtn: "Add Faculty Member",
         councilBadge: "STUDENT COUNCIL LEADERSHIP",
         councilTitle: "General Secretary & Class Representatives <span class=\"text-royal-700\">(GS & CRs)</span>",
         councilSubtitle: "Student leadership representing BA, B.Com, and B.Sc streams. Photo management, full names, roles, and department assignments.",
         updateCouncilBtn: "Add Student Leader / CR",
+        routineSectionTitle: "Class Lecture <span class=\"text-royal-700\">Timetable</span>",
+        routineSectionSubtitle: "Daily period schedule for B.Sc, B.Com, and B.A with standard breakfast break from 10:30 AM to 11:00 AM.",
+        tblRoutineDay: "Day of Week",
+        tblRoutineTime: "Timing",
+        tblRoutineSubject: "Subject Name",
         ttBadge: "OFFICIAL CIRCULAR VERIFIED • 2026–27",
         ttTitle: "1st, 3rd & 5th Semester <span class=\"text-royal-700\">Internal Test</span> Timetable",
         ttSubtitle: "Conducted by SSBM Examination Committee. Matches official notification signed by Examination Chairman & Principal Dr. Amaresh Topalakatti.",
@@ -1625,7 +1694,7 @@
         devSubtitle: "A dedicated student-led digital initiative designed and engineered for Shri S.B. Mamadapur Degree College, Badami under Roxstarlabs.",
         devLeadName: "Rahulkumar K",
         devLeadRole: "B.Sc 1st Semester • SSBM College Badami",
-        devLeadBio: "Initiated and developed this Unified Digital Campus Hub for Shri S.B. Mamadapur Arts, Commerce & Science Degree College under <strong>Roxstarlabs</strong> to modernize access to internal test circulars, SEP learning modules, athletic pavilion scores, and institutional administration.",
+        devLeadBio: "Initiated and developed this Unified Digital Campus Hub for Shri S.B. Mamadapur Arts, Commerce & Science Degree College under <strong>Roxstarlabs</strong> to modernize access to internal test circulars, class timetables, faculty departments, SEP learning modules, athletic pavilion scores, and institutional administration.",
         orgBadge: "STUDENT INNOVATION LAB",
         orgDesc: "Roxstarlabs builds purpose-driven, ultra-fast web platforms, institutional software architectures, and automated portals to empower educational ecosystems across Karnataka.",
         orgPt1: "Single-file zero maintenance static deployment",
@@ -1649,6 +1718,7 @@
         navPrincipal: "ಪ್ರಾಚಾರ್ಯರು",
         navStaff: "ಬೋಧಕ ವೃಂದ",
         navCouncil: "ವಿದ್ಯಾರ್ಥಿ ಪರಿಷತ್",
+        navRoutine: "ತರಗತಿ ವೇಳಾಪಟ್ಟಿ",
         navTimetable: "ಆಂತರಿಕ ಪರೀಕ್ಷೆ",
         navStudyHub: "SEP ಕೇಂದ್ರ",
         navDeadlines: "ಸಲ್ಲಿಕೆ ದಿನಾಂಕ",
@@ -1658,10 +1728,10 @@
         navDev: "ಡೆವಲಪರ್",
         heroTitlePart1: "ಐತಿಹಾಸಿಕ ಬಾದಾಮಿ ಚಾಲುಕ್ಯರ ನಾಡಿನಲ್ಲಿ",
         heroTitlePart2: "ಗುಣಮಟ್ಟದ ಉನ್ನತ ಶಿಕ್ಷಣದ ಜ್ಯೋತಿ",
-        heroSubtitle: "ಶ್ರೀ ಎಸ್.ಬಿ. ಮಮದಾಪೂರ ಪದವಿ ಕಾಲೇಜಿನ ಅಧಿಕೃತ ಡಿಜಿಟಲ್ ಪೋರ್ಟಲ್. ಆಂತರಿಕ ಪರೀಕ್ಷಾ ವೇಳಾಪಟ್ಟಿ, ವಿಶ್ವವಿದ್ಯಾಲಯ ಪರೀಕ್ಷೆಗಳು, ಜರ್ನಲ್ ಸಲ್ಲಿಕೆ ದಿನಾಂಕಗಳು ಮತ್ತು ಕ್ರೀಡಾ ದಾಖಲೆಗಳು ಇಲ್ಲಿ ಲಭ್ಯ.",
+        heroSubtitle: "ಶ್ರೀ ಎಸ್.ಬಿ. ಮಮದಾಪೂರ ಪದವಿ ಕಾಲೇಜಿನ ಅಧಿಕೃತ ಡಿಜಿಟಲ್ ಪೋರ್ಟಲ್. ತರಗತಿ ವೇಳಾಪಟ್ಟಿ, ಬೋಧಕ ಅಧ್ಯಾಪಕರ ವಿವರ, ಆಂತರಿಕ ಪರೀಕ್ಷಾ ವಿವರಗಳು, ಜರ್ನಲ್ ಸಲ್ಲಿಕೆ ದಿನಾಂಕಗಳು ಮತ್ತು ಕ್ರೀಡಾ ದಾಖಲೆಗಳು ಇಲ್ಲಿ ಲಭ್ಯ.",
+        heroActionRoutine: "ದೈನಂದಿನ ತರಗತಿ ವೇಳಾಪಟ್ಟಿ",
         heroActionTimetable: "ಆಂತರಿಕ ಪರೀಕ್ಷಾ ವೇಳಾಪಟ್ಟಿ",
         heroActionNotes: "SEP ಅಧ್ಯಯನ ಸಾಮಗ್ರಿಗಳು",
-        heroActionDeadlines: "ಸಲ್ಲಿಕೆಯ ಕೊನೆಯ ದಿನಾಂಕ",
         heroActionSports: "ಎಸ್.ಎಸ್.ಬಿ.ಎಂ ಕ್ರೀಡಾ ಪೆವಿಲಿಯನ್",
         metricEstablished: "ಪದವಿ ಆರಂಭ",
         metricSamstha: "ಸಂಸ್ಥೆ ಸ್ಥಾಪನೆ 1956",
@@ -1669,8 +1739,8 @@
         metricFaculties: "ಬಿ.ಎ, ಬಿ.ಕಾಂ, ಬಿ.ಎಸ್ಸಿ",
         metricAffiliation: "ಬಾಗಲಕೋಟೆ ವಿ.ವಿ",
         metricGovt: "UGC 2(f) ಮತ್ತು 12(B)",
-        metricDedicated: "ಅರ್ಪಣಾ ಶಿಕ್ಷಕ ವೃಂದ",
-        metricFaculty: "ವಿಜ್ಞಾನ, ವಾಣಿಜ್ಯ ಮತ್ತು ಕಲಾ",
+        metricDedicated: "ಶೈಕ್ಷಣಿಕ ಪದ್ಧತಿ",
+        metricFaculty: "ರಾಜ್ಯ ಶಿಕ್ಷಣ ನೀತಿ (SEP)",
         aboutBadge: "ಸಂಸ್ಥೆಯ ಇತಿಹಾಸ ಮತ್ತು ಪರಂಪರೆ",
         aboutTitle: "ಶ್ರೀ ಎಸ್.ಬಿ. ಮಮದಾಪೂರ ಪದವಿ ಕಾಲೇಜು ಬಾದಾಮಿ",
         aboutSubtitle: "ಶ್ರೀ ವೀರಪುಲಿಕೇಶಿ ವಿದ್ಯಾವರ್ಧಕ ಸಂಸ್ಥೆಯ ಅಡಿಯಲ್ಲಿ ನಾಲ್ಕು ದಶಕಗಳಿಗೂ ಹೆಚ್ಚು ಕಾಲ ಗ್ರಾಮೀಣ ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಜ್ಞಾನದಾಸೋಹ.",
@@ -1683,24 +1753,29 @@
         visionLabel: "ನಮ್ಮ ದೃಷ್ಟಿಕೋನ (VISION)",
         visionText: "\"ಗ್ರಾಮೀಣ ಮತ್ತು ಹಿಂದುಳಿದ ವರ್ಗದ ಯುವಜನರಿಗೆ ಮೌಲ್ಯಾಧಾರಿತ, ಉನ್ನತ ಗುಣಮಟ್ಟದ ಶಿಕ್ಷಣವನ್ನು ನೀಡಿ, ಅವರನ್ನು ಜಾಗತಿಕ ಮಟ್ಟದಲ್ಲಿ ಸ್ಪರ್ಧಾತ್ಮಕ ಮತ್ತು ಸಾಮಾಜಿಕ ಜವಾಬ್ದಾರಿಯುತ ಪ್ರಜೆಗಳನ್ನಾಗಿ ರೂಪಿಸುವುದು.\"",
         missionLabel: "ನಮ್ಮ ಗುರಿ (MISSION)",
-        missionText: "\"ವಿಜ್ಞಾನ, ವಾಣಿಜ್ಯ ಮತ್ತು ಕಲಾ ವಿಭಾಗಗಳಲ್ಲಿ ನುರಿತ ಅಧ್ಯಾಪಕರು, ಆಧುನಿಕ ಪ್ರಯೋಗಾಲಯಗಳು ಮತ್ತು ವೈಜ್ಞಾನಿಕ ಮನೋಭಾವದ ಮೂಲಕ ಶೈಕ್ಷಣಿಕ ಶ್ರೇಷ್ಠತೆಯನ್ನು ಸಾಧಿಸುವುದು.\"",
+        missionText: "\"ವಿಜ್ಞಾನ, ವಾಣಿಜ್ಯ ಮತ್ತು ಕಲಾ ವಿಭಾಗಗಳಲ್ಲಿ ಆಧುನಿಕ ಸೌಲಭ್ಯಗಳು ಮತ್ತು ವೈಜ್ಞಾನಿಕ ಮನೋಭಾವದ ಮೂಲಕ ಶೈಕ್ಷಣಿಕ ಶ್ರೇಷ್ಠತೆಯನ್ನು ಸಾಧಿಸುವುದು.\"",
         samsthaMotto: "ಶ್ರೀ ವೀರಪುಲಿಕೇಶಿ ಸಂಸ್ಥೆ • ಬಾದಾಮಿ",
         principalBadge: "ಪ್ರಾಚಾರ್ಯರು ಮತ್ತು ಸಂಸ್ಥೆಯ ಮುಖ್ಯಸ್ಥರು",
         principalName: "ಡಾ. ಅಮರೇಶ ತೋಪಲಕಟ್ಟಿ",
         principalQual: "ಎಂ.ಎಸ್ಸಿ., ಪಿಎಚ್.ಡಿ. • InSc ಅತ್ಯುತ್ತಮ ಸಂಶೋಧಕ ಪ್ರಶಸ್ತಿ ಪುರಸ್ಕೃತರು",
-        principalDept: "ಪ್ರಾಚಾರ್ಯರು ಹಾಗೂ ಸಸ್ಯಶಾಸ್ತ್ರ ವಿಭಾಗದ ಮುಖ್ಯಸ್ಥರು",
+        principalDept: "ಪ್ರಾಚಾರ್ಯರು ಮತ್ತು ಸಂಸ್ಥೆಯ ಮುಖ್ಯಸ್ಥರು",
         principalMessageHeader: "ಪ್ರಾಚಾರ್ಯರ ಸಂದೇಶ",
         principalQuote: "\"ಶ್ರೀ ಎಸ್.ಬಿ. ಮಮದಾಪೂರ ಕಲಾ, ವಾಣಿಜ್ಯ ಮತ್ತು ವಿಜ್ಞಾನ ಮಹಾವಿದ್ಯಾಲಯಕ್ಕೆ ಆತ್ಮೀಯ ಸ್ವಾಗತ. 1982 ರಿಂದ ನಮ್ಮ ಸಂಸ್ಥೆಯು ಬಾದಾಮಿ ಚಾಲುಕ್ಯರ ಭವ್ಯ ಪರಂಪರೆಯನ್ನು ಮುನ್ನಡೆಸುತ್ತಾ ಜ್ಞಾನದ ದೇಗುಲವಾಗಿ ಬೆಳಗುತ್ತಿದೆ.\"",
         principalBody1: "<strong>ಬಾಗಲಕೋಟೆ ವಿಶ್ವವಿದ್ಯಾಲಯ (ಜಮಖಂಡಿ)</strong> ಸಂಯೋಜನೆಯ ಅಡಿಯಲ್ಲಿ ನಾವು ಬಿ.ಎಸ್ಸಿ, ಬಿ.ಕಾಂ ಮತ್ತು ಬಿ.ಎ ವಿಭಾಗಗಳಲ್ಲಿ ಕಠಿಣ ಮತ್ತು ಪ್ರಾಯೋಗಿಕ ಆಧಾರಿತ ಪದವಿ ಶಿಕ್ಷಣವನ್ನು ನೀಡುತ್ತಿದ್ದೇವೆ.",
         principalBody2: "ನಮ್ಮ ಬಿ.ಎಸ್ಸಿ 1ನೇ ಸೆಮಿಸ್ಟರ್ ವಿದ್ಯಾರ್ಥಿ ರಾಹುಲ್‌ಕುಮಾರ್ ಕೆ ಮತ್ತು ರಾಕ್ಸ್ಟಾರ್ ಲ್ಯಾಬ್ಸ್ ತಂಡವು ಈ ಡಿಜಿಟಲ್ ಕ್ಯಾಂಪಸ್ ಪೋರ್ಟಲ್ ಅನ್ನು ರೂಪಿಸಿರುವುದು ಅತ್ಯಂತ ಶ್ಲಾಘನೀಯ.",
         staffBadge: "ಬೋಧಕ ವೃಂದದ ವಿವರ",
         staffTitle: "ಅಧ್ಯಾಪಕರ <span class=\"text-royal-700\">ನಿರ್ದೇಶಿಕೆ</span>",
-        staffSubtitle: "ವಿಜ್ಞಾನ, ವಾಣಿಜ್ಯ ಮತ್ತು ಕಲಾ ವಿಭಾಗಗಳಲ್ಲಿ ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಮಾರ್ಗದರ್ಶನ ನೀಡುತ್ತಿರುವ ಪ್ರಾಧ್ಯಾಪಕರು.",
+        staffSubtitle: "ವಿಭಾಗ ಮುಖ್ಯಸ್ಥರು (HODs) ಹಾಗೂ ಸಹಾಯಕ ಉಪನ್ಯಾಸಕರ ಸಮಗ್ರ ವಿವರ.",
         addStaffBtn: "ಅಧ್ಯಾಪಕರ ವಿವರ ಸೇರಿಸಿ",
         councilBadge: "ವಿದ್ಯಾರ್ಥಿ ಪರಿಷತ್ ನಾಯಕತ್ವ",
         councilTitle: "ಜನರಲ್ ಸೆಕ್ರೆಟರಿ ಹಾಗೂ ಕ್ಲಾಸ್ ಪ್ರತಿನಿಧಿಗಳು <span class=\"text-royal-700\">(GS & CRs)</span>",
         councilSubtitle: "ಬಿ.ಎ, ಬಿ.ಕಾಂ ಮತ್ತು ಬಿ.ಎಸ್ಸಿ ತರಗತಿಗಳನ್ನು ಮುನ್ನಡೆಸುವ ವಿದ್ಯಾರ್ಥಿ ನಾಯಕರ ಮಂಡಳಿ.",
         updateCouncilBtn: "ವಿದ್ಯಾರ್ಥಿ ನಾಯಕರ ವಿವರ ಸೇರಿಸಿ / ಬದಲಿಸಿ",
+        routineSectionTitle: "ತರಗತಿ ಬೋಧನಾ <span class=\"text-royal-700\">ವೇಳಾಪಟ್ಟಿ</span>",
+        routineSectionSubtitle: "ಬಿ.ಎಸ್ಸಿ, ಬಿ.ಕಾಂ ಮತ್ತು ಬಿ.ಎ ವಿಭಾಗಗಳ ದೈನಂದಿನ ತರಗತಿ ವೇಳಾಪಟ್ಟಿ (ಪ್ರತಿದಿನ 10:30 ರಿಂದ 11:00 ರವರೆಗೆ ಉಪಾಹಾರದ ವಿರಾಮ).",
+        tblRoutineDay: "ದಿನಾಂಕ / ವಾರ",
+        tblRoutineTime: "ಸಮಯ",
+        tblRoutineSubject: "ವಿಷಯದ ಹೆಸರು",
         ttBadge: "ಅಧಿಕೃತ ಸುತ್ತೋಲೆ ಅನುಮೋದಿತ • 2026–27",
         ttTitle: "1ನೇ, 3ನೇ ಮತ್ತು 5ನೇ ಸೆಮಿಸ್ಟರ್ <span class=\"text-royal-700\">ಆಂತರಿಕ ಪರೀಕ್ಷಾ</span> ವೇಳಾಪಟ್ಟಿ",
         ttSubtitle: "ಎಸ್.ಎಸ್.ಬಿ.ಎಂ ಪರೀಕ್ಷಾ ಸಮಿತಿಯಿಂದ ಪ್ರಕಟಿತ. ಪರೀಕ್ಷಾ ಸಮಿತಿ ಅಧ್ಯಕ್ಷರು ಮತ್ತು ಪ್ರಾಚಾರ್ಯರಾದ ಡಾ. ಅಮರೇಶ ತೋಪಲಕಟ್ಟಿ ಅವರಿಂದ ಅನುಮೋದಿತವಾಗಿದೆ.",
@@ -1722,14 +1797,14 @@
         univExamBadge: "ಬಾಗಲಕೋಟೆ ವಿಶ್ವವಿದ್ಯಾಲಯ ಪರೀಕ್ಷಾ ಪ್ರಕಟಣೆ",
         sepBadge: "ಬಾಗಲಕೋಟೆ ವಿಶ್ವವಿದ್ಯಾಲಯ ಶೈಕ್ಷಣಿಕ ಕೇಂದ್ರ",
         sepTitle: "SEP ಪಠ್ಯಕ್ರಮದ <span class=\"text-royal-700\">ಅಧ್ಯಯನ ಸಾಮಗ್ರಿಗಳು ಮತ್ತು ಬ್ಲೂಪ್ರಿಂಟ್</span>",
-        sepSubtitle: "1, 3 ಮತ್ತು 5ನೇ ಸೆಮಿಸ್ಟರ್‌ನ ಅಧಿಕೃತ ಪಠ್ಯಕ್ರಮ, ಅಧ್ಯಾಪಕರ ಟಿಪ್ಪಣಿಗಳು, ಲ್ಯಾಬ್ ಮ್ಯಾನುಯಲ್ ಮತ್ತು ಮಾದರಿ ಪ್ರಶ್ನೆಪತ್ರಿಕೆಗಳು.",
+        sepSubtitle: "1, 3 ಮತ್ತು 5ನೇ ಸೆಮಿಸ್ಟರ್‌ನ ಅಧಿಕೃತ ಪಠ್ಯಕ್ರಮ, ಲ್ಯಾಬ್ ಮ್ಯಾನುಯಲ್ ಮತ್ತು ಮಾದರಿ ಪ್ರಶ್ನೆಪತ್ರಿಕೆಗಳು.",
         matTabAll: "ಎಲ್ಲ ವಿಷಯಗಳು",
         matTabBsc: "ಬಿ.ಎಸ್ಸಿ ವಿಜ್ಞಾನ ಕೇಂದ್ರ",
         matTabBcom: "ಬಿ.ಕಾಂ ವಾಣಿಜ್ಯ ಕೇಂದ್ರ",
         matTabBa: "ಬಿ.ಎ ಕಲಾ ಕೇಂದ್ರ",
         matTabGen: "ಭಾಷೆಗಳು ಮತ್ತು ಮೌಲ್ಯಗಳು",
         deadlinesBadge: "ಶೈಕ್ಷಣಿಕ ಸಲ್ಲಿಕೆಗಳ ದಿನಸೂಚಿ",
-        deadlinesTitle: "ಅಸೈನ್‌ಮೆಂಟ್ ಮತ್ತು ಜರ್ನಲ್ <span class=\"text-royal-700\">ಸಲ್ಲಿಕೆಯ ದಿನಾಂಕಗಳು</span>",
+        deadlinesTitle: "ಅಸೈನ್‌‌ಮೆಂಟ್ ಮತ್ತು ಜರ್ನಲ್ <span class=\"text-royal-700\">ಸಲ್ಲಿಕೆಯ ದಿನಾಂಕಗಳು</span>",
         deadlinesSubtitle: "ವಿವಿಧ ವಿಭಾಗಗಳ ಪ್ರಯೋಗಾಲಯ ದಾಖಲೆಗಳು ಮತ್ತು ಅಸೈನ್‌ಮೆಂಟ್ ಸಲ್ಲಿಕೆಯ ನಿಗದಿತ ಅಂತಿಮ ದಿನಾಂಕಗಳು.",
         addDeadlineBtn: "ಸಲ್ಲಿಕೆ ದಿನಾಂಕ ಸೇರಿಸಿ",
         strengthBadge: "ಅಧಿಕೃತ ಪ್ರವೇಶ ದಾಖಲೆಗಳು",
@@ -1766,7 +1841,7 @@
         devSubtitle: "ಶ್ರೀ ಎಸ್.ಬಿ. ಮಮದಾಪೂರ ಪದವಿ ಮಹಾವಿದ್ಯಾಲಯಕ್ಕಾಗಿ ರಾಕ್ಸ್ಟಾರ್ ಲ್ಯಾಬ್ಸ್ ಅಡಿಯಲ್ಲಿ ವಿದ್ಯಾರ್ಥಿಗಳಿಂದಲೇ ಅಭಿವೃದ್ಧಿಪಡಿಸಲಾದ ವೇದಿಕೆ.",
         devLeadName: "ರಾಹುಲ್‌ಕುಮಾರ್ ಕೆ",
         devLeadRole: "ಬಿ.ಎಸ್ಸಿ 1ನೇ ಸೆಮಿಸ್ಟರ್ • ಎಸ್.ಎಸ್.ಬಿ.ಎಂ ಕಾಲೇಜು ಬಾದಾಮಿ",
-        devLeadBio: "<strong>ರಾಕ್ಸ್ಟಾರ್ ಲ್ಯಾಬ್ಸ್</strong> ವತಿಯಿಂದ ಕಾಲೇಜಿನ ಪರೀಕ್ಷಾ ವೇಳಾಪಟ್ಟಿಗಳು, ನೋಟ್ಸ್‌ಗಳು ಮತ್ತು ಕ್ರೀಡಾ ದಾಖಲೆಗಳನ್ನು ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಸುಲಭವಾಗಿ ತಲುಪಿಸಲು ಈ ವ್ಯವಸ್ಥೆಯನ್ನು ರೂಪಿಸಲಾಗಿದೆ.",
+        devLeadBio: "<strong>ರಾಕ್ಸ್ಟಾರ್ ಲ್ಯಾಬ್ಸ್</strong> ವತಿಯಿಂದ ಕಾಲೇಜಿನ ಪರೀಕ್ಷಾ ವೇಳಾಪಟ್ಟಿಗಳು, ತರಗತಿ ವಿವರಗಳು, ಬೋಧಕ ಸಿಬ್ಬಂದಿ ಮಾಹಿತಿ ಮತ್ತು ಕ್ರೀಡಾ ದಾಖಲೆಗಳನ್ನು ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಸುಲಭವಾಗಿ ತಲುಪಿಸಲು ಈ ವ್ಯವಸ್ಥೆಯನ್ನು ರೂಪಿಸಲಾಗಿದೆ.",
         orgBadge: "ವಿದ್ಯಾರ್ಥಿ ಇನ್ನೋವೇಶನ್ ಲ್ಯಾಬ್",
         orgDesc: "ಕರ್ನಾಟಕದ ಗ್ರಾಮೀಣ ಶೈಕ್ಷಣಿಕ ಪರಿಸರ ವ್ಯವಸ್ಥೆಯನ್ನು ಸಬಲೀಕರಣಗೊಳಿಸಲು ರಾಕ್ಸ್ಟಾರ್ ಲ್ಯಾಬ್ಸ್ ಉನ್ನತ ಗುಣಮಟ್ಟದ ಸಾಫ್ಟ್‌ವೇರ್ ಮತ್ತು ವೆಬ್ ಪೋರ್ಟಲ್‌ಗಳನ್ನು ನಿರ್ಮಿಸುತ್ತದೆ.",
         orgPt1: "ಏಕ-ಫೈಲ್ ಜಿರೋ ಮೇಂಟೆನೆನ್ಸ್ ಸ್ಟಾಟಿಕ್ ತಂತ್ರಜ್ಞಾನ",
@@ -1806,6 +1881,7 @@
         }
       });
 
+      updateRoutineView();
       renderTimetable();
       renderMaterials(studyMaterials);
       refreshCurrentView();
@@ -1813,7 +1889,7 @@
     }
 
     /* =========================================================================
-       4. TEACHING STAFF SECTION
+       4. TEACHING STAFF SECTION (Cards with Photos, HODs, Roles, and Subjects)
        ========================================================================= */
     let currentStaffDept = 'ALL';
 
@@ -1827,7 +1903,7 @@
       });
 
       if (filtered.length === 0) {
-        container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-400 font-mono text-xs">No teaching staff records found for this faculty.</div>`;
+        container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-400 font-mono text-xs">No faculty records found for this department.</div>`;
         return;
       }
 
@@ -1837,24 +1913,40 @@
         if (s.dept === 'BCOM') badgeColor = "bg-blue-100 text-blue-800 font-bold";
         if (s.dept === 'BA') badgeColor = "bg-amber-100 text-amber-800 font-bold";
 
+        const photoHtml = s.photo 
+          ? `<img src="${s.photo}" alt="${s.name}" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\\'w-full h-full flex items-center justify-center bg-royal-950 text-amber-400 font-black text-sm\\'>${s.name.substring(0,2).toUpperCase()}</div>';" />`
+          : `<div class="w-full h-full flex flex-col items-center justify-center bg-royal-950 text-amber-400 font-bold text-xs"><i data-lucide="user" class="w-6 h-6 mb-1 text-slate-400"></i><span>${s.name.substring(0,2).toUpperCase()}</span></div>`;
+
+        const isHod = s.role.includes("HOD") || s.role.includes("Head") || s.role.includes("Principal");
+
         const card = document.createElement('div');
         card.className = "luxury-card p-5 rounded-2xl flex flex-col justify-between relative group";
         card.innerHTML = `
           <div>
             <div class="flex items-center justify-between mb-3">
               <span class="px-2 py-0.5 rounded text-[10px] ${badgeColor}">${s.dept} Faculty</span>
-              <!-- Isolated passkey delete action -->
-              <button onclick="promptPasskeyForAction('deleteStaff_${s.id}', 'Remove Staff: ${s.name}')" class="opacity-0 group-hover:opacity-100 text-red-500 hover:text-red-700 transition p-1" title="Remove (Staff)">
+              <button onclick="promptPasskeyForAction('deleteStaff_${s.id}', 'Remove Faculty: ${s.name}')" class="opacity-0 group-hover:opacity-100 text-red-500 hover:text-red-700 transition p-1" title="Remove Faculty">
                 <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
               </button>
             </div>
-            <h4 class="font-bold text-slate-900 text-sm">${s.name}</h4>
-            <p class="text-xs text-royal-700 font-semibold mt-0.5">${s.role}</p>
-            <p class="text-[11px] text-slate-500 mt-1 font-mono">${s.qualification}</p>
+
+            <div class="flex items-start gap-3.5">
+              <div class="w-16 h-20 rounded-xl overflow-hidden bg-slate-100 border border-slate-200 shadow-sm flex-shrink-0 flex items-center justify-center">
+                ${photoHtml}
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-900 text-sm leading-tight">${s.name}</h4>
+                <div class="mt-1 flex items-center gap-1">
+                  <span class="text-[10px] font-bold px-1.5 py-0.5 rounded ${isHod ? 'bg-amber-100 text-amber-900 border border-amber-300' : 'bg-slate-100 text-slate-700'}">${s.role}</span>
+                </div>
+                <p class="text-xs text-royal-700 font-semibold mt-1.5">${s.subject}</p>
+                <p class="text-[11px] text-slate-500 font-mono mt-0.5">${s.qualification}</p>
+              </div>
+            </div>
           </div>
           <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
             <span>SSBM Badami</span>
-            <span class="text-emerald-600 font-medium flex items-center gap-1"><i data-lucide="check" class="w-3 h-3"></i> Verified</span>
+            <span class="text-emerald-600 font-medium flex items-center gap-1"><i data-lucide="check-circle" class="w-3 h-3"></i> Verified Faculty</span>
           </div>
         `;
         container.appendChild(card);
@@ -1880,28 +1972,46 @@
       const dept = document.getElementById('mStaffDept').value;
       const name = document.getElementById('mStaffName').value.trim();
       const role = document.getElementById('mStaffRole').value.trim();
-      const qualification = document.getElementById('mStaffSubject').value.trim();
+      const subject = document.getElementById('mStaffSubject').value.trim();
+      const qualification = document.getElementById('mStaffQual').value.trim();
+      const photoInput = document.getElementById('mStaffPhotoInput');
 
       if (!name) {
-        showToast("Please provide the faculty name.");
+        showToast("Please provide the faculty member's name.");
         return;
       }
 
       if (!campusData[currentSelectedYear]) campusData[currentSelectedYear] = {};
       if (!campusData[currentSelectedYear].staffList) campusData[currentSelectedYear].staffList = [];
 
-      campusData[currentSelectedYear].staffList.push({
+      const member = {
         id: Date.now(),
         dept,
         name,
-        role: role || 'Faculty Member',
-        qualification: qualification || 'M.A / M.Sc / M.Com'
-      });
+        role: role || 'Assistant Professor',
+        subject: subject || 'Department Faculty',
+        qualification: qualification || 'M.A / M.Sc / M.Com',
+        photo: ""
+      };
 
-      persistDataStore();
-      renderStaff(campusData[currentSelectedYear].staffList);
-      closeModal('staffEditModal');
-      showToast("Teaching faculty member added successfully.");
+      if (photoInput.files && photoInput.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          member.photo = e.target.result;
+          campusData[currentSelectedYear].staffList.push(member);
+          persistDataStore();
+          renderStaff(campusData[currentSelectedYear].staffList);
+          closeModal('staffEditModal');
+          showToast("Teaching faculty member added with portrait.");
+        };
+        reader.readAsDataURL(photoInput.files[0]);
+      } else {
+        campusData[currentSelectedYear].staffList.push(member);
+        persistDataStore();
+        renderStaff(campusData[currentSelectedYear].staffList);
+        closeModal('staffEditModal');
+        showToast("Teaching faculty member added successfully.");
+      }
     }
 
     function deleteStaffMember(id) {
@@ -1934,7 +2044,6 @@
           : `<div class="w-full h-full flex flex-col items-center justify-center bg-royal-950 text-amber-400"><i data-lucide="user-check" class="w-8 h-8 mb-1 text-slate-300"></i><span class="text-[9px] font-mono text-slate-400">Scholar</span></div>`;
 
         card.innerHTML = `
-          <!-- Isolated Passkey Protected Delete Button -->
           <button onclick="promptPasskeyForAction('deleteCouncil_${c.id}', 'Remove Student Leader: ${c.name}')" class="absolute top-3 right-3 text-slate-400 hover:text-red-600 opacity-0 group-hover:opacity-100 transition p-1" title="Remove Member">
             <i data-lucide="trash-2" class="w-4 h-4"></i>
           </button>
@@ -2007,7 +2116,184 @@
     }
 
     /* =========================================================================
-       6. INTERNAL ASSESSMENT (IA) TIMETABLE LIFECYCLE
+       6. WEEKLY CLASS ROUTINE DATA & RENDERING (Clean 3-Columns: Day, Timing, Subject)
+       ========================================================================= */
+    const weeklyClassTimetables = {
+      BSC: {
+        sem1: [
+          { day: "Monday", time: "8:00 AM - 9:00 AM", subject: "Chemistry" },
+          { day: "Monday", time: "9:00 AM - 10:00 AM", subject: "Physics" },
+          { day: "Monday", time: "10:00 AM - 10:30 AM", subject: "Mathematics" },
+          { day: "Monday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Monday", time: "11:00 AM - 12:00 PM", subject: "Basic Kannada" },
+          { day: "Monday", time: "12:00 PM - 1:00 PM", subject: "Basic English" },
+
+          { day: "Tuesday", time: "8:00 AM - 9:00 AM", subject: "Botany" },
+          { day: "Tuesday", time: "9:00 AM - 10:00 AM", subject: "Zoology" },
+          { day: "Tuesday", time: "10:00 AM - 10:30 AM", subject: "Physics" },
+          { day: "Tuesday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Tuesday", time: "11:00 AM - 12:00 PM", subject: "Chemistry" },
+          { day: "Tuesday", time: "12:00 PM - 1:00 PM", subject: "Mathematics" },
+
+          { day: "Wednesday", time: "8:00 AM - 9:30 AM", subject: "Physics Practical" },
+          { day: "Wednesday", time: "9:30 AM - 10:30 AM", subject: "Chemistry Practical" },
+          { day: "Wednesday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Wednesday", time: "11:00 AM - 12:00 PM", subject: "Computer Science" },
+          { day: "Wednesday", time: "12:00 PM - 1:00 PM", subject: "Constitutional Values" },
+
+          { day: "Thursday", time: "8:00 AM - 9:00 AM", subject: "Mathematics" },
+          { day: "Thursday", time: "9:00 AM - 10:00 AM", subject: "Physics" },
+          { day: "Thursday", time: "10:00 AM - 10:30 AM", subject: "Chemistry" },
+          { day: "Thursday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Thursday", time: "11:00 AM - 12:00 PM", subject: "Botany" },
+          { day: "Thursday", time: "12:00 PM - 1:00 PM", subject: "Zoology" },
+
+          { day: "Friday", time: "8:00 AM - 9:00 AM", subject: "Computer Science" },
+          { day: "Friday", time: "9:00 AM - 10:00 AM", subject: "Basic Kannada" },
+          { day: "Friday", time: "10:00 AM - 10:30 AM", subject: "Basic English" },
+          { day: "Friday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Friday", time: "11:00 AM - 12:00 PM", subject: "Constitutional Values" },
+          { day: "Friday", time: "12:00 PM - 1:00 PM", subject: "Chemistry" },
+
+          { day: "Saturday", time: "8:00 AM - 9:00 AM", subject: "Physics" },
+          { day: "Saturday", time: "9:00 AM - 10:00 AM", subject: "Mathematics" },
+          { day: "Saturday", time: "10:00 AM - 10:30 AM", subject: "Library Session" },
+          { day: "Saturday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Saturday", time: "11:00 AM - 12:30 PM", subject: "Mentoring & Sports" }
+        ],
+        sem2: [
+          { day: "Monday", time: "8:00 AM - 9:00 AM", subject: "Physics" },
+          { day: "Monday", time: "9:00 AM - 10:00 AM", subject: "Chemistry" },
+          { day: "Monday", time: "10:00 AM - 10:30 AM", subject: "Mathematics" },
+          { day: "Monday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Monday", time: "11:00 AM - 12:00 PM", subject: "Basic Kannada / English" },
+          { day: "Tuesday", time: "8:00 AM - 10:30 AM", subject: "Botany & Zoology" },
+          { day: "Tuesday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Tuesday", time: "11:00 AM - 1:00 PM", subject: "Environmental Studies" }
+        ],
+        sem3: [
+          { day: "Monday", time: "8:00 AM - 9:00 AM", subject: "Physics / Zoology" },
+          { day: "Monday", time: "9:00 AM - 10:00 AM", subject: "Chemistry / CS" },
+          { day: "Monday", time: "10:00 AM - 10:30 AM", subject: "Mathematics / Botany" },
+          { day: "Monday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Monday", time: "11:00 AM - 12:00 PM", subject: "Basic Kannada / Hindi" },
+          { day: "Tuesday", time: "8:00 AM - 10:30 AM", subject: "All CEC Subjects" },
+          { day: "Tuesday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Tuesday", time: "11:00 AM - 1:00 PM", subject: "Core Practical Session" }
+        ]
+      },
+      BCOM: {
+        sem1: [
+          { day: "Monday", time: "8:00 AM - 9:00 AM", subject: "Financial Accounting - I" },
+          { day: "Monday", time: "9:00 AM - 10:00 AM", subject: "Business Economics" },
+          { day: "Monday", time: "10:00 AM - 10:30 AM", subject: "Corporate Administration" },
+          { day: "Monday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Monday", time: "11:00 AM - 12:00 PM", subject: "Basic English" },
+          { day: "Monday", time: "12:00 PM - 1:00 PM", subject: "Marketing Management" },
+
+          { day: "Tuesday", time: "8:00 AM - 9:00 AM", subject: "Corporate Administration" },
+          { day: "Tuesday", time: "9:00 AM - 10:00 AM", subject: "Financial Accounting - I" },
+          { day: "Tuesday", time: "10:00 AM - 10:30 AM", subject: "Basic Kannada / Hindi" },
+          { day: "Tuesday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Tuesday", time: "11:00 AM - 12:00 PM", subject: "Business Economics" },
+          { day: "Tuesday", time: "12:00 PM - 1:00 PM", subject: "Constitutional Values" },
+
+          { day: "Wednesday", time: "8:00 AM - 9:00 AM", subject: "Marketing Management" },
+          { day: "Wednesday", time: "9:00 AM - 10:00 AM", subject: "Digital Fluency" },
+          { day: "Wednesday", time: "10:00 AM - 10:30 AM", subject: "Basic English" },
+          { day: "Wednesday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Wednesday", time: "11:00 AM - 12:00 PM", subject: "Financial Accounting - I" }
+        ],
+        sem2: [
+          { day: "Monday", time: "8:00 AM - 10:30 AM", subject: "Financial Accounting - II" },
+          { day: "Monday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Monday", time: "11:00 AM - 1:00 PM", subject: "Business Mathematics" }
+        ],
+        sem3: [
+          { day: "Monday", time: "8:00 AM - 9:00 AM", subject: "Corporate Accounting" },
+          { day: "Monday", time: "9:00 AM - 10:00 AM", subject: "Business Ethics" },
+          { day: "Monday", time: "10:00 AM - 10:30 AM", subject: "Cost Accounting" },
+          { day: "Monday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Monday", time: "11:00 AM - 12:00 PM", subject: "Statistics" },
+          { day: "Tuesday", time: "8:00 AM - 10:30 AM", subject: "Rural Marketing" },
+          { day: "Tuesday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Tuesday", time: "11:00 AM - 1:00 PM", subject: "All CEC Electives" }
+        ]
+      },
+      BA: {
+        sem1: [
+          { day: "Monday", time: "8:00 AM - 9:00 AM", subject: "Basic Kannada" },
+          { day: "Monday", time: "9:00 AM - 10:00 AM", subject: "Political Science" },
+          { day: "Monday", time: "10:00 AM - 10:30 AM", subject: "Economics" },
+          { day: "Monday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Monday", time: "11:00 AM - 12:00 PM", subject: "History of Karnataka" },
+          { day: "Monday", time: "12:00 PM - 1:00 PM", subject: "Basic English / Hindi" },
+
+          { day: "Tuesday", time: "8:00 AM - 9:00 AM", subject: "History of Karnataka" },
+          { day: "Tuesday", time: "9:00 AM - 10:00 AM", subject: "Economics" },
+          { day: "Tuesday", time: "10:00 AM - 10:30 AM", subject: "Political Science" },
+          { day: "Tuesday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Tuesday", time: "11:00 AM - 12:00 PM", subject: "Constitutional Values" },
+          { day: "Tuesday", time: "12:00 PM - 1:00 PM", subject: "Optional Languages" }
+        ],
+        sem2: [
+          { day: "Monday", time: "8:00 AM - 10:30 AM", subject: "History & Culture of Karnataka" },
+          { day: "Monday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Monday", time: "11:00 AM - 1:00 PM", subject: "Indian Economy" }
+        ],
+        sem3: [
+          { day: "Monday", time: "8:00 AM - 9:00 AM", subject: "History" },
+          { day: "Monday", time: "9:00 AM - 10:00 AM", subject: "Political Science" },
+          { day: "Monday", time: "10:00 AM - 10:30 AM", subject: "Economics" },
+          { day: "Monday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Monday", time: "11:00 AM - 12:00 PM", subject: "Basic Kannada / Hindi" },
+          { day: "Tuesday", time: "8:00 AM - 10:30 AM", subject: "All CEC Electives" },
+          { day: "Tuesday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Tuesday", time: "11:00 AM - 1:00 PM", subject: "Optional Languages / Stat" }
+        ]
+      }
+    };
+
+    function updateRoutineView() {
+      const stream = document.getElementById('routineStreamSelect').value;
+      const sem = document.getElementById('routineSemSelect').value;
+      const tbody = document.getElementById('routineTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      const list = (weeklyClassTimetables[stream] && weeklyClassTimetables[stream][sem]) || [];
+      if (list.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="3" class="py-8 text-center text-slate-400 font-mono">Routine for ${stream} ${sem.toUpperCase()} will be released by the college office.</td></tr>`;
+        return;
+      }
+
+      list.forEach(item => {
+        const tr = document.createElement('tr');
+        if (item.isBreak) {
+          tr.className = "bg-amber-50/70 border-y border-amber-200/60 font-semibold";
+          tr.innerHTML = `
+            <td class="py-2.5 px-6 font-bold text-amber-900">${item.day}</td>
+            <td class="py-2.5 px-6 font-mono font-bold text-amber-800">${item.time}</td>
+            <td class="py-2.5 px-6 font-bold text-amber-900 flex items-center gap-2">
+              <span>${item.subject}</span>
+              <span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-amber-200 text-amber-950 border border-amber-300">Interval</span>
+            </td>
+          `;
+        } else {
+          tr.className = "hover:bg-slate-50/80 transition";
+          tr.innerHTML = `
+            <td class="py-3 px-6 font-bold text-slate-900">${item.day}</td>
+            <td class="py-3 px-6 font-mono font-semibold text-royal-700">${item.time}</td>
+            <td class="py-3 px-6 font-semibold text-slate-900">${item.subject}</td>
+          `;
+        }
+        tbody.appendChild(tr);
+      });
+      lucide.createIcons();
+    }
+
+    /* =========================================================================
+       7. INTERNAL ASSESSMENT (IA) TIMETABLE LIFECYCLE
        ========================================================================= */
     let timetableDataset = [
       // 07-10-2026 (Wednesday) - 8:00 AM TO 9:00 AM
@@ -2234,7 +2520,7 @@
     }
 
     /* =========================================================================
-       7. SEP STUDY MATERIALS
+       8. SEP STUDY MATERIALS
        ========================================================================= */
     const studyMaterials = [
       { id: "m-1", stream: "BSC", title: "Chemistry & Qualitative Salt Analysis", titleKn: "ರಸಾಯನಶಾಸ್ತ್ರ ಮತ್ತು ಗುಣಾತ್ಮಕ ವಿಶ್ಲೇಷಣೆ", category: "Physical & Inorganic Chemistry", desc: "Chemical Bonding, Periodic Properties, Aliphatic Hydrocarbons, and qualitative salt analysis manual.", descKn: "ರಾಸಾಯನಿಕ ಬಂಧ, ಆವರ್ತಕ ಗುಣಲಕ್ಷಣಗಳು ಮತ್ತು ಪ್ರಾಯೋಗಿಕ ಲ್ಯಾಬ್ ಮ್ಯಾನುಯಲ್.", sem: "Sem I / III / V" },
@@ -2333,7 +2619,7 @@
     }
 
     /* =========================================================================
-       8. SUBMISSION DEADLINES
+       9. SUBMISSION DEADLINES
        ========================================================================= */
     function renderDeadlines(deadlines) {
       const container = document.getElementById('deadlinesGrid');
@@ -2406,7 +2692,7 @@
     }
 
     /* =========================================================================
-       9. STUDENT STRENGTH TABLE & REGISTRY
+       10. STUDENT STRENGTH TABLE & REGISTRY
        ========================================================================= */
     function renderStrength(strength) {
       if (!strength) return;
@@ -2497,7 +2783,7 @@
     }
 
     /* =========================================================================
-       10. SPORTS HUB RENDERING
+       11. SPORTS HUB RENDERING
        ========================================================================= */
     let currentSport = 'ALL';
 
@@ -2540,7 +2826,6 @@
           </div>
 
           <div class="grid lg:grid-cols-3 gap-5">
-            <!-- Champions -->
             <div class="p-5 rounded-2xl border border-amber-300 bg-gradient-to-b from-amber-50/60 to-white flex flex-col justify-between shadow-sm">
               <div>
                 <div class="flex items-center justify-between mb-2">
@@ -2559,7 +2844,6 @@
               </div>
             </div>
 
-            <!-- Runners-up -->
             <div class="p-5 rounded-2xl border border-slate-200 bg-slate-50/50 flex flex-col justify-between">
               <div>
                 <div class="flex items-center justify-between mb-2">
@@ -2578,7 +2862,6 @@
               </div>
             </div>
 
-            <!-- 3rd Place -->
             <div class="p-5 rounded-2xl border border-amber-800/10 bg-slate-50/50 flex flex-col justify-between">
               <div>
                 <div class="flex items-center justify-between mb-2">
@@ -2674,7 +2957,7 @@
     }
 
     /* =========================================================================
-       11. TALENT HUNT 2026 ARCHIVE
+       12. TALENT HUNT 2026 ARCHIVE
        ========================================================================= */
     function renderTalentHunt(winners) {
       const container = document.getElementById('talentContainer');
@@ -2706,8 +2989,7 @@
     }
 
     /* =========================================================================
-    /* =========================================================================
-       12. PRINCIPAL PHOTO UPLOAD (Local Base64 Storage + Automatic Default)
+       13. PRINCIPAL PHOTO UPLOAD (Local Base64 Storage + Automatic Default)
        ========================================================================= */
     function loadPrincipalPhoto() {
       const imgElem = document.getElementById("principalImage");
@@ -2717,11 +2999,9 @@
       if (saved) {
         imgElem.src = saved;
       } else {
-        // Default to your uploaded GitHub file
         imgElem.src = "principal.jpeg";
       }
 
-      // Built-in fallback in case filename matches another extension
       imgElem.onerror = function() {
         if (this.src.indexOf('principal.jpeg') !== -1) {
           this.src = 'principal.jpg.jpeg';
@@ -2751,7 +3031,7 @@
     }
 
     /* =========================================================================
-       13. UNIVERSITY SEMESTER EXAMS BULLETIN
+       14. UNIVERSITY SEMESTER EXAMS BULLETIN
        ========================================================================= */
     function renderUnivExam(exam) {
       const section = document.getElementById('univExamSection');
@@ -2808,6 +3088,7 @@
     window.addEventListener('DOMContentLoaded', () => {
       initDataStore();
       loadPrincipalPhoto();
+      updateRoutineView();
       renderTimetable();
       renderMaterials(studyMaterials);
       refreshCurrentView();
