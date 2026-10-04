@@ -69,6 +69,9 @@
       transform: translateY(-2px);
     }
 
+    /* Underline marking the last class of each day in the Class Timetable */
+    .last-class-row td { border-bottom: 3px solid #1e40af !important; }
+
     @media print {
       body { background: white !important; color: black !important; }
       header, footer, #mobileMenu, .no-print, button { display: none !important; }
@@ -156,6 +159,7 @@
         <a href="#principal" class="hover:text-royal-700 transition py-1" data-i18n="navPrincipal">Principal</a>
         <a href="#staff" class="hover:text-royal-700 transition py-1" data-i18n="navStaff">Teaching Faculty</a>
         <a href="#council" class="hover:text-royal-700 transition py-1" data-i18n="navCouncil">Student Council</a>
+        <a href="#extra-notices" class="hover:text-royal-700 transition py-1 text-red-700 font-extrabold">Extra/Lab</a>
         <a href="#class-routine" class="hover:text-royal-700 transition py-1 text-royal-700 font-extrabold" data-i18n="navRoutine">Class Timetable</a>
         <a href="#timetable" class="hover:text-royal-700 transition py-1 text-amber-700 font-extrabold" data-i18n="navTimetable">Internal Exams</a>
         <a href="#materials" class="hover:text-royal-700 transition py-1" data-i18n="navStudyHub">SEP Hub</a>
@@ -180,6 +184,7 @@
       <a href="#principal" class="block py-1 text-slate-700 hover:text-royal-700" data-i18n="navPrincipal">Principal's Desk</a>
       <a href="#staff" class="block py-1 text-slate-700 hover:text-royal-700" data-i18n="navStaff">Teaching Faculty Directory</a>
       <a href="#council" class="block py-1 text-slate-700 hover:text-royal-700" data-i18n="navCouncil">Student Council (GS &amp; CRs)</a>
+      <a href="#extra-notices" class="block py-1 text-red-700 font-bold">Extra Class &amp; Lab Notices</a>
       <a href="#class-routine" class="block py-1 text-royal-700 font-bold" data-i18n="navRoutine">Class Lecture Timetable</a>
       <a href="#timetable" class="block py-1 text-amber-700 font-bold" data-i18n="navTimetable">Internal Assessment Exams</a>
       <a href="#materials" class="block py-1 text-slate-700 hover:text-royal-700" data-i18n="navStudyHub">SEP Study Repository</a>
@@ -478,6 +483,32 @@
     </div>
   </section>
 
+  <!-- SECTION 4B: EXTRA CLASS & LAB NOTICES (auto-expire after end time) -->
+  <section id="extra-notices" class="py-16 px-4 sm:px-6 max-w-7xl mx-auto border-b border-slate-200">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+      <div>
+        <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-royal-800 bg-royal-100 px-3 py-1 rounded-md border border-royal-200 mb-2">
+          <i data-lucide="megaphone" class="w-4 h-4 text-royal-700"></i>
+          <span>LIVE NOTICES &bull; ತುರ್ತು ಸೂಚನೆ</span>
+        </div>
+        <h3 class="text-2xl sm:text-4xl font-black text-slate-900">
+          Extra Class &amp; Lab <span class="text-royal-700">Notices</span>
+        </h3>
+        <p class="text-xs sm:text-sm text-slate-600 mt-1 max-w-2xl">
+          Teachers post extra classes and lab sessions here with lecturer name and timing. Each notice disappears automatically once its end time has passed.
+        </p>
+      </div>
+      <button onclick="promptPasskeyForAction('extraNoticeAdd', 'Post Extra Class / Lab Notice')" class="px-4 py-2.5 rounded-xl bg-royal-700 hover:bg-royal-800 text-white font-bold text-xs shadow-md transition flex items-center gap-2">
+        <i data-lucide="plus-circle" class="w-4 h-4 text-amber-300"></i>
+        <span>Post Extra Class / Lab</span>
+      </button>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5" id="extraNoticesGrid">
+      <!-- Injected by JavaScript -->
+    </div>
+  </section>
+
   <!-- SECTION 5: WEEKLY CLASS ROUTINE TIMETABLE (Academic Year 2026–2027) -->
   <section id="class-routine" class="py-16 px-4 sm:px-6 max-w-7xl mx-auto border-b border-slate-200">
     <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
@@ -501,10 +532,15 @@
           <option value="BCOM">B.Com (Commerce)</option>
           <option value="BA">B.A (Arts)</option>
         </select>
+        <!-- B.Sc Department (visible only when B.Sc is selected) -->
+        <select id="routineDeptSelect" onchange="updateRoutineView()" class="px-3.5 py-2 rounded-xl bg-emerald-50 border border-emerald-300 font-bold text-xs text-emerald-900 focus:outline-none focus:border-emerald-600 shadow-sm cursor-pointer">
+          <option value="PCM">PCM (Physics, Chemistry/CS, Maths)</option>
+          <option value="CBZ">CBZ (Chemistry, Botany, Zoology)</option>
+        </select>
         <select id="routineSemSelect" onchange="updateRoutineView()" class="px-3.5 py-2 rounded-xl bg-royal-700 text-white font-bold text-xs focus:outline-none shadow-sm cursor-pointer">
           <option value="sem1">Semester I</option>
-          <option value="sem2">Semester II</option>
           <option value="sem3">Semester III</option>
+          <option value="sem5">Semester V</option>
         </select>
       </div>
     </div>
@@ -1290,6 +1326,58 @@
     </div>
   </div>
 
+  <!-- 8. EXTRA CLASS / LAB NOTICE MODAL -->
+  <div id="extraNoticeModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white max-w-md w-full rounded-3xl border border-slate-200 p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+      <button onclick="closeModal('extraNoticeModal')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700"><i data-lucide="x" class="w-5 h-5"></i></button>
+      <div class="flex items-center gap-2 text-royal-700 text-xs font-bold uppercase mb-1">
+        <i data-lucide="megaphone" class="w-4 h-4"></i> <span>Live Notice Manager</span>
+      </div>
+      <h3 class="text-lg font-bold text-slate-900">Post Extra Class / Lab Notice</h3>
+      <p class="text-xs text-slate-500 mt-0.5">The notice is removed automatically after the end time.</p>
+
+      <div class="mt-4 space-y-3 text-xs">
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block font-semibold mb-1">Notice Type</label>
+            <select id="mXnType" class="w-full border rounded-lg p-2 bg-slate-50">
+              <option value="Extra Class">Extra Class</option>
+              <option value="Lab">Lab / Practical</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-semibold mb-1">Stream &amp; Semester</label>
+            <input type="text" id="mXnStream" placeholder="e.g. B.Sc Sem I (PCM)" class="w-full border rounded-lg p-2" />
+          </div>
+        </div>
+        <div>
+          <label class="block font-semibold mb-1">Subject</label>
+          <input type="text" id="mXnSubject" placeholder="e.g. Physics Lab / Mathematics Extra Class" class="w-full border rounded-lg p-2 font-bold" />
+        </div>
+        <div>
+          <label class="block font-semibold mb-1">Lecturer / Lab In-charge Name</label>
+          <input type="text" id="mXnLecturer" placeholder="e.g. Prof. S. R. Patil" class="w-full border rounded-lg p-2" />
+        </div>
+        <div>
+          <label class="block font-semibold mb-1">Venue (Optional)</label>
+          <input type="text" id="mXnVenue" placeholder="e.g. Physics Lab / Room 12" class="w-full border rounded-lg p-2" />
+        </div>
+        <div>
+          <label class="block font-semibold mb-1">Date</label>
+          <input type="date" id="mXnDate" class="w-full border rounded-lg p-2" />
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div><label class="block font-semibold mb-1">Timing From</label><input type="time" id="mXnFrom" class="w-full border rounded-lg p-2" /></div>
+          <div><label class="block font-semibold mb-1">Timing To</label><input type="time" id="mXnTo" class="w-full border rounded-lg p-2" /></div>
+        </div>
+      </div>
+      <div class="mt-5 flex justify-end gap-2">
+        <button onclick="closeModal('extraNoticeModal')" class="px-4 py-2 bg-slate-100 rounded-lg text-xs font-semibold">Cancel</button>
+        <button onclick="saveExtraNotice()" class="px-4 py-2 bg-royal-700 text-white rounded-lg text-xs font-bold">Publish Notice</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Toast Notification Box -->
   <div id="toastBox" class="fixed bottom-6 right-6 z-50 bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-xl text-xs font-bold flex items-center gap-2.5 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
     <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
@@ -1379,6 +1467,10 @@
       } else if (action.startsWith('deleteSport_')) {
         const id = action.replace('deleteSport_', '');
         deleteSportTournament(id);
+      } else if (action === 'extraNoticeAdd') {
+        openExtraNoticeEditor();
+      } else if (action.startsWith('deleteExtraNotice_')) {
+        deleteExtraNotice(action.replace('deleteExtraNotice_', ''));
       }
     }
 
@@ -2120,136 +2212,485 @@
        ========================================================================= */
     const weeklyClassTimetables = {
       BSC: {
-        sem1: [
-          { day: "Monday", time: "8:00 AM - 9:00 AM", subject: "Chemistry" },
-          { day: "Monday", time: "9:00 AM - 10:00 AM", subject: "Physics" },
-          { day: "Monday", time: "10:00 AM - 10:30 AM", subject: "Mathematics" },
-          { day: "Monday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
-          { day: "Monday", time: "11:00 AM - 12:00 PM", subject: "Basic Kannada" },
-          { day: "Monday", time: "12:00 PM - 1:00 PM", subject: "Basic English" },
+        // PCM: Physics, Chemistry / Computer Science (CS optional for Chemistry), Mathematics
+        PCM: {
+          sem1: [
+            { day: "Monday", time: "7:30 AM - 8:30 AM", subject: "Mathematics (SHS)" },
+            { day: "Monday", time: "8:30 AM - 9:30 AM", subject: "Physics (SSM)" },
+            { day: "Monday", time: "9:30 AM - 10:30 AM", subject: "Basic English (FMB)" },
+            { day: "Monday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
 
-          { day: "Tuesday", time: "8:00 AM - 9:00 AM", subject: "Botany" },
-          { day: "Tuesday", time: "9:00 AM - 10:00 AM", subject: "Zoology" },
-          { day: "Tuesday", time: "10:00 AM - 10:30 AM", subject: "Physics" },
-          { day: "Tuesday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
-          { day: "Tuesday", time: "11:00 AM - 12:00 PM", subject: "Chemistry" },
-          { day: "Tuesday", time: "12:00 PM - 1:00 PM", subject: "Mathematics" },
+            { day: "Tuesday", time: "7:30 AM - 8:30 AM", subject: "Physics (SSM)" },
+            { day: "Tuesday", time: "8:30 AM - 9:30 AM", subject: "Constitutional Values (SRM)" },
+            { day: "Tuesday", time: "9:30 AM - 10:30 AM", subject: "Basic Kannada / Hindi (BKK)" },
+            { day: "Tuesday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+            { day: "Tuesday", time: "11:00 AM - 12:00 PM", subject: "Mathematics (MH)" },
 
-          { day: "Wednesday", time: "8:00 AM - 9:30 AM", subject: "Physics Practical" },
-          { day: "Wednesday", time: "9:30 AM - 10:30 AM", subject: "Chemistry Practical" },
-          { day: "Wednesday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
-          { day: "Wednesday", time: "11:00 AM - 12:00 PM", subject: "Computer Science" },
-          { day: "Wednesday", time: "12:00 PM - 1:00 PM", subject: "Constitutional Values" },
+            { day: "Wednesday", time: "7:30 AM - 8:30 AM", subject: "Constitutional Values (SRM)" },
+            { day: "Wednesday", time: "8:30 AM - 9:30 AM", subject: "Chemistry (PG) / Computer Science (SBG)" },
+            { day: "Wednesday", time: "9:30 AM - 10:30 AM", subject: "Physics (SSM)" },
+            { day: "Wednesday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+            { day: "Wednesday", time: "11:00 AM - 12:00 PM", subject: "Basic Kannada / Hindi (BKK)" },
 
-          { day: "Thursday", time: "8:00 AM - 9:00 AM", subject: "Mathematics" },
-          { day: "Thursday", time: "9:00 AM - 10:00 AM", subject: "Physics" },
-          { day: "Thursday", time: "10:00 AM - 10:30 AM", subject: "Chemistry" },
-          { day: "Thursday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
-          { day: "Thursday", time: "11:00 AM - 12:00 PM", subject: "Botany" },
-          { day: "Thursday", time: "12:00 PM - 1:00 PM", subject: "Zoology" },
+            { day: "Thursday", time: "7:30 AM - 8:30 AM", subject: "Chemistry (PG) / Computer Science (SBG)" },
+            { day: "Thursday", time: "8:30 AM - 9:30 AM", subject: "Basic English (FMB)" },
+            { day: "Thursday", time: "9:30 AM - 10:30 AM", subject: "Mathematics (MH)" },
+            { day: "Thursday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+            { day: "Thursday", time: "11:00 AM - 12:00 PM", subject: "Physics (SSM)" },
 
-          { day: "Friday", time: "8:00 AM - 9:00 AM", subject: "Computer Science" },
-          { day: "Friday", time: "9:00 AM - 10:00 AM", subject: "Basic Kannada" },
-          { day: "Friday", time: "10:00 AM - 10:30 AM", subject: "Basic English" },
-          { day: "Friday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
-          { day: "Friday", time: "11:00 AM - 12:00 PM", subject: "Constitutional Values" },
-          { day: "Friday", time: "12:00 PM - 1:00 PM", subject: "Chemistry" },
+            { day: "Friday", time: "7:30 AM - 8:30 AM", subject: "Basic Kannada / Hindi (BKK)" },
+            { day: "Friday", time: "8:30 AM - 9:30 AM", subject: "Basic English (FMB)" },
+            { day: "Friday", time: "9:30 AM - 10:30 AM", subject: "Chemistry (SSA) / Computer Science (SBG)" },
+            { day: "Friday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
 
-          { day: "Saturday", time: "8:00 AM - 9:00 AM", subject: "Physics" },
-          { day: "Saturday", time: "9:00 AM - 10:00 AM", subject: "Mathematics" },
-          { day: "Saturday", time: "10:00 AM - 10:30 AM", subject: "Library Session" },
-          { day: "Saturday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
-          { day: "Saturday", time: "11:00 AM - 12:30 PM", subject: "Mentoring & Sports" }
-        ],
-        sem2: [
-          { day: "Monday", time: "8:00 AM - 9:00 AM", subject: "Physics" },
-          { day: "Monday", time: "9:00 AM - 10:00 AM", subject: "Chemistry" },
-          { day: "Monday", time: "10:00 AM - 10:30 AM", subject: "Mathematics" },
-          { day: "Monday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
-          { day: "Monday", time: "11:00 AM - 12:00 PM", subject: "Basic Kannada / English" },
-          { day: "Tuesday", time: "8:00 AM - 10:30 AM", subject: "Botany & Zoology" },
-          { day: "Tuesday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
-          { day: "Tuesday", time: "11:00 AM - 1:00 PM", subject: "Environmental Studies" }
-        ],
-        sem3: [
-          { day: "Monday", time: "8:00 AM - 9:00 AM", subject: "Physics / Zoology" },
-          { day: "Monday", time: "9:00 AM - 10:00 AM", subject: "Chemistry / CS" },
-          { day: "Monday", time: "10:00 AM - 10:30 AM", subject: "Mathematics / Botany" },
-          { day: "Monday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
-          { day: "Monday", time: "11:00 AM - 12:00 PM", subject: "Basic Kannada / Hindi" },
-          { day: "Tuesday", time: "8:00 AM - 10:30 AM", subject: "All CEC Subjects" },
-          { day: "Tuesday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
-          { day: "Tuesday", time: "11:00 AM - 1:00 PM", subject: "Core Practical Session" }
-        ]
+            { day: "Saturday", time: "7:30 AM - 8:30 AM", subject: "Basic Kannada / Hindi (BKK)" },
+            { day: "Saturday", time: "8:30 AM - 9:30 AM", subject: "Mathematics (SHS)" },
+            { day: "Saturday", time: "9:30 AM - 10:30 AM", subject: "Chemistry (SSA) / Computer Science (SBG)" },
+            { day: "Saturday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+            { day: "Saturday", time: "11:00 AM - 12:00 PM", subject: "Basic English (FMB)" }
+          ],
+          sem3: [
+            { day: "Monday", time: "7:30 AM - 8:30 AM", subject: "Physics (BNT)" },
+            { day: "Monday", time: "8:30 AM - 9:30 AM", subject: "Mathematics (MH)" },
+            { day: "Monday", time: "9:30 AM - 10:30 AM", subject: "Chemistry (SSA) / Computer Science (SBG)" },
+            { day: "Monday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+            { day: "Monday", time: "11:00 AM - 12:00 PM", subject: "Basic English (SSP)" },
+            { day: "Monday", time: "12:00 PM - 1:00 PM", subject: "Basic Kannada / Hindi (SVA)" },
+
+            { day: "Tuesday", time: "7:30 AM - 8:30 AM", subject: "Basic English (SSP)" },
+            { day: "Tuesday", time: "8:30 AM - 9:30 AM", subject: "Mathematics (SHS)" },
+            { day: "Tuesday", time: "9:30 AM - 10:30 AM", subject: "Physics (BMT)" },
+            { day: "Tuesday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+            { day: "Tuesday", time: "11:00 AM - 12:00 PM", subject: "Chemistry (SSA) / Computer Science (SBG)" },
+
+            { day: "Wednesday", time: "7:30 AM - 8:30 AM", subject: "Chemistry (SSA) / Computer Science (SBG)" },
+            { day: "Wednesday", time: "8:30 AM - 9:30 AM", subject: "Physics (BMT)" },
+            { day: "Wednesday", time: "9:30 AM - 10:30 AM", subject: "Mathematics (MH)" },
+            { day: "Wednesday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+            { day: "Wednesday", time: "11:00 AM - 12:00 PM", subject: "Basic Kannada / Hindi (SVA)" },
+
+            { day: "Thursday", time: "7:30 AM - 8:30 AM", subject: "Mathematics (SHS)" },
+            { day: "Thursday", time: "8:30 AM - 9:30 AM", subject: "All CEC" },
+            { day: "Thursday", time: "9:30 AM - 10:30 AM", subject: "Chemistry (PG) / Computer Science (SBG)" },
+            { day: "Thursday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+            { day: "Thursday", time: "11:00 AM - 12:00 PM", subject: "Basic English (SSP)" },
+            { day: "Thursday", time: "12:00 PM - 1:00 PM", subject: "Zoology CEC (SSI)" },
+
+            { day: "Friday", time: "7:30 AM - 8:30 AM", subject: "Basic Kannada / Hindi (SVA)" },
+            { day: "Friday", time: "8:30 AM - 9:30 AM", subject: "All CEC" },
+            { day: "Friday", time: "9:30 AM - 10:30 AM", subject: "Basic English (SSP)" },
+            { day: "Friday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+
+            { day: "Saturday", time: "7:30 AM - 8:30 AM", subject: "All CEC" },
+            { day: "Saturday", time: "8:30 AM - 9:30 AM", subject: "Basic Kannada / Hindi (SVA)" },
+            { day: "Saturday", time: "9:30 AM - 10:30 AM", subject: "Physics (BMT)" },
+            { day: "Saturday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true }
+          ],
+          sem5: [
+            { day: "Monday", time: "7:30 AM - 8:30 AM", subject: "Chemistry (SSA) / Statistics (NBS) / Computer Science (SBG)" },
+            { day: "Monday", time: "8:30 AM - 9:30 AM", subject: "Physics (SSM)" },
+            { day: "Monday", time: "9:30 AM - 10:30 AM", subject: "Mathematics (SHS)" },
+            { day: "Monday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+            { day: "Monday", time: "11:00 AM - 12:00 PM", subject: "Physics (BMT)" },
+
+            { day: "Tuesday", time: "7:30 AM - 8:30 AM", subject: "Mathematics (MH)" },
+            { day: "Tuesday", time: "8:30 AM - 9:30 AM", subject: "Physics (SSM)" },
+            { day: "Tuesday", time: "9:30 AM - 10:30 AM", subject: "Chemistry (SSA) / Statistics (NBS) / Computer Science (SBG)" },
+            { day: "Tuesday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+            { day: "Tuesday", time: "11:00 AM - 12:00 PM", subject: "Mathematics (SHS)" },
+
+            { day: "Wednesday", time: "7:30 AM - 8:30 AM", subject: "Physics (SSM)" },
+            { day: "Wednesday", time: "8:30 AM - 9:30 AM", subject: "Mathematics (SHS)" },
+            { day: "Wednesday", time: "9:30 AM - 10:30 AM", subject: "Chemistry (PG) / Statistics (LCM) / Computer Science (SBG)" },
+            { day: "Wednesday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+            { day: "Wednesday", time: "11:00 AM - 12:00 PM", subject: "Physics (BMT)" },
+
+            { day: "Thursday", time: "7:30 AM - 8:30 AM", subject: "Mathematics (MH)" },
+            { day: "Thursday", time: "8:30 AM - 9:30 AM", subject: "Chemistry (SSA) / Statistics (LCM) / Computer Science (SBG)" },
+            { day: "Thursday", time: "9:30 AM - 10:30 AM", subject: "Physics (SSM)" },
+            { day: "Thursday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+            { day: "Thursday", time: "11:00 AM - 12:00 PM", subject: "Chemistry (SSA) / Statistics (NBS) / Computer Science (SBG)" },
+
+            { day: "Friday", time: "7:30 AM - 8:30 AM", subject: "Chemistry (PG) / Statistics (NBS) / Computer Science (SBG)" },
+            { day: "Friday", time: "8:30 AM - 9:30 AM", subject: "Mathematics (SHS)" },
+            { day: "Friday", time: "9:30 AM - 10:30 AM", subject: "Physics (SSM)" },
+            { day: "Friday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+            { day: "Friday", time: "11:00 AM - 12:00 PM", subject: "Mathematics (MH)" },
+
+            { day: "Saturday", time: "7:30 AM - 8:30 AM", subject: "Physics (SSM)" },
+            { day: "Saturday", time: "8:30 AM - 9:30 AM", subject: "Chemistry (PG) / Statistics (LCM) / Computer Science (SBG)" },
+            { day: "Saturday", time: "9:30 AM - 10:30 AM", subject: "Mathematics (MH)" },
+            { day: "Saturday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+            { day: "Saturday", time: "11:00 AM - 12:00 PM", subject: "Chemistry (PG) / Statistics (NBS) / Computer Science (SBG)" }
+          ]
+        },
+        // CBZ: Chemistry, Botany, Zoology
+        CBZ: {
+          sem1: [
+            { day: "Monday", time: "7:30 AM - 8:30 AM", subject: "Botany (SMM)" },
+            { day: "Monday", time: "8:30 AM - 9:30 AM", subject: "Zoology (SSI)" },
+            { day: "Monday", time: "9:30 AM - 10:30 AM", subject: "Basic English (FMB)" },
+            { day: "Monday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+
+            { day: "Tuesday", time: "7:30 AM - 8:30 AM", subject: "Zoology (SSI)" },
+            { day: "Tuesday", time: "8:30 AM - 9:30 AM", subject: "Constitutional Values (SRM)" },
+            { day: "Tuesday", time: "9:30 AM - 10:30 AM", subject: "Basic Kannada / Hindi (BKK)" },
+            { day: "Tuesday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+            { day: "Tuesday", time: "11:00 AM - 12:00 PM", subject: "Botany (SMM)" },
+
+            { day: "Wednesday", time: "7:30 AM - 8:30 AM", subject: "Constitutional Values (SRM)" },
+            { day: "Wednesday", time: "8:30 AM - 9:30 AM", subject: "Chemistry (PG)" },
+            { day: "Wednesday", time: "9:30 AM - 10:30 AM", subject: "Zoology (PBK)" },
+            { day: "Wednesday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+            { day: "Wednesday", time: "11:00 AM - 12:00 PM", subject: "Basic Kannada / Hindi (BKK)" },
+
+            { day: "Thursday", time: "7:30 AM - 8:30 AM", subject: "Chemistry (PG)" },
+            { day: "Thursday", time: "8:30 AM - 9:30 AM", subject: "Basic English (FMB)" },
+            { day: "Thursday", time: "9:30 AM - 10:30 AM", subject: "Botany (NFD)" },
+            { day: "Thursday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+            { day: "Thursday", time: "11:00 AM - 12:00 PM", subject: "Zoology (PBK)" },
+
+            { day: "Friday", time: "7:30 AM - 8:30 AM", subject: "Basic Kannada / Hindi (BKK)" },
+            { day: "Friday", time: "8:30 AM - 9:30 AM", subject: "Basic English (FMB)" },
+            { day: "Friday", time: "9:30 AM - 10:30 AM", subject: "Chemistry (SSA)" },
+            { day: "Friday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+
+            { day: "Saturday", time: "7:30 AM - 8:30 AM", subject: "Basic Kannada / Hindi (BKK)" },
+            { day: "Saturday", time: "8:30 AM - 9:30 AM", subject: "Botany (NFD)" },
+            { day: "Saturday", time: "9:30 AM - 10:30 AM", subject: "Chemistry (SSA)" },
+            { day: "Saturday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+            { day: "Saturday", time: "11:00 AM - 12:00 PM", subject: "Basic English (FMB)" }
+          ],
+          sem3: [
+            { day: "Monday", time: "7:30 AM - 8:30 AM", subject: "Zoology (SSI)" },
+            { day: "Monday", time: "8:30 AM - 9:30 AM", subject: "Botany (NFD)" },
+            { day: "Monday", time: "9:30 AM - 10:30 AM", subject: "Chemistry (SSA)" },
+            { day: "Monday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+            { day: "Monday", time: "11:00 AM - 12:00 PM", subject: "Basic English (SSP)" },
+            { day: "Monday", time: "12:00 PM - 1:00 PM", subject: "Basic Kannada / Hindi (SVA)" },
+
+            { day: "Tuesday", time: "7:30 AM - 8:30 AM", subject: "Basic English (SSP)" },
+            { day: "Tuesday", time: "8:30 AM - 9:30 AM", subject: "Botany (NFD)" },
+            { day: "Tuesday", time: "9:30 AM - 10:30 AM", subject: "Zoology (PBK)" },
+            { day: "Tuesday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+            { day: "Tuesday", time: "11:00 AM - 12:00 PM", subject: "Chemistry (SSA)" },
+
+            { day: "Wednesday", time: "7:30 AM - 8:30 AM", subject: "Chemistry (SSA)" },
+            { day: "Wednesday", time: "8:30 AM - 9:30 AM", subject: "Zoology (PBK)" },
+            { day: "Wednesday", time: "9:30 AM - 10:30 AM", subject: "Botany (SMM)" },
+            { day: "Wednesday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+            { day: "Wednesday", time: "11:00 AM - 12:00 PM", subject: "Basic Kannada / Hindi (SVA)" },
+
+            { day: "Thursday", time: "7:30 AM - 8:30 AM", subject: "Botany (SMM)" },
+            { day: "Thursday", time: "8:30 AM - 9:30 AM", subject: "All CEC" },
+            { day: "Thursday", time: "9:30 AM - 10:30 AM", subject: "Chemistry (PG)" },
+            { day: "Thursday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+            { day: "Thursday", time: "11:00 AM - 12:00 PM", subject: "Basic English (SSP)" },
+            { day: "Thursday", time: "12:00 PM - 1:00 PM", subject: "Zoology CEC (SSI)" },
+
+            { day: "Friday", time: "7:30 AM - 8:30 AM", subject: "Basic Kannada / Hindi (SVA)" },
+            { day: "Friday", time: "8:30 AM - 9:30 AM", subject: "All CEC" },
+            { day: "Friday", time: "9:30 AM - 10:30 AM", subject: "Basic English (SSP)" },
+            { day: "Friday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+
+            { day: "Saturday", time: "7:30 AM - 8:30 AM", subject: "All CEC" },
+            { day: "Saturday", time: "8:30 AM - 9:30 AM", subject: "Basic Kannada / Hindi (SVA)" },
+            { day: "Saturday", time: "9:30 AM - 10:30 AM", subject: "Zoology (SSI)" },
+            { day: "Saturday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true }
+          ],
+          sem5: [
+            { day: "Monday", time: "7:30 AM - 8:30 AM", subject: "Chemistry (SSA)" },
+            { day: "Monday", time: "8:30 AM - 9:30 AM", subject: "Botany (SMM)" },
+            { day: "Monday", time: "9:30 AM - 10:30 AM", subject: "Zoology (PBK)" },
+            { day: "Monday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+            { day: "Monday", time: "11:00 AM - 12:00 PM", subject: "Zoology (SSI)" },
+
+            { day: "Tuesday", time: "7:30 AM - 8:30 AM", subject: "Botany (AAT)" },
+            { day: "Tuesday", time: "8:30 AM - 9:30 AM", subject: "Zoology (PBK)" },
+            { day: "Tuesday", time: "9:30 AM - 10:30 AM", subject: "Chemistry (SSA)" },
+            { day: "Tuesday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+            { day: "Tuesday", time: "11:00 AM - 12:00 PM", subject: "Botany (NFD)" },
+
+            { day: "Wednesday", time: "7:30 AM - 8:30 AM", subject: "Zoology (SSI)" },
+            { day: "Wednesday", time: "8:30 AM - 9:30 AM", subject: "Botany (NFD)" },
+            { day: "Wednesday", time: "9:30 AM - 10:30 AM", subject: "Chemistry (PG)" },
+            { day: "Wednesday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+            { day: "Wednesday", time: "11:00 AM - 12:00 PM", subject: "Zoology (SSI)" },
+
+            { day: "Thursday", time: "7:30 AM - 8:30 AM", subject: "Botany (AAT)" },
+            { day: "Thursday", time: "8:30 AM - 9:30 AM", subject: "Chemistry (SSA)" },
+            { day: "Thursday", time: "9:30 AM - 10:30 AM", subject: "Zoology (PBK)" },
+            { day: "Thursday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+            { day: "Thursday", time: "11:00 AM - 12:00 PM", subject: "Chemistry (SSA)" },
+
+            { day: "Friday", time: "7:30 AM - 8:30 AM", subject: "Chemistry (PG)" },
+            { day: "Friday", time: "8:30 AM - 9:30 AM", subject: "Botany (AAT)" },
+            { day: "Friday", time: "9:30 AM - 10:30 AM", subject: "Zoology (SSI)" },
+            { day: "Friday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+            { day: "Friday", time: "11:00 AM - 12:00 PM", subject: "Botany (SMM)" },
+
+            { day: "Saturday", time: "7:30 AM - 8:30 AM", subject: "Botany (AAT)" },
+            { day: "Saturday", time: "8:30 AM - 9:30 AM", subject: "Chemistry (PG)" },
+            { day: "Saturday", time: "9:30 AM - 10:30 AM", subject: "Zoology (PBK)" },
+            { day: "Saturday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+            { day: "Saturday", time: "11:00 AM - 12:00 PM", subject: "Chemistry (PG)" }
+          ]
+        }
       },
       BCOM: {
         sem1: [
-          { day: "Monday", time: "8:00 AM - 9:00 AM", subject: "Financial Accounting - I" },
-          { day: "Monday", time: "9:00 AM - 10:00 AM", subject: "Business Economics" },
-          { day: "Monday", time: "10:00 AM - 10:30 AM", subject: "Corporate Administration" },
+          { day: "Monday", time: "7:30 AM - 8:30 AM", subject: "Financial Accounting (SST)" },
+          { day: "Monday", time: "8:30 AM - 9:30 AM", subject: "Basic English (SDG)" },
+          { day: "Monday", time: "9:30 AM - 10:30 AM", subject: "Cost Accounting (YBB)" },
           { day: "Monday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
-          { day: "Monday", time: "11:00 AM - 12:00 PM", subject: "Basic English" },
-          { day: "Monday", time: "12:00 PM - 1:00 PM", subject: "Marketing Management" },
+          { day: "Monday", time: "11:00 AM - 12:00 PM", subject: "Basic Kannada / Hindi (SVA)" },
+          { day: "Monday", time: "12:00 PM - 1:00 PM", subject: "Financial Management (SND)" },
 
-          { day: "Tuesday", time: "8:00 AM - 9:00 AM", subject: "Corporate Administration" },
-          { day: "Tuesday", time: "9:00 AM - 10:00 AM", subject: "Financial Accounting - I" },
-          { day: "Tuesday", time: "10:00 AM - 10:30 AM", subject: "Basic Kannada / Hindi" },
+          { day: "Tuesday", time: "7:30 AM - 8:30 AM", subject: "Basic Kannada / Hindi (SVA)" },
+          { day: "Tuesday", time: "8:30 AM - 9:30 AM", subject: "Constitutional Values (BCP)" },
+          { day: "Tuesday", time: "9:30 AM - 10:30 AM", subject: "Marketing Management (SIM)" },
           { day: "Tuesday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
-          { day: "Tuesday", time: "11:00 AM - 12:00 PM", subject: "Business Economics" },
-          { day: "Tuesday", time: "12:00 PM - 1:00 PM", subject: "Constitutional Values" },
+          { day: "Tuesday", time: "11:00 AM - 12:00 PM", subject: "Basic English (SDG)" },
+          { day: "Tuesday", time: "12:00 PM - 1:00 PM", subject: "Financial Accounting (SST)" },
 
-          { day: "Wednesday", time: "8:00 AM - 9:00 AM", subject: "Marketing Management" },
-          { day: "Wednesday", time: "9:00 AM - 10:00 AM", subject: "Digital Fluency" },
-          { day: "Wednesday", time: "10:00 AM - 10:30 AM", subject: "Basic English" },
+          { day: "Wednesday", time: "7:30 AM - 8:30 AM", subject: "Financial Accounting (SST)" },
+          { day: "Wednesday", time: "8:30 AM - 9:30 AM", subject: "Cost Accounting (YBB)" },
+          { day: "Wednesday", time: "9:30 AM - 10:30 AM", subject: "Marketing Management (SIM)" },
           { day: "Wednesday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
-          { day: "Wednesday", time: "11:00 AM - 12:00 PM", subject: "Financial Accounting - I" }
-        ],
-        sem2: [
-          { day: "Monday", time: "8:00 AM - 10:30 AM", subject: "Financial Accounting - II" },
-          { day: "Monday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
-          { day: "Monday", time: "11:00 AM - 1:00 PM", subject: "Business Mathematics" }
+          { day: "Wednesday", time: "11:00 AM - 12:00 PM", subject: "Financial Management (SND)" },
+
+          { day: "Thursday", time: "7:30 AM - 8:30 AM", subject: "Basic English (SDG)" },
+          { day: "Thursday", time: "8:30 AM - 9:30 AM", subject: "Financial Accounting (SST)" },
+          { day: "Thursday", time: "9:30 AM - 10:30 AM", subject: "Basic Kannada / Hindi (SVA)" },
+          { day: "Thursday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Thursday", time: "11:00 AM - 12:00 PM", subject: "Cost Accounting (YBB)" },
+
+          { day: "Friday", time: "7:30 AM - 8:30 AM", subject: "Financial Management (SND)" },
+          { day: "Friday", time: "8:30 AM - 9:30 AM", subject: "Cost Accounting (YBB)" },
+          { day: "Friday", time: "9:30 AM - 10:30 AM", subject: "Marketing Management (SIM)" },
+          { day: "Friday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Friday", time: "11:00 AM - 12:00 PM", subject: "Basic Kannada / Hindi (SVA)" },
+
+          { day: "Saturday", time: "7:30 AM - 8:30 AM", subject: "Marketing Management (SIM)" },
+          { day: "Saturday", time: "8:30 AM - 9:30 AM", subject: "Basic English (SDG)" },
+          { day: "Saturday", time: "9:30 AM - 10:30 AM", subject: "Financial Management (SND)" },
+          { day: "Saturday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Saturday", time: "11:00 AM - 12:00 PM", subject: "Constitutional Values (BCP)" }
         ],
         sem3: [
-          { day: "Monday", time: "8:00 AM - 9:00 AM", subject: "Corporate Accounting" },
-          { day: "Monday", time: "9:00 AM - 10:00 AM", subject: "Business Ethics" },
-          { day: "Monday", time: "10:00 AM - 10:30 AM", subject: "Cost Accounting" },
+          { day: "Monday", time: "7:30 AM - 8:30 AM", subject: "Basic Kannada / Hindi (BKK)" },
+          { day: "Monday", time: "8:30 AM - 9:30 AM", subject: "Statistics (NBS)" },
+          { day: "Monday", time: "9:30 AM - 10:30 AM", subject: "Basic English (SDG)" },
           { day: "Monday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
-          { day: "Monday", time: "11:00 AM - 12:00 PM", subject: "Statistics" },
-          { day: "Tuesday", time: "8:00 AM - 10:30 AM", subject: "Rural Marketing" },
+          { day: "Monday", time: "11:00 AM - 12:00 PM", subject: "Business Economics (YBB)" },
+          { day: "Monday", time: "12:00 PM - 1:00 PM", subject: "Corporate Accounting (SIM)" },
+
+          { day: "Tuesday", time: "7:30 AM - 8:30 AM", subject: "Cost Accounting (SST)" },
+          { day: "Tuesday", time: "8:30 AM - 9:30 AM", subject: "Basic English (SDG)" },
+          { day: "Tuesday", time: "9:30 AM - 10:30 AM", subject: "Business Economics (YBB)" },
           { day: "Tuesday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
-          { day: "Tuesday", time: "11:00 AM - 1:00 PM", subject: "All CEC Electives" }
+          { day: "Tuesday", time: "11:00 AM - 12:00 PM", subject: "Basic Kannada / Hindi (BK)" },
+          { day: "Tuesday", time: "12:00 PM - 1:00 PM", subject: "Statistics (NBS)" },
+
+          { day: "Wednesday", time: "7:30 AM - 8:30 AM", subject: "Corporate Accounting (SIM)" },
+          { day: "Wednesday", time: "8:30 AM - 9:30 AM", subject: "Basic English (SDG)" },
+          { day: "Wednesday", time: "9:30 AM - 10:30 AM", subject: "Basic Kannada / Hindi (BKK)" },
+          { day: "Wednesday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Wednesday", time: "11:00 AM - 12:00 PM", subject: "Cost Accounting (SST)" },
+
+          { day: "Thursday", time: "7:30 AM - 8:30 AM", subject: "Corporate Accounting (SIM)" },
+          { day: "Thursday", time: "8:30 AM - 9:30 AM", subject: "Basic Kannada / Hindi (BKK)" },
+          { day: "Thursday", time: "9:30 AM - 10:30 AM", subject: "Business Economics (YBB)" },
+          { day: "Thursday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Thursday", time: "11:00 AM - 12:00 PM", subject: "Statistics (NBS)" },
+          { day: "Thursday", time: "12:00 PM - 1:00 PM", subject: "Rural Marketing (SST)" },
+
+          { day: "Friday", time: "7:30 AM - 8:30 AM", subject: "Cost Accounting (SST)" },
+          { day: "Friday", time: "8:30 AM - 9:30 AM", subject: "Corporate Accounting (SIM)" },
+          { day: "Friday", time: "9:30 AM - 10:30 AM", subject: "Statistics (NBS)" },
+          { day: "Friday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Friday", time: "11:00 AM - 12:00 PM", subject: "Rural Marketing (SST)" },
+
+          { day: "Saturday", time: "7:30 AM - 8:30 AM", subject: "Cost Accounting (SST)" },
+          { day: "Saturday", time: "8:30 AM - 9:30 AM", subject: "Business Economics (YBB)" },
+          { day: "Saturday", time: "9:30 AM - 10:30 AM", subject: "Basic English (SDG)" },
+          { day: "Saturday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true }
+        ],
+        sem5: [
+          { day: "Monday", time: "7:30 AM - 8:30 AM", subject: "SA & ESG Reporting (YBB)" },
+          { day: "Monday", time: "8:30 AM - 9:30 AM", subject: "Income Tax (SIM)" },
+          { day: "Monday", time: "9:30 AM - 10:30 AM", subject: "Auditing (SST)" },
+          { day: "Monday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Monday", time: "11:00 AM - 12:00 PM", subject: "Research Methodology (SIM)" },
+
+          { day: "Tuesday", time: "7:30 AM - 8:30 AM", subject: "Income Tax (SIM)" },
+          { day: "Tuesday", time: "8:30 AM - 9:30 AM", subject: "SA & ESG Reporting (YBB)" },
+          { day: "Tuesday", time: "9:30 AM - 10:30 AM", subject: "Skill Based (XYZ)" },
+          { day: "Tuesday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Tuesday", time: "11:00 AM - 12:00 PM", subject: "Security Market (SIM)" },
+
+          { day: "Wednesday", time: "7:30 AM - 8:30 AM", subject: "SA & ESG Reporting (YBB)" },
+          { day: "Wednesday", time: "8:30 AM - 9:30 AM", subject: "Security Market (SIM)" },
+          { day: "Wednesday", time: "9:30 AM - 10:30 AM", subject: "Taxation Management (YBB)" },
+          { day: "Wednesday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Wednesday", time: "11:00 AM - 12:00 PM", subject: "Research Methodology (YBB)" },
+
+          { day: "Thursday", time: "7:30 AM - 8:30 AM", subject: "Auditing (SST)" },
+          { day: "Thursday", time: "8:30 AM - 9:30 AM", subject: "Taxation Management (YBB)" },
+          { day: "Thursday", time: "9:30 AM - 10:30 AM", subject: "Income Tax (SIM)" },
+          { day: "Thursday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Thursday", time: "11:00 AM - 12:00 PM", subject: "Research Methodology (SST)" },
+
+          { day: "Friday", time: "7:30 AM - 8:30 AM", subject: "Security Market (SIM)" },
+          { day: "Friday", time: "8:30 AM - 9:30 AM", subject: "Auditing (SST)" },
+          { day: "Friday", time: "9:30 AM - 10:30 AM", subject: "Skill Based (XYZ)" },
+          { day: "Friday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Friday", time: "11:00 AM - 12:00 PM", subject: "Research Methodology (XYZ)" },
+
+          { day: "Saturday", time: "7:30 AM - 8:30 AM", subject: "Taxation Management (YBB)" },
+          { day: "Saturday", time: "8:30 AM - 9:30 AM", subject: "Auditing (SST)" },
+          { day: "Saturday", time: "9:30 AM - 10:30 AM", subject: "SA & ESG Reporting (YBB)" },
+          { day: "Saturday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Saturday", time: "11:00 AM - 12:00 PM", subject: "Income Tax (SIM)" }
         ]
       },
       BA: {
         sem1: [
-          { day: "Monday", time: "8:00 AM - 9:00 AM", subject: "Basic Kannada" },
-          { day: "Monday", time: "9:00 AM - 10:00 AM", subject: "Political Science" },
-          { day: "Monday", time: "10:00 AM - 10:30 AM", subject: "Economics" },
+          { day: "Monday", time: "7:30 AM - 8:30 AM", subject: "Basic Kannada (SVA)" },
+          { day: "Monday", time: "8:30 AM - 9:30 AM", subject: "Opt. Eng / Kan / Hindi / Stat (SSP/BKK/PSB/LCM)" },
+          { day: "Monday", time: "9:30 AM - 10:30 AM", subject: "Economics (CYC)" },
           { day: "Monday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
-          { day: "Monday", time: "11:00 AM - 12:00 PM", subject: "History of Karnataka" },
-          { day: "Monday", time: "12:00 PM - 1:00 PM", subject: "Basic English / Hindi" },
+          { day: "Monday", time: "11:00 AM - 12:00 PM", subject: "History (MBD)" },
+          { day: "Monday", time: "12:00 PM - 1:00 PM", subject: "Political Science (SRM)" },
 
-          { day: "Tuesday", time: "8:00 AM - 9:00 AM", subject: "History of Karnataka" },
-          { day: "Tuesday", time: "9:00 AM - 10:00 AM", subject: "Economics" },
-          { day: "Tuesday", time: "10:00 AM - 10:30 AM", subject: "Political Science" },
+          { day: "Tuesday", time: "7:30 AM - 8:30 AM", subject: "Constitutional Values (BCP)" },
+          { day: "Tuesday", time: "8:30 AM - 9:30 AM", subject: "Basic Kannada (BK)" },
+          { day: "Tuesday", time: "9:30 AM - 10:30 AM", subject: "Basic English / Hindi (SSP/PSB)" },
           { day: "Tuesday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
-          { day: "Tuesday", time: "11:00 AM - 12:00 PM", subject: "Constitutional Values" },
-          { day: "Tuesday", time: "12:00 PM - 1:00 PM", subject: "Optional Languages" }
-        ],
-        sem2: [
-          { day: "Monday", time: "8:00 AM - 10:30 AM", subject: "History & Culture of Karnataka" },
-          { day: "Monday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
-          { day: "Monday", time: "11:00 AM - 1:00 PM", subject: "Indian Economy" }
+          { day: "Tuesday", time: "11:00 AM - 12:00 PM", subject: "History (MBD)" },
+          { day: "Tuesday", time: "12:00 PM - 1:00 PM", subject: "Opt. Eng / Kan / Hindi / Stat (SSP/BKK/PSB/LCM)" },
+
+          { day: "Wednesday", time: "7:30 AM - 8:30 AM", subject: "History (MBD)" },
+          { day: "Wednesday", time: "8:30 AM - 9:30 AM", subject: "Opt. Eng / Kan / Hindi / Stat (SSP/BKK/NBS)" },
+          { day: "Wednesday", time: "9:30 AM - 10:30 AM", subject: "Political Science (SRM)" },
+          { day: "Wednesday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Wednesday", time: "11:00 AM - 12:00 PM", subject: "Economics (CYC)" },
+          { day: "Wednesday", time: "12:00 PM - 1:00 PM", subject: "Basic English / Hindi (SSP/PSB)" },
+          { day: "Wednesday", time: "1:00 PM - 2:00 PM", subject: "Opt. Kannada (SVA)" },
+
+          { day: "Thursday", time: "7:30 AM - 8:30 AM", subject: "Opt. Eng / Kan / Hindi / Stat (SSP/SVA/PSB/NBS)" },
+          { day: "Thursday", time: "8:30 AM - 9:30 AM", subject: "Political Science (SRM)" },
+          { day: "Thursday", time: "9:30 AM - 10:30 AM", subject: "Constitutional Values (BCP)" },
+          { day: "Thursday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Thursday", time: "11:00 AM - 12:00 PM", subject: "Basic English / Hindi (SSP/PSB)" },
+          { day: "Thursday", time: "12:00 PM - 1:00 PM", subject: "Economics (SND)" },
+
+          { day: "Friday", time: "7:30 AM - 8:30 AM", subject: "History (MBD)" },
+          { day: "Friday", time: "8:30 AM - 9:30 AM", subject: "Opt. Eng / Kan / Hindi / Stat (SSP/SVA/PSB/LCM)" },
+          { day: "Friday", time: "9:30 AM - 10:30 AM", subject: "Political Science (SRM)" },
+          { day: "Friday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Friday", time: "11:00 AM - 12:00 PM", subject: "Economics (SND)" },
+          { day: "Friday", time: "12:00 PM - 1:00 PM", subject: "Basic Kannada (BK)" },
+
+          { day: "Saturday", time: "7:30 AM - 8:30 AM", subject: "Basic Kannada (BK)" },
+          { day: "Saturday", time: "8:30 AM - 9:30 AM", subject: "Economics (SND)" },
+          { day: "Saturday", time: "9:30 AM - 10:30 AM", subject: "Basic English / Hindi (SSP/PSB)" },
+          { day: "Saturday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Saturday", time: "11:00 AM - 12:00 PM", subject: "Political Science (SRM)" },
+          { day: "Saturday", time: "12:00 PM - 1:00 PM", subject: "History (MBD)" }
         ],
         sem3: [
-          { day: "Monday", time: "8:00 AM - 9:00 AM", subject: "History" },
-          { day: "Monday", time: "9:00 AM - 10:00 AM", subject: "Political Science" },
-          { day: "Monday", time: "10:00 AM - 10:30 AM", subject: "Economics" },
+          { day: "Monday", time: "7:30 AM - 8:30 AM", subject: "Political Science (BCP)" },
+          { day: "Monday", time: "8:30 AM - 9:30 AM", subject: "Basic Kannada / Hindi (BK/PSB)" },
+          { day: "Monday", time: "9:30 AM - 10:30 AM", subject: "History (MBD)" },
           { day: "Monday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
-          { day: "Monday", time: "11:00 AM - 12:00 PM", subject: "Basic Kannada / Hindi" },
-          { day: "Tuesday", time: "8:00 AM - 10:30 AM", subject: "All CEC Electives" },
+          { day: "Monday", time: "11:00 AM - 12:00 PM", subject: "Economics (CYC)" },
+          { day: "Monday", time: "12:00 PM - 1:00 PM", subject: "Opt. Eng / Kan / Hindi / Stat (SDG/BK/LCM)" },
+
+          { day: "Tuesday", time: "7:30 AM - 8:30 AM", subject: "Opt. Eng / Kan / Hindi / Stat (SDG/BK/PSB/NBS)" },
+          { day: "Tuesday", time: "8:30 AM - 9:30 AM", subject: "Basic Kannada / Hindi (BKK)" },
+          { day: "Tuesday", time: "9:30 AM - 10:30 AM", subject: "History (MBD)" },
           { day: "Tuesday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
-          { day: "Tuesday", time: "11:00 AM - 1:00 PM", subject: "Optional Languages / Stat" }
+          { day: "Tuesday", time: "11:00 AM - 12:00 PM", subject: "Basic English (FMB)" },
+          { day: "Tuesday", time: "12:00 PM - 1:00 PM", subject: "Economics (CYC)" },
+
+          { day: "Wednesday", time: "7:30 AM - 8:30 AM", subject: "Political Science (BCP)" },
+          { day: "Wednesday", time: "8:30 AM - 9:30 AM", subject: "History (MBD)" },
+          { day: "Wednesday", time: "9:30 AM - 10:30 AM", subject: "Basic English (FMB)" },
+          { day: "Wednesday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Wednesday", time: "11:00 AM - 12:00 PM", subject: "Opt. Eng / Kan / Hindi / Stat (SDG/BK/PSB/LCM)" },
+          { day: "Wednesday", time: "12:00 PM - 1:00 PM", subject: "Economics (SND)" },
+
+          { day: "Thursday", time: "7:30 AM - 8:30 AM", subject: "All CEC" },
+          { day: "Thursday", time: "8:30 AM - 9:30 AM", subject: "Opt. Eng / Kan / Hindi / Stat (SDG/BK/PSB/NBS)" },
+          { day: "Thursday", time: "9:30 AM - 10:30 AM", subject: "Basic English (FMB)" },
+          { day: "Thursday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Thursday", time: "11:00 AM - 12:00 PM", subject: "Basic Kannada / Hindi (BKK)" },
+          { day: "Thursday", time: "12:00 PM - 1:00 PM", subject: "Political Science (BCP)" },
+
+          { day: "Friday", time: "7:30 AM - 8:30 AM", subject: "Political Science (BCP)" },
+          { day: "Friday", time: "8:30 AM - 9:30 AM", subject: "History (MBD)" },
+          { day: "Friday", time: "9:30 AM - 10:30 AM", subject: "Economics (CYC)" },
+          { day: "Friday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Friday", time: "11:00 AM - 12:00 PM", subject: "Basic Kannada / Hindi (BK)" },
+          { day: "Friday", time: "12:00 PM - 1:00 PM", subject: "Opt. Eng / Kan / Hindi / Stat (SDG/BKK/PSB/NBS)" },
+          { day: "Friday", time: "1:00 PM - 2:00 PM", subject: "All CEC" },
+
+          { day: "Saturday", time: "7:30 AM - 8:30 AM", subject: "History (MBD)" },
+          { day: "Saturday", time: "8:30 AM - 9:30 AM", subject: "Basic English (FMB)" },
+          { day: "Saturday", time: "9:30 AM - 10:30 AM", subject: "Political Science (BCP)" },
+          { day: "Saturday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Saturday", time: "11:00 AM - 12:00 PM", subject: "Economics (SND)" },
+          { day: "Saturday", time: "12:00 PM - 1:00 PM", subject: "All CEC" },
+          { day: "Saturday", time: "1:00 PM - 2:00 PM", subject: "Opt. Kannada (BK)" }
+        ],
+        sem5: [
+          { day: "Monday", time: "7:30 AM - 8:30 AM", subject: "History (MBD)" },
+          { day: "Monday", time: "8:30 AM - 9:30 AM", subject: "Political Science (SRM/BCP)" },
+          { day: "Monday", time: "9:30 AM - 10:30 AM", subject: "Opt. Eng / Kan / Hindi / Stat / Eco (SSP/SVA/LCM/SND)" },
+          { day: "Monday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Monday", time: "11:00 AM - 12:00 PM", subject: "Political Science (SRM)" },
+          { day: "Monday", time: "12:00 PM - 1:00 PM", subject: "History (AYB)" },
+
+          { day: "Tuesday", time: "7:30 AM - 8:30 AM", subject: "History (AYB)" },
+          { day: "Tuesday", time: "8:30 AM - 9:30 AM", subject: "Opt. Eng / Kan / Hindi / Stat / Eco (SSP/SVA/PSB/LCM/CYC)" },
+          { day: "Tuesday", time: "9:30 AM - 10:30 AM", subject: "Political Science (SRM/BCP)" },
+          { day: "Tuesday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Tuesday", time: "11:00 AM - 12:00 PM", subject: "Opt. Eng / Kan / Hindi / Stat / Eco (FMB/BKK/PSB/NBS/SND)" },
+          { day: "Tuesday", time: "12:00 PM - 1:00 PM", subject: "Political Science (SRM)" },
+          { day: "Tuesday", time: "1:00 PM - 2:00 PM", subject: "History (MBD)" },
+
+          { day: "Wednesday", time: "7:30 AM - 8:30 AM", subject: "Opt. Eng / Kan / Hindi / Stat / Eco (SSP/SVA/PSB/LCM/CYC)" },
+          { day: "Wednesday", time: "8:30 AM - 9:30 AM", subject: "Political Science (SRM/BCP)" },
+          { day: "Wednesday", time: "9:30 AM - 10:30 AM", subject: "History (AYB/MBD)" },
+          { day: "Wednesday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Wednesday", time: "11:00 AM - 12:00 PM", subject: "Political Science (SRM)" },
+          { day: "Wednesday", time: "12:00 PM - 1:00 PM", subject: "Opt. Eng / Kan / Hindi / Stat / Eco (FMB/SVA/PSB/NBS/CYC)" },
+          { day: "Wednesday", time: "1:00 PM - 2:00 PM", subject: "Value Based / SEC" },
+
+          { day: "Thursday", time: "7:30 AM - 8:30 AM", subject: "Political Science (SRM)" },
+          { day: "Thursday", time: "8:30 AM - 9:30 AM", subject: "History (MBD/AYB)" },
+          { day: "Thursday", time: "9:30 AM - 10:30 AM", subject: "Opt. Eng / Kan / Hindi / Stat / Eco (SSP/BKK/PSB/NBS/SND)" },
+          { day: "Thursday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Thursday", time: "11:00 AM - 12:00 PM", subject: "History (AYB/MBD)" },
+          { day: "Thursday", time: "12:00 PM - 1:00 PM", subject: "Opt. Eng / Kan / Hindi / Stat / Eco (FMB/SVA/PSB/LCM/CYC)" },
+          { day: "Thursday", time: "1:00 PM - 2:00 PM", subject: "Value Based / SEC" },
+
+          { day: "Friday", time: "7:30 AM - 8:30 AM", subject: "Opt. Eng / Kan / Hindi / Stat / Eco (SSP/BK/PSB/LCM/CYC)" },
+          { day: "Friday", time: "8:30 AM - 9:30 AM", subject: "Political Science (SRM)" },
+          { day: "Friday", time: "9:30 AM - 10:30 AM", subject: "History (AYB)" },
+          { day: "Friday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Friday", time: "11:00 AM - 12:00 PM", subject: "Political Science (SRM/BCP)" },
+          { day: "Friday", time: "12:00 PM - 1:00 PM", subject: "History (MBD/AYB)" },
+          { day: "Friday", time: "1:00 PM - 2:00 PM", subject: "Opt. Kannada (SVA)" },
+
+          { day: "Saturday", time: "7:30 AM - 8:30 AM", subject: "Political Science (BCP/SRM)" },
+          { day: "Saturday", time: "8:30 AM - 9:30 AM", subject: "Opt. Eng / Kan / Hindi / Stat / Eco (FMB/BK/PSB/NBS/CYC)" },
+          { day: "Saturday", time: "9:30 AM - 10:30 AM", subject: "History (MBD/AYB)" },
+          { day: "Saturday", time: "10:30 AM - 11:00 AM", subject: "☕ Breakfast Break", isBreak: true },
+          { day: "Saturday", time: "11:00 AM - 12:00 PM", subject: "Opt. Kannada (BK)" },
+          { day: "Saturday", time: "12:00 PM - 1:00 PM", subject: "Opt. Eng / Kan / Hindi / Stat / Eco (FMB/BKK/NBS/SND)" },
+          { day: "Saturday", time: "1:00 PM - 2:00 PM", subject: "Value Based / SEC" }
         ]
       }
     };
@@ -2261,13 +2702,26 @@
       if (!tbody) return;
       tbody.innerHTML = '';
 
-      const list = (weeklyClassTimetables[stream] && weeklyClassTimetables[stream][sem]) || [];
+      // B.Sc has two departments (PCM / CBZ); show the department dropdown only for B.Sc
+      const deptSelect = document.getElementById('routineDeptSelect');
+      const dept = deptSelect ? deptSelect.value : 'PCM';
+      if (deptSelect) deptSelect.classList.toggle('hidden', stream !== 'BSC');
+
+      const streamTable = (stream === 'BSC') ? (weeklyClassTimetables.BSC && weeklyClassTimetables.BSC[dept]) : weeklyClassTimetables[stream];
+      const streamLabel = (stream === 'BSC') ? 'BSC ' + dept : stream;
+      const list = (streamTable && streamTable[sem]) || [];
       if (list.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="3" class="py-8 text-center text-slate-400 font-mono">Routine for ${stream} ${sem.toUpperCase()} will be released by the college office.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="3" class="py-8 text-center text-slate-400 font-mono">Routine for ${streamLabel} ${sem.toUpperCase()} will be released by the college office.</td></tr>`;
         return;
       }
 
-      list.forEach(item => {
+      // Find the last class (non-break) of each day so it can be underlined
+      const lastClassIndex = {};
+      list.forEach((it, i) => { if (!it.isBreak) lastClassIndex[it.day] = i; });
+
+      list.forEach((item, idx) => {
+        // No breakfast-break row after the last class of the day
+        if (item.isBreak && idx > lastClassIndex[item.day]) return;
         const tr = document.createElement('tr');
         if (item.isBreak) {
           tr.className = "bg-amber-50/70 border-y border-amber-200/60 font-semibold";
@@ -2287,6 +2741,7 @@
             <td class="py-3 px-6 font-semibold text-slate-900">${item.subject}</td>
           `;
         }
+        if (!item.isBreak && idx === lastClassIndex[item.day]) tr.classList.add('last-class-row');
         tbody.appendChild(tr);
       });
       lucide.createIcons();
@@ -2296,6 +2751,74 @@
        7. INTERNAL ASSESSMENT (IA) TIMETABLE LIFECYCLE
        ========================================================================= */
     let timetableDataset = [
+      // ===== 1st INTERNAL TEST (01-09-2026 to 03-09-2026) - from official circular =====
+      // 01-09-2026 (Tuesday)
+      { id: 101, date: "01-09-2026", day: "Tue", dayKn: "ಮಂಗಳವಾರ", time: "8:00 AM - 9:00 AM", sem: "I", stream: "BA", subject: "Basic Kannada", subjectKn: "ಬೇಸಿಕ್ ಕನ್ನಡ", paperType: "AECC" },
+      { id: 102, date: "01-09-2026", day: "Tue", dayKn: "ಮಂಗಳವಾರ", time: "8:00 AM - 9:00 AM", sem: "I", stream: "BCOM", subject: "Basic English", subjectKn: "ಬೇಸಿಕ್ ಇಂಗ್ಲಿಷ್", paperType: "AECC" },
+      { id: 103, date: "01-09-2026", day: "Tue", dayKn: "ಮಂಗಳವಾರ", time: "8:00 AM - 9:00 AM", sem: "I", stream: "BSC", subject: "Chemistry / CS", subjectKn: "ರಸಾಯನಶಾಸ್ತ್ರ / ಗಣಕವಿಜ್ಞಾನ", paperType: "DSC Core" },
+      { id: 104, date: "01-09-2026", day: "Tue", dayKn: "ಮಂಗಳವಾರ", time: "8:00 AM - 9:00 AM", sem: "III", stream: "BA", subject: "Opt. Eng / Kan / Hindi / Stat", subjectKn: "ಐಚ್ಛಿಕ ಇಂಗ್ಲಿಷ್/ಕನ್ನಡ/ಹಿಂದಿ/ಸಂಖ್ಯಾ", paperType: "DSC Core" },
+      { id: 105, date: "01-09-2026", day: "Tue", dayKn: "ಮಂಗಳವಾರ", time: "8:00 AM - 9:00 AM", sem: "III", stream: "BCOM", subject: "Statistics (Stat)", subjectKn: "ಸಂಖ್ಯಾಶಾಸ್ತ್ರ (Stat)", paperType: "DSC Core" },
+      { id: 106, date: "01-09-2026", day: "Tue", dayKn: "ಮಂಗಳವಾರ", time: "8:00 AM - 9:00 AM", sem: "III", stream: "BSC", subject: "Physics / Zoology", subjectKn: "ಭೌತಶಾಸ್ತ್ರ / ಪ್ರಾಣಿಶಾಸ್ತ್ರ", paperType: "DSC Core" },
+      { id: 107, date: "01-09-2026", day: "Tue", dayKn: "ಮಂಗಳವಾರ", time: "8:00 AM - 9:00 AM", sem: "V", stream: "BA", subject: "Paper - I Economics", subjectKn: "ಪತ್ರಿಕೆ - 1 ಅರ್ಥಶಾಸ್ತ್ರ", paperType: "DSE Elective" },
+      { id: 108, date: "01-09-2026", day: "Tue", dayKn: "ಮಂಗಳವಾರ", time: "8:00 AM - 9:00 AM", sem: "V", stream: "BCOM", subject: "SA & ESG", subjectKn: "ಎಸ್.ಎ ಮತ್ತು ಇ.ಎಸ್.ಜಿ", paperType: "Major Core" },
+      { id: 109, date: "01-09-2026", day: "Tue", dayKn: "ಮಂಗಳವಾರ", time: "8:00 AM - 9:00 AM", sem: "V", stream: "BSC", subject: "Paper - I Mathematics / Botany", subjectKn: "ಪತ್ರಿಕೆ - 1 ಗಣಿತ / ಸಸ್ಯಶಾಸ್ತ್ರ", paperType: "DSE Elective" },
+      { id: 110, date: "01-09-2026", day: "Tue", dayKn: "ಮಂಗಳವಾರ", time: "9:30 AM - 10:30 AM", sem: "I", stream: "BA", subject: "Political Science", subjectKn: "ರಾಜ್ಯಶಾಸ್ತ್ರ", paperType: "DSC Core" },
+      { id: 111, date: "01-09-2026", day: "Tue", dayKn: "ಮಂಗಳವಾರ", time: "9:30 AM - 10:30 AM", sem: "I", stream: "BCOM", subject: "Financial Accounting (F.A.)", subjectKn: "ಆರ್ಥಿಕ ಲೆಕ್ಕಶಾಸ್ತ್ರ (F.A.)", paperType: "DSC Core" },
+      { id: 112, date: "01-09-2026", day: "Tue", dayKn: "ಮಂಗಳವಾರ", time: "9:30 AM - 10:30 AM", sem: "I", stream: "BSC", subject: "Mathematics / Botany", subjectKn: "ಗಣಿತಶಾಸ್ತ್ರ / ಸಸ್ಯಶಾಸ್ತ್ರ", paperType: "DSC Core" },
+      { id: 113, date: "01-09-2026", day: "Tue", dayKn: "ಮಂಗಳವಾರ", time: "9:30 AM - 10:30 AM", sem: "III", stream: "BA", subject: "Basic Kannada / Hindi", subjectKn: "ಬೇಸಿಕ್ ಕನ್ನಡ / ಹಿಂದಿ", paperType: "AECC" },
+      { id: 114, date: "01-09-2026", day: "Tue", dayKn: "ಮಂಗಳವಾರ", time: "9:30 AM - 10:30 AM", sem: "III", stream: "BCOM", subject: "Business Economics (B.E.)", subjectKn: "ವ್ಯವಹಾರ ಅರ್ಥಶಾಸ್ತ್ರ (B.E.)", paperType: "DSC Core" },
+      { id: 115, date: "01-09-2026", day: "Tue", dayKn: "ಮಂಗಳವಾರ", time: "9:30 AM - 10:30 AM", sem: "III", stream: "BSC", subject: "Basic Kannada / Hindi", subjectKn: "ಬೇಸಿಕ್ ಕನ್ನಡ / ಹಿಂದಿ", paperType: "AECC" },
+      { id: 116, date: "01-09-2026", day: "Tue", dayKn: "ಮಂಗಳವಾರ", time: "9:30 AM - 10:30 AM", sem: "V", stream: "BA", subject: "Paper - I History", subjectKn: "ಪತ್ರಿಕೆ - 1 ಇತಿಹಾಸ", paperType: "DSE Elective" },
+      { id: 117, date: "01-09-2026", day: "Tue", dayKn: "ಮಂಗಳವಾರ", time: "9:30 AM - 10:30 AM", sem: "V", stream: "BCOM", subject: "Income Tax (I.T.)", subjectKn: "ಆದಾಯ ತೆರಿಗೆ (I.T.)", paperType: "Major Core" },
+      { id: 118, date: "01-09-2026", day: "Tue", dayKn: "ಮಂಗಳವಾರ", time: "9:30 AM - 10:30 AM", sem: "V", stream: "BSC", subject: "Paper - I Chemistry / Stat / CS", subjectKn: "ಪತ್ರಿಕೆ - 1 ರಸಾಯನ / ಸಂಖ್ಯಾ / ಸಿ.ಎಸ್", paperType: "DSE Elective" },
+      { id: 119, date: "01-09-2026", day: "Tue", dayKn: "ಮಂಗಳವಾರ", time: "11:00 AM - 12:00 PM", sem: "I", stream: "BA", subject: "Economics", subjectKn: "ಅರ್ಥಶಾಸ್ತ್ರ", paperType: "DSC Core" },
+      { id: 120, date: "01-09-2026", day: "Tue", dayKn: "ಮಂಗಳವಾರ", time: "11:00 AM - 12:00 PM", sem: "I", stream: "BCOM", subject: "Cost Accounting (C.A.)", subjectKn: "ವೆಚ್ಚ ಲೆಕ್ಕಶಾಸ್ತ್ರ (C.A.)", paperType: "DSC Core" },
+      { id: 121, date: "01-09-2026", day: "Tue", dayKn: "ಮಂಗಳವಾರ", time: "11:00 AM - 12:00 PM", sem: "I", stream: "BSC", subject: "Physics / Zoology", subjectKn: "ಭೌತಶಾಸ್ತ್ರ / ಪ್ರಾಣಿಶಾಸ್ತ್ರ", paperType: "DSC Core" },
+      { id: 122, date: "01-09-2026", day: "Tue", dayKn: "ಮಂಗಳವಾರ", time: "11:00 AM - 12:00 PM", sem: "III", stream: "BA", subject: "History", subjectKn: "ಇತಿಹಾಸ", paperType: "DSC Core" },
+      { id: 123, date: "01-09-2026", day: "Tue", dayKn: "ಮಂಗಳವಾರ", time: "11:00 AM - 12:00 PM", sem: "III", stream: "BCOM", subject: "Corporate Accounting (Corp A/c)", subjectKn: "ಕಾರ್ಪೊರೇಟ್ ಲೆಕ್ಕಶಾಸ್ತ್ರ", paperType: "DSC Core" },
+      { id: 124, date: "01-09-2026", day: "Tue", dayKn: "ಮಂಗಳವಾರ", time: "11:00 AM - 12:00 PM", sem: "III", stream: "BSC", subject: "Mathematics / Botany", subjectKn: "ಗಣಿತಶಾಸ್ತ್ರ / ಸಸ್ಯಶಾಸ್ತ್ರ", paperType: "DSC Core" },
+      { id: 125, date: "01-09-2026", day: "Tue", dayKn: "ಮಂಗಳವಾರ", time: "11:00 AM - 12:00 PM", sem: "V", stream: "BA", subject: "Paper - I Kan / Eng / Hindi / Stat", subjectKn: "ಪತ್ರಿಕೆ - 1 ಕನ್ನಡ/ಇಂಗ್ಲಿಷ್/ಹಿಂದಿ", paperType: "DSE Elective" },
+      { id: 126, date: "01-09-2026", day: "Tue", dayKn: "ಮಂಗಳವಾರ", time: "11:00 AM - 12:00 PM", sem: "V", stream: "BCOM", subject: "Auditing", subjectKn: "ಲೆಕ್ಕಪರಿಶೋಧನೆ (ಆಡಿಟಿಂಗ್)", paperType: "Major Core" },
+      { id: 127, date: "01-09-2026", day: "Tue", dayKn: "ಮಂಗಳವಾರ", time: "11:00 AM - 12:00 PM", sem: "V", stream: "BSC", subject: "Paper - I Physics / Zoology", subjectKn: "ಪತ್ರಿಕೆ - 1 ಭೌತಶಾಸ್ತ್ರ / ಪ್ರಾಣಿಶಾಸ್ತ್ರ", paperType: "DSE Elective" },
+      // 02-09-2026 (Wednesday)
+      { id: 128, date: "02-09-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "8:00 AM - 9:00 AM", sem: "I", stream: "BA", subject: "History", subjectKn: "ಇತಿಹಾಸ", paperType: "DSC Core" },
+      { id: 129, date: "02-09-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "8:00 AM - 9:00 AM", sem: "I", stream: "BCOM", subject: "Basic Kannada / Hindi", subjectKn: "ಬೇಸಿಕ್ ಕನ್ನಡ / ಹಿಂದಿ", paperType: "AECC" },
+      { id: 130, date: "02-09-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "8:00 AM - 9:00 AM", sem: "I", stream: "BSC", subject: "Basic English", subjectKn: "ಬೇಸಿಕ್ ಇಂಗ್ಲಿಷ್", paperType: "AECC" },
+      { id: 131, date: "02-09-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "8:00 AM - 9:00 AM", sem: "III", stream: "BA", subject: "Basic English / Hindi", subjectKn: "ಬೇಸಿಕ್ ಇಂಗ್ಲಿಷ್ / ಹಿಂದಿ", paperType: "AECC" },
+      { id: 132, date: "02-09-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "8:00 AM - 9:00 AM", sem: "III", stream: "BCOM", subject: "Basic Kannada / Hindi", subjectKn: "ಬೇಸಿಕ್ ಕನ್ನಡ / ಹಿಂದಿ", paperType: "AECC" },
+      { id: 133, date: "02-09-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "8:00 AM - 9:00 AM", sem: "III", stream: "BSC", subject: "Chem / CS", subjectKn: "ರಸಾಯನಶಾಸ್ತ್ರ / ಗಣಕವಿಜ್ಞಾನ", paperType: "DSC Core" },
+      { id: 134, date: "02-09-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "8:00 AM - 9:00 AM", sem: "V", stream: "BA", subject: "Paper - I Political Science", subjectKn: "ಪತ್ರಿಕೆ - 1 ರಾಜ್ಯಶಾಸ್ತ್ರ", paperType: "DSE Elective" },
+      { id: 135, date: "02-09-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "8:00 AM - 9:00 AM", sem: "V", stream: "BCOM", subject: "Research Methodology", subjectKn: "ಸಂಶೋಧನಾ ವಿಧಾನ", paperType: "Major Core" },
+      { id: 136, date: "02-09-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "8:00 AM - 9:00 AM", sem: "V", stream: "BSC", subject: "Paper - II Physics / Zoology", subjectKn: "ಪತ್ರಿಕೆ - 2 ಭೌತಶಾಸ್ತ್ರ / ಪ್ರಾಣಿಶಾಸ್ತ್ರ", paperType: "DSE Elective" },
+      { id: 137, date: "02-09-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "9:30 AM - 10:30 AM", sem: "I", stream: "BA", subject: "Basic English / Hindi", subjectKn: "ಬೇಸಿಕ್ ಇಂಗ್ಲಿಷ್ / ಹಿಂದಿ", paperType: "AECC" },
+      { id: 138, date: "02-09-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "9:30 AM - 10:30 AM", sem: "I", stream: "BCOM", subject: "Financial Management (F.M.)", subjectKn: "ಹಣಕಾಸು ನಿರ್ವಹಣೆ (F.M.)", paperType: "DSC Core" },
+      { id: 139, date: "02-09-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "9:30 AM - 10:30 AM", sem: "I", stream: "BSC", subject: "Basic Kannada / Hindi", subjectKn: "ಬೇಸಿಕ್ ಕನ್ನಡ / ಹಿಂದಿ", paperType: "AECC" },
+      { id: 140, date: "02-09-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "9:30 AM - 10:30 AM", sem: "III", stream: "BA", subject: "Political Science", subjectKn: "ರಾಜ್ಯಶಾಸ್ತ್ರ", paperType: "DSC Core" },
+      { id: 141, date: "02-09-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "9:30 AM - 10:30 AM", sem: "III", stream: "BCOM", subject: "Basic English", subjectKn: "ಬೇಸಿಕ್ ಇಂಗ್ಲಿಷ್", paperType: "AECC" },
+      { id: 142, date: "02-09-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "9:30 AM - 10:30 AM", sem: "III", stream: "BSC", subject: "All CEC Subjects", subjectKn: "ಎಲ್ಲ CEC ವಿಷಯಗಳು", paperType: "CEC Elective" },
+      { id: 143, date: "02-09-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "9:30 AM - 10:30 AM", sem: "V", stream: "BA", subject: "Paper - II Economics", subjectKn: "ಪತ್ರಿಕೆ - 2 ಅರ್ಥಶಾಸ್ತ್ರ", paperType: "DSE Elective" },
+      { id: 144, date: "02-09-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "9:30 AM - 10:30 AM", sem: "V", stream: "BCOM", subject: "Skill Based Subject", subjectKn: "ಕೌಶಲ್ಯಾಧಾರಿತ ವಿಷಯ", paperType: "SEC Skill" },
+      { id: 145, date: "02-09-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "9:30 AM - 10:30 AM", sem: "V", stream: "BSC", subject: "Paper - II Mathematics / Botany", subjectKn: "ಪತ್ರಿಕೆ - 2 ಗಣಿತ / ಸಸ್ಯಶಾಸ್ತ್ರ", paperType: "DSE Elective" },
+      { id: 146, date: "02-09-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "11:00 AM - 12:00 PM", sem: "I", stream: "BA", subject: "Constitutional Values", subjectKn: "ಸಂವಿಧಾನದ ಮೌಲ್ಯಗಳು", paperType: "Value Added" },
+      { id: 147, date: "02-09-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "11:00 AM - 12:00 PM", sem: "I", stream: "BCOM", subject: "Constitutional Values", subjectKn: "ಸಂವಿಧಾನದ ಮೌಲ್ಯಗಳು", paperType: "Value Added" },
+      { id: 148, date: "02-09-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "11:00 AM - 12:00 PM", sem: "I", stream: "BSC", subject: "Constitutional Values", subjectKn: "ಸಂವಿಧಾನದ ಮೌಲ್ಯಗಳು", paperType: "Value Added" },
+      { id: 149, date: "02-09-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "11:00 AM - 12:00 PM", sem: "III", stream: "BA", subject: "Economics", subjectKn: "ಅರ್ಥಶಾಸ್ತ್ರ", paperType: "DSC Core" },
+      { id: 150, date: "02-09-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "11:00 AM - 12:00 PM", sem: "III", stream: "BCOM", subject: "Cost Accounting (Cost A/c)", subjectKn: "ವೆಚ್ಚ ಲೆಕ್ಕಶಾಸ್ತ್ರ (Cost A/c)", paperType: "DSC Core" },
+      { id: 151, date: "02-09-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "11:00 AM - 12:00 PM", sem: "III", stream: "BSC", subject: "Basic English", subjectKn: "ಬೇಸಿಕ್ ಇಂಗ್ಲಿಷ್", paperType: "AECC" },
+      { id: 152, date: "02-09-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "11:00 AM - 12:00 PM", sem: "V", stream: "BA", subject: "Paper - II Kan / Eng / Hindi / Stat", subjectKn: "ಪತ್ರಿಕೆ - 2 ಐಚ್ಛಿಕ ಭಾಷೆಗಳು", paperType: "DSE Elective" },
+      { id: 153, date: "02-09-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "11:00 AM - 12:00 PM", sem: "V", stream: "BCOM", subject: "Security Market (S.M.)", subjectKn: "ಷೇರು ಮಾರುಕಟ್ಟೆ (S.M.)", paperType: "Major Core" },
+      { id: 154, date: "02-09-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "11:00 AM - 12:00 PM", sem: "V", stream: "BSC", subject: "Paper - II Chemistry / Stat / CS", subjectKn: "ಪತ್ರಿಕೆ - 2 ರಸಾಯನ / ಸಂಖ್ಯಾ / ಸಿ.ಎಸ್", paperType: "DSE Elective" },
+      // 03-09-2026 (Thursday)
+      { id: 155, date: "03-09-2026", day: "Thu", dayKn: "ಗುರುವಾರ", time: "8:00 AM - 9:00 AM", sem: "I", stream: "BA", subject: "Opt. Eng / Kan / Hindi / Stat", subjectKn: "ಐಚ್ಛಿಕ ಇಂಗ್ಲಿಷ್/ಕನ್ನಡ/ಹಿಂದಿ/ಸಂಖ್ಯಾ", paperType: "DSC Core" },
+      { id: 156, date: "03-09-2026", day: "Thu", dayKn: "ಗುರುವಾರ", time: "8:00 AM - 9:00 AM", sem: "I", stream: "BCOM", subject: "Marketing Management (M.M.)", subjectKn: "ಮಾರುಕಟ್ಟೆ ನಿರ್ವಹಣೆ (M.M.)", paperType: "DSC Core" },
+      { id: 157, date: "03-09-2026", day: "Thu", dayKn: "ಗುರುವಾರ", time: "8:00 AM - 9:00 AM", sem: "III", stream: "BA", subject: "All CEC Subjects", subjectKn: "ಎಲ್ಲ CEC ವಿಷಯಗಳು", paperType: "CEC Elective" },
+      { id: 158, date: "03-09-2026", day: "Thu", dayKn: "ಗುರುವಾರ", time: "8:00 AM - 9:00 AM", sem: "III", stream: "BCOM", subject: "Rural Marketing (R.M.)", subjectKn: "ಗ್ರಾಮೀಣ ಮಾರುಕಟ್ಟೆ (R.M.)", paperType: "DSC Core" },
+      { id: 159, date: "03-09-2026", day: "Thu", dayKn: "ಗುರುವಾರ", time: "8:00 AM - 9:00 AM", sem: "V", stream: "BA", subject: "Paper - II History", subjectKn: "ಪತ್ರಿಕೆ - 2 ಇತಿಹಾಸ", paperType: "DSE Elective" },
+      { id: 160, date: "03-09-2026", day: "Thu", dayKn: "ಗುರುವಾರ", time: "8:00 AM - 9:00 AM", sem: "V", stream: "BCOM", subject: "Taxation Management (T.M.)", subjectKn: "ತೆರಿಗೆ ನಿರ್ವಹಣೆ (T.M.)", paperType: "Major Core" },
+      { id: 161, date: "03-09-2026", day: "Thu", dayKn: "ಗುರುವಾರ", time: "8:00 AM - 9:00 AM", sem: "V", stream: "BSC", subject: "All SEC / VBC Subjects", subjectKn: "ಎಲ್ಲ SEC / VBC ವಿಷಯಗಳು", paperType: "Skill / Value" },
+      { id: 162, date: "03-09-2026", day: "Thu", dayKn: "ಗುರುವಾರ", time: "9:30 AM - 10:30 AM", sem: "V", stream: "BA", subject: "Paper - II Political Science", subjectKn: "ಪತ್ರಿಕೆ - 2 ರಾಜ್ಯಶಾಸ್ತ್ರ", paperType: "DSE Elective" },
+      { id: 163, date: "03-09-2026", day: "Thu", dayKn: "ಗುರುವಾರ", time: "11:00 AM - 12:00 PM", sem: "V", stream: "BA", subject: "All SEC / VBC Subjects", subjectKn: "ಎಲ್ಲ SEC / VBC ವಿಷಯಗಳು", paperType: "Skill / Value" },
+      // ===== 2nd INTERNAL TEST (07-10-2026 to 09-10-2026) =====
       // 07-10-2026 (Wednesday) - 8:00 AM TO 9:00 AM
       { id: 1, date: "07-10-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "8:00 AM - 9:00 AM", sem: "I", stream: "BA", subject: "Basic Kannada", subjectKn: "ಬೇಸಿಕ್ ಕನ್ನಡ", paperType: "AECC" },
       { id: 2, date: "07-10-2026", day: "Wed", dayKn: "ಬುಧವಾರ", time: "8:00 AM - 9:00 AM", sem: "I", stream: "BCOM", subject: "Basic English", subjectKn: "ಬೇಸಿಕ್ ಇಂಗ್ಲಿಷ್", paperType: "AECC" },
@@ -3084,9 +3607,151 @@
       }, 3200);
     }
 
+    /* =========================================================================
+       EXTRA CLASS & LAB NOTICES (auto-expire when end time passes)
+       ========================================================================= */
+    const EXTRA_NOTICE_KEY = 'ssbm_extra_notices_v1';
+
+    function loadExtraNotices() {
+      try {
+        const arr = JSON.parse(localStorage.getItem(EXTRA_NOTICE_KEY) || '[]');
+        return Array.isArray(arr) ? arr : [];
+      } catch (e) { return []; }
+    }
+
+    function saveExtraNotices(list) {
+      try { localStorage.setItem(EXTRA_NOTICE_KEY, JSON.stringify(list)); } catch (e) {}
+    }
+
+    function noticeEndMs(n) {
+      return new Date(n.date + 'T' + n.to + ':00').getTime();
+    }
+
+    function noticeStartMs(n) {
+      return new Date(n.date + 'T' + n.from + ':00').getTime();
+    }
+
+    function fmt12(t) {
+      const [h, m] = t.split(':').map(Number);
+      const ap = h >= 12 ? 'PM' : 'AM';
+      const hh = ((h + 11) % 12) + 1;
+      return hh + ':' + String(m).padStart(2, '0') + ' ' + ap;
+    }
+
+    function fmtNoticeDate(d) {
+      const dt = new Date(d + 'T00:00:00');
+      return dt.toLocaleDateString('en-IN', { weekday: 'short', day: '2-digit', month: 'short', year: 'numeric' });
+    }
+
+    function escHtml(s) {
+      return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+
+    function renderExtraNotices() {
+      const grid = document.getElementById('extraNoticesGrid');
+      if (!grid) return;
+
+      // Auto-remove notices whose end time has passed
+      const now = Date.now();
+      const all = loadExtraNotices();
+      const active = all.filter(n => noticeEndMs(n) > now);
+      if (active.length !== all.length) saveExtraNotices(active);
+
+      active.sort((a, b) => noticeStartMs(a) - noticeStartMs(b));
+
+      if (active.length === 0) {
+        grid.innerHTML = `<div class="col-span-full py-8 text-center text-slate-400 font-mono text-xs luxury-card rounded-2xl">No extra classes or lab sessions announced right now.</div>`;
+        return;
+      }
+
+      grid.innerHTML = '';
+      active.forEach(n => {
+        const isLab = n.type === 'Lab';
+        const live = noticeStartMs(n) <= now;
+        const badge = isLab ? 'bg-emerald-100 text-emerald-800 border border-emerald-300' : 'bg-amber-100 text-amber-900 border border-amber-300';
+        const card = document.createElement('div');
+        card.className = 'luxury-card p-5 rounded-2xl flex flex-col justify-between relative group';
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wide ${badge}">${isLab ? 'Lab / Practical' : 'Extra Class'}</span>
+              ${live
+                ? '<span class="flex items-center gap-1 text-[10px] font-bold text-emerald-700"><span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> HAPPENING NOW</span>'
+                : '<span class="text-[10px] font-bold text-royal-700 font-mono">UPCOMING</span>'}
+            </div>
+            <h4 class="font-black text-slate-900 text-base leading-snug">${escHtml(n.subject)}</h4>
+            ${n.stream ? `<p class="text-xs text-royal-700 font-semibold mt-1">${escHtml(n.stream)}</p>` : ''}
+            <div class="mt-3 space-y-1.5 text-xs text-slate-700">
+              <div class="flex items-center gap-2"><i data-lucide="user" class="w-3.5 h-3.5 text-royal-700"></i><span class="font-semibold">${escHtml(n.lecturer)}</span></div>
+              ${n.venue ? `<div class="flex items-center gap-2"><i data-lucide="map-pin" class="w-3.5 h-3.5 text-royal-700"></i><span>${escHtml(n.venue)}</span></div>` : ''}
+              <div class="flex items-center gap-2"><i data-lucide="calendar" class="w-3.5 h-3.5 text-royal-700"></i><span class="font-mono">${fmtNoticeDate(n.date)}</span></div>
+              <div class="flex items-center gap-2"><i data-lucide="clock" class="w-3.5 h-3.5 text-amber-600"></i><span class="font-mono font-bold text-amber-700">${fmt12(n.from)} - ${fmt12(n.to)}</span></div>
+            </div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
+            <span>Auto-removes after ${fmt12(n.to)}</span>
+            <button onclick="promptPasskeyForAction('deleteExtraNotice_${n.id}', 'Remove Notice: ${escHtml(n.subject).replace(/'/g, '')}')" class="opacity-0 group-hover:opacity-100 text-red-500 hover:text-red-700 transition p-1" title="Remove notice">
+              <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+      lucide.createIcons();
+    }
+
+    function openExtraNoticeEditor() {
+      ['mXnStream', 'mXnSubject', 'mXnLecturer', 'mXnVenue', 'mXnFrom', 'mXnTo'].forEach(id => { document.getElementById(id).value = ''; });
+      document.getElementById('mXnType').value = 'Extra Class';
+      const d = new Date();
+      document.getElementById('mXnDate').value = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+      openModal('extraNoticeModal');
+    }
+
+    function saveExtraNotice() {
+      const type = document.getElementById('mXnType').value;
+      const stream = document.getElementById('mXnStream').value.trim();
+      const subject = document.getElementById('mXnSubject').value.trim();
+      const lecturer = document.getElementById('mXnLecturer').value.trim();
+      const venue = document.getElementById('mXnVenue').value.trim();
+      const date = document.getElementById('mXnDate').value;
+      const from = document.getElementById('mXnFrom').value;
+      const to = document.getElementById('mXnTo').value;
+
+      if (!subject || !lecturer || !date || !from || !to) {
+        showToast('Please fill subject, lecturer name, date and timing.');
+        return;
+      }
+      const n = { id: String(Date.now()), type, stream, subject, lecturer, venue, date, from, to };
+      if (noticeEndMs(n) <= noticeStartMs(n)) {
+        showToast('End time must be after the start time.');
+        return;
+      }
+      if (noticeEndMs(n) <= Date.now()) {
+        showToast('That time has already passed.');
+        return;
+      }
+      const list = loadExtraNotices();
+      list.push(n);
+      saveExtraNotices(list);
+      renderExtraNotices();
+      closeModal('extraNoticeModal');
+      showToast('Notice published. It will disappear after ' + fmt12(to) + '.');
+    }
+
+    function deleteExtraNotice(id) {
+      saveExtraNotices(loadExtraNotices().filter(n => n.id !== id));
+      renderExtraNotices();
+      showToast('Notice removed.');
+    }
+
+    // Re-check every 30 seconds so expired notices vanish automatically
+    setInterval(renderExtraNotices, 30000);
+
     /* Initial Startup Sequence */
     window.addEventListener('DOMContentLoaded', () => {
       initDataStore();
+      renderExtraNotices();
       loadPrincipalPhoto();
       updateRoutineView();
       renderTimetable();
